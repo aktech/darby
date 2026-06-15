@@ -59,6 +59,7 @@
           '<span class="sr-title">' + esc(it.title) + '</span>' +
           (it.snippet ? '<span class="sr-snippet">' + it.snippet + '</span>' : '') +
         '</span>' +
+        '<span class="sr-enter" aria-hidden="true">&crarr;</span>' +
       '</a></li>';
   }
 

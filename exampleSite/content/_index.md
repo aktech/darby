@@ -1,5 +1,5 @@
 +++
-title = "Darby Docs"
+title = "Darby"
 description = "A minimal, fast, beautiful Hugo documentation theme."
 badge = "Built for Hugo"
 heroTitle = "Documentation your users will love"

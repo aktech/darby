@@ -1,6 +1,6 @@
 baseURL = "https://example.org/"
 languageCode = "en-us"
-title = "Darby Docs"
+title = "Darby"
 
 [module]
   [[module.imports]]

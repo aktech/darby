@@ -4,6 +4,6 @@
 {{- if $i }},{{ end -}}
 {{- $section := "" -}}
 {{- with $p.Parent -}}{{- if not .IsHome -}}{{- $section = .Title -}}{{- end -}}{{- end -}}
-{"title":{{ $p.Title | jsonify }},"section":{{ $section | jsonify }},"url":{{ $p.RelPermalink | jsonify }},"summary":{{ $p.Summary | plainify | jsonify }},"content":{{ $p.Plain | jsonify }}}
+{"title":{{ $p.Title | jsonify }},"section":{{ $section | jsonify }},"url":{{ $p.RelPermalink | jsonify }},"summary":{{ $p.Summary | plainify | htmlUnescape | jsonify }},"content":{{ $p.Plain | htmlUnescape | jsonify }}}
 {{- end -}}
 ]
