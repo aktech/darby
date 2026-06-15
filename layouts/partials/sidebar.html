@@ -1,0 +1,20 @@
+<aside class="sidebar" id="sidebar">
+  <nav class="sidebar-nav">
+    {{ $current := . }}
+    {{ range .Site.Home.Sections.ByWeight }}
+      <div class="sidebar-group">
+        <span class="sidebar-group-title">{{ .Title }}</span>
+        <ul>
+          {{ range .Pages.ByWeight }}
+            <li>
+              <a class="sidebar-link{{ if eq $current . }} active{{ end }}" href="{{ .RelPermalink }}">
+                {{ with .Params.icon }}<span class="sidebar-icon">{{ . }}</span>{{ end }}
+                {{ .Params.sidebarLabel | default .LinkTitle }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </nav>
+</aside>

@@ -12,3 +12,12 @@ h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .doc { max-width: var(--maxw-content); margin: 0 auto; padding: 2rem 1.25rem 6rem; }
+.layout { display: grid; grid-template-columns: var(--sidebar-w) minmax(0,1fr) var(--toc-w); gap: 0; max-width: 90rem; margin: 0 auto; }
+.sidebar { position: sticky; top: var(--topbar-h); align-self: start; height: calc(100vh - var(--topbar-h)); overflow-y: auto; padding: 1.5rem 1rem; border-right: 1px solid var(--border); }
+.sidebar-group { margin-bottom: 1.25rem; }
+.sidebar-group-title { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--fg-muted); font-weight: 700; margin-bottom: .4rem; }
+.sidebar-nav ul { list-style: none; margin: 0; padding: 0; }
+.sidebar-link { display: block; padding: .3rem .6rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; }
+.sidebar-link:hover { background: var(--bg-subtle); text-decoration: none; color: var(--fg); }
+.sidebar-link.active { background: var(--sidebar-active-bg); color: var(--accent); font-weight: 600; }
+@media (max-width: 960px) { .layout { grid-template-columns: 1fr; } .sidebar { position: fixed; left: 0; top: var(--topbar-h); width: 80%; max-width: 20rem; background: var(--bg); transform: translateX(-100%); transition: transform .2s; z-index: 40; } .sidebar.open { transform: none; } }

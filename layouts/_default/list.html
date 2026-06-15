@@ -1,6 +1,10 @@
 {{ define "main" }}
-<article class="doc">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-</article>
+<div class="layout">
+  {{ partial "sidebar.html" . }}
+  <article class="doc">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </article>
+  <div class="toc-col"></div>
+</div>
 {{ end }}
