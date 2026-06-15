@@ -1,7 +1,7 @@
 :root {
   --font-body: "Inter", system-ui, sans-serif;
   --font-heading: "Space Grotesk", var(--font-body);
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
   --accent: #6366f1;
   --accent-contrast: #ffffff;
 

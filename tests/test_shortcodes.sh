@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 build_site
-P="$PUB/docs/components/index.html"
+P="$PUB/reference/shortcodes/index.html"
 assert_grep "$P" "class=\"tabs\"" "tabs render"
 assert_grep "$P" "data-tab-btn" "tab buttons render"
 assert_grep "$P" "class=\"cards\"" "cards grid renders"

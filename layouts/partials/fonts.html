@@ -1,7 +1,7 @@
 {{ $fonts := .Site.Params.fonts | default dict }}
 {{ $body := index $fonts "body" | default "Inter" }}
 {{ $head := index $fonts "heading" | default "Space Grotesk" }}
-{{ $mono := index $fonts "mono" | default "JetBrains Mono" }}
+{{ $mono := index $fonts "mono" | default "Fira Code" }}
 {{ $fams := slice $body $head $mono | uniq }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

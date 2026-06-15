@@ -63,8 +63,8 @@ All theme options live under `[params]`:
 
   [params.fonts]
     body = "Inter"
-    heading = "Inter"
-    mono = "JetBrains Mono"
+    heading = "Space Grotesk"
+    mono = "Fira Code"
 
   [params.search]
     enable = true
