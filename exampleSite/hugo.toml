@@ -11,3 +11,21 @@ title = "Acme Docs"
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+
+# Hugo does not merge a theme's [markup] config into a consuming site
+# (the markup key is _merge: none), so adopters must set these themselves.
+# This block is the reference config the theme is designed for.
+[markup]
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+  [markup.goldmark.parser.attribute]
+    block = true
+    title = true
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
