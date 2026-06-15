@@ -1,0 +1,13 @@
+baseURL = "https://example.org/"
+languageCode = "en-us"
+title = "Acme Docs"
+
+[module]
+  [[module.imports]]
+    path = "github.com/aktech/hugo-docs-theme"
+
+[params]
+  accent = "#6366f1"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

@@ -1,0 +1,5 @@
+name = "Hugo Docs Theme"
+license = "MIT"
+min_version = "0.128.0"
+[author]
+  name = "aktech"
