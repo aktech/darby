@@ -11,8 +11,6 @@
 {{- with index $fonts "mono" }}{{ if findRE $safe . }}--font-mono:{{ . }};{{ end }}{{ end }}
 }
 </style>
-{{ $tokens := resources.Get "css/tokens.css" }}
-{{ $main := resources.Get "css/main.css" }}
-{{ $css := slice $tokens $main | resources.Concat "css/main.bundle.css" }}
+{{ $css := slice (resources.Get "css/tokens.css") (resources.Get "css/chroma.css") (resources.Get "css/main.css") | resources.Concat "css/main.bundle.css" }}
 {{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">

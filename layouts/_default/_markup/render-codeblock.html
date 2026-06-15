@@ -1,0 +1,12 @@
+{{- $lang := .Type | default "text" -}}
+{{- $filename := .Attributes.filename -}}
+{{- $opts := merge .Options (dict "noClasses" false) -}}
+{{- $hl := transform.Highlight (trim .Inner "\n") $lang $opts -}}
+<div class="code-block" data-lang="{{ $lang }}">
+  <div class="code-head">
+    {{ with $filename }}<span class="code-filename">{{ . }}</span>{{ end }}
+    <span class="code-lang">{{ $lang }}</span>
+    <button class="code-copy" data-copy type="button" aria-label="Copy code">Copy</button>
+  </div>
+  {{ $hl }}
+</div>

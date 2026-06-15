@@ -1,0 +1,8 @@
+.chroma { background: var(--bg-code); color: #e4e4e7; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: .9rem 1rem; overflow-x: auto; font-family: var(--font-mono); font-size: .85rem; line-height: 1.6; }
+.chroma .k, .chroma .kd, .chroma .kn { color: #c4b5fd; }
+.chroma .s, .chroma .s1, .chroma .s2 { color: #86efac; }
+.chroma .nf, .chroma .nx { color: #93c5fd; }
+.chroma .c, .chroma .c1, .chroma .cm { color: #71717a; font-style: italic; }
+.chroma .mi, .chroma .mf { color: #fca5a5; }
+.chroma .o { color: #f0abfc; }
+.chroma .hl { background: rgba(129,140,248,.15); display: block; margin: 0 -1rem; padding: 0 1rem; }
