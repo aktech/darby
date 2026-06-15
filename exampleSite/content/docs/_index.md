@@ -4,7 +4,7 @@ weight = 1
 description = "A beautiful, minimal Hugo documentation theme with dark and light modes, search, callouts, and a rich set of shortcodes."
 +++
 
-Welcome to **Acme Docs**, the demo site for a beautiful, minimal Hugo documentation theme. It gives you everything you need to publish polished technical documentation: a clean reading layout, instant dark and light modes, client-side search, syntax-highlighted code blocks, and a collection of shortcodes for callouts, tabs, cards, and step-by-step guides.
+Welcome to **Darby Docs**, the demo site for a beautiful, minimal Hugo documentation theme. It gives you everything you need to publish polished technical documentation: a clean reading layout, instant dark and light modes, client-side search, syntax-highlighted code blocks, and a collection of shortcodes for callouts, tabs, cards, and step-by-step guides.
 
 This site is itself built with the theme, so every page you read here is also a live example of what the theme produces.
 

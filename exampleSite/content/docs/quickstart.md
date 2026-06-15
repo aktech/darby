@@ -32,7 +32,7 @@ brew install hugo
 
 # Confirm you have the Extended edition
 hugo version
-# hugo v0.140.0+extended darwin/arm64
+# hugo v0.163.2+extended darwin/arm64
 ```
 {{< /tab >}}
 {{< tab title="Linux" >}}
@@ -42,7 +42,7 @@ sudo install -m 0755 hugo /usr/local/bin/hugo
 
 # Confirm the version and that it says "extended"
 hugo version
-# hugo v0.140.0+extended linux/amd64
+# hugo v0.163.2+extended linux/amd64
 ```
 {{< /tab >}}
 {{< tab title="Windows" >}}
@@ -60,14 +60,14 @@ Once Hugo is installed, create a new site and initialize it as a Hugo Module so 
 
 ```bash
 # Create a new site and move into it
-hugo new site acme-docs
-cd acme-docs
+hugo new site darby-docs
+cd darby-docs
 
 # Initialize a module (replace with your own module path)
-hugo mod init github.com/acme/docs
+hugo mod init github.com/darby/docs
 
 # Add the theme as a module dependency
-hugo mod get github.com/acme/hugo-docs-theme
+hugo mod get github.com/darby/hugo-docs-theme
 ```
 
 {{< callout type="warning" >}}
@@ -81,11 +81,11 @@ Open `hugo.toml` and tell Hugo to import the theme module. The theme needs a sma
 ```toml {filename="hugo.toml"}
 baseURL = "https://docs.example.com/"
 languageCode = "en-us"
-title = "Acme Docs"
+title = "Darby Docs"
 
 [module]
   [[module.imports]]
-    path = "github.com/acme/hugo-docs-theme"
+    path = "github.com/darby/hugo-docs-theme"
 
 [params]
   accent = "#6366f1"
@@ -117,7 +117,7 @@ If you keep a small JavaScript helper alongside your docs (for example a tiny re
 // Optional client-side helper loaded by the theme.
 // Reads the saved theme preference and applies it before paint
 // so visitors never see a flash of the wrong color scheme.
-const STORAGE_KEY = "acme-docs-theme";
+const STORAGE_KEY = "darby-docs-theme";
 
 function applyTheme() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -129,7 +129,7 @@ function applyTheme() {
 
 document.addEventListener("DOMContentLoaded", () => {
   const current = applyTheme();
-  console.log(`Acme Docs loaded with the ${current} theme`);
+  console.log(`Darby Docs loaded with the ${current} theme`);
 });
 ```
 

@@ -1,14 +1,16 @@
 baseURL = "https://example.org/"
 languageCode = "en-us"
-title = "Acme Docs"
+title = "Darby Docs"
 
 [module]
   [[module.imports]]
     path = "github.com/aktech/darby"
 
 [params]
-  accent = "#6366f1"
-  editURL = "https://github.com/acme/docs/edit/main/exampleSite/content/"
+  accent = "#7c3aed"
+  accentDark = "#a78bfa"
+  repo = "https://github.com/aktech/darby"
+  editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
   showLastUpdated = true
 
   [[params.tabs]]
@@ -34,7 +36,7 @@ title = "Acme Docs"
     backend = "fuse"
 
   [params.footer]
-    text = "Copyright Acme, Inc."
+    text = "Copyright Darby, Inc."
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

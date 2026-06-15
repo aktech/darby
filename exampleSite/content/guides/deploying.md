@@ -1,12 +1,12 @@
 +++
 title = "Deploying"
 weight = 3
-description = "Build an Acme Docs site, choose a search backend, and deploy to Netlify, Vercel, or GitHub Pages."
+description = "Build an Darby Docs site, choose a search backend, and deploy to Netlify, Vercel, or GitHub Pages."
 +++
 
 Once your content reads well in local preview, the next step is to build the static site and push it to a host. This guide covers the build command, the two search backends the theme supports, and ready-to-paste configuration for three common hosts.
 
-A deployed Acme Docs site is just static files: HTML, CSS, JavaScript, and a search index. There is no server-side runtime, so any static host will serve it. The only host-specific work is telling the platform how to run Hugo and where the output lives.
+A deployed Darby Docs site is just static files: HTML, CSS, JavaScript, and a search index. There is no server-side runtime, so any static host will serve it. The only host-specific work is telling the platform how to run Hugo and where the output lives.
 
 ## Building the site
 
@@ -27,7 +27,7 @@ Hugo bakes `baseURL` into canonical links, the sitemap, and absolute asset URLs 
 
 ## Choosing a search backend
 
-Acme Docs ships with client-side search built in. There are two backends, and which one you want depends on how large your site is.
+Darby Docs ships with client-side search built in. There are two backends, and which one you want depends on how large your site is.
 
 ### Fuse (default)
 
@@ -71,7 +71,7 @@ The configs below assume Pagefind so the search step is visible. If you stay on 
   command = "hugo --gc --minify && npx -y pagefind --site public"
 
 [build.environment]
-  HUGO_VERSION = "0.153.1"
+  HUGO_VERSION = "0.163.2"
   HUGO_ENV     = "production"
   NODE_VERSION = "20"
 
@@ -97,7 +97,7 @@ The configs below assume Pagefind so the search step is visible. If you stay on 
   "framework": "hugo",
   "build": {
     "env": {
-      "HUGO_VERSION": "0.153.1",
+      "HUGO_VERSION": "0.163.2",
       "HUGO_ENV": "production"
     }
   },
@@ -134,7 +134,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.153.1
+      HUGO_VERSION: 0.163.2
     steps:
       - uses: actions/checkout@v4
         with:

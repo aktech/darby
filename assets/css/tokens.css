@@ -2,7 +2,7 @@
   --font-body: "Inter", system-ui, sans-serif;
   --font-heading: "Space Grotesk", var(--font-body);
   --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --accent: #6366f1;
+  --accent: #7c3aed;
   --accent-contrast: #ffffff;
 
   --bg: #ffffff;
@@ -11,7 +11,7 @@
   --fg: #18181b;
   --fg-muted: #52525b;
   --border: #e4e4e7;
-  --sidebar-active-bg: #eef0ff;
+  --sidebar-active-bg: #f3eefc;
 
   --radius: 8px;
   --radius-lg: 12px;
@@ -23,7 +23,7 @@
 }
 
 [data-theme="dark"] {
-  --accent: var(--accent-dark, #818cf8);
+  --accent: var(--accent-dark, #a78bfa);
   --bg: #18181b;
   --bg-subtle: #1f1f23;
   --bg-code: #0e0e10;

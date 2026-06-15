@@ -27,10 +27,10 @@ Pick one of the two methods below. They are mutually exclusive: do not mix a mod
 ```bash
 # From the root of your Hugo site
 # 1. Initialize a module if you have not already
-hugo mod init github.com/acme/docs
+hugo mod init github.com/darby/docs
 
 # 2. Pull the theme as a versioned dependency
-hugo mod get github.com/acme/hugo-docs-theme@latest
+hugo mod get github.com/darby/hugo-docs-theme@latest
 
 # 3. Tidy the module graph
 hugo mod tidy
@@ -40,7 +40,7 @@ hugo mod tidy
 ```bash
 # From the root of your Hugo site
 # 1. Add the theme as a submodule under themes/
-git submodule add https://github.com/acme/hugo-docs-theme themes/hugo-docs-theme
+git submodule add https://github.com/darby/hugo-docs-theme themes/hugo-docs-theme
 
 # 2. Pin the theme in hugo.toml instead of importing a module:
 #    theme = "hugo-docs-theme"
@@ -56,7 +56,7 @@ If you used the module method, add the import to `hugo.toml`:
 ```toml {filename="hugo.toml"}
 [module]
   [[module.imports]]
-    path = "github.com/acme/hugo-docs-theme"
+    path = "github.com/darby/hugo-docs-theme"
 ```
 
 If you used the submodule method, set the theme by name instead:

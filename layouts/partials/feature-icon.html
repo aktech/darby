@@ -1,0 +1,13 @@
+{{- /* Returns an inline SVG for a named feature icon. Falls back to a dot. */ -}}
+{{- $i := . -}}
+{{- $svgs := dict
+  "theme" `<path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.39 5.39 0 0 1 12 3z"/>`
+  "search" `<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>`
+  "code" `<path d="m9 18 6-12M7 8l-4 4 4 4M17 8l4 4-4 4"/>`
+  "callout" `<path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>`
+  "nav" `<path d="M3 6h18M3 12h18M3 18h18"/>`
+  "speed" `<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>`
+  "responsive" `<rect x="2" y="4" width="14" height="12" rx="2"/><path d="M18 8h4v12h-8v-4"/>`
+  "config" `<path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.7-1L14.5 2h-5l-.3 2.6a7 7 0 0 0-1.7 1l-2.4-1-2 3.4L3 11a7 7 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.3 2.4h5l.3-2.6a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6c.07-.33.1-.66.1-1z"/>`
+-}}
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ index $svgs $i | default `<circle cx="12" cy="12" r="4"/>` | safeHTML }}</svg>

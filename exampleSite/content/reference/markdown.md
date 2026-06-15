@@ -1,7 +1,7 @@
 +++
 title = "Markdown Reference"
 weight = 1
-description = "A single page that exercises every Markdown feature the Acme Docs theme renders: headings, text styles, lists, tables, blockquotes, callouts, GitHub alerts, and multi-language code blocks."
+description = "A single page that exercises every Markdown feature the Darby Docs theme renders: headings, text styles, lists, tables, blockquotes, callouts, GitHub alerts, and multi-language code blocks."
 +++
 
 This page is a deliberate stress test. It puts every supported Markdown feature on a single page so you can see how the theme handles a dense, real-world document: how headings flow into the table of contents, how code blocks sit next to prose, and how callouts break up long passages. Read it top to bottom, or jump to a section using the table of contents.
@@ -199,7 +199,7 @@ The third is a Bash deployment snippet, the kind of thing you might paste into a
 set -euo pipefail
 
 SITE_DIR="${1:-public}"
-BUCKET="acme-docs-prod"
+BUCKET="darby-docs-prod"
 
 echo "Building site..."
 hugo --minify --gc

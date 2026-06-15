@@ -1,7 +1,7 @@
 +++
 title = "Code Blocks"
 weight = 3
-description = "A showcase of code rendering in the Acme Docs theme: substantial, idiomatic samples in eight languages with filenames, copy buttons, language labels, and line highlighting."
+description = "A showcase of code rendering in the Darby Docs theme: substantial, idiomatic samples in eight languages with filenames, copy buttons, language labels, and line highlighting."
 +++
 
 Code is the heart of most technical documentation, so this page exists to prove that the theme's code blocks look good when they carry real, substantial content. Every block below is idiomatic and complete enough to read on its own. As you scroll, notice the three features that make these blocks pleasant to use: the filename header, the language label, and the copy button in the top-right corner.
@@ -235,7 +235,7 @@ jobs:
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.140.0"
+          hugo-version: "0.163.2"
           extended: true
       - name: Build the site
         run: hugo --minify --gc
@@ -251,7 +251,7 @@ A configuration document, formatted the way the theme would highlight it.
 
 ```json {filename="config.json"}
 {
-  "name": "acme-docs",
+  "name": "darby-docs",
   "version": "1.4.0",
   "theme": {
     "accentColor": "#3b82f6",

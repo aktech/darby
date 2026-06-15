@@ -1,7 +1,7 @@
 +++
 title = "Reference"
 weight = 3
-description = "A complete, rendered reference for every Markdown feature, shortcode, and code-block style the Acme Docs theme supports."
+description = "A complete, rendered reference for every Markdown feature, shortcode, and code-block style the Darby Docs theme supports."
 +++
 
 This section is the kitchen sink. Every page here exists to show, in one place, exactly how a feature looks once the theme has rendered it. If you want to know whether a table, a callout, a tabbed example, or a highlighted code block will look good in your own docs, read the matching page and copy the source straight into your project.

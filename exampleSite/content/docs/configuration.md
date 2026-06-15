@@ -54,7 +54,7 @@ Set `editURL` to add an "Edit this page" link to every page, pointing at your re
 
 ```toml
 [params]
-  editURL = "https://github.com/acme/docs/edit/main/content/"
+  editURL = "https://github.com/darby/docs/edit/main/content/"
   showLastUpdated = true
 ```
 
@@ -88,14 +88,14 @@ Configure the footer text, social links shown in the footer, and an optional log
   logo = "/images/logo.svg"
 
 [params.footer]
-  text = "Copyright Acme, Inc."
+  text = "Copyright Darby, Inc."
 
 [[params.social]]
   name = "github"
-  url = "https://github.com/acme"
+  url = "https://github.com/darby"
 [[params.social]]
   name = "x"
-  url = "https://x.com/acme"
+  url = "https://x.com/darby"
 ```
 
 ## Full example
@@ -110,7 +110,7 @@ Here is a complete `[params]` block that exercises every setting at once. Copy i
   logo = "/images/logo.svg"
 
   # Behavior
-  editURL = "https://github.com/acme/docs/edit/main/content/"
+  editURL = "https://github.com/darby/docs/edit/main/content/"
   showLastUpdated = true
 
   [params.fonts]
@@ -123,7 +123,7 @@ Here is a complete `[params]` block that exercises every setting at once. Copy i
     backend = "fuse"
 
   [params.footer]
-    text = "Copyright Acme, Inc."
+    text = "Copyright Darby, Inc."
 
   [[params.tabs]]
     name = "Docs"
@@ -142,10 +142,10 @@ Here is a complete `[params]` block that exercises every setting at once. Copy i
 
   [[params.social]]
     name = "github"
-    url = "https://github.com/acme"
+    url = "https://github.com/darby"
   [[params.social]]
     name = "x"
-    url = "https://x.com/acme"
+    url = "https://x.com/darby"
 ```
 
 ## Parameter reference

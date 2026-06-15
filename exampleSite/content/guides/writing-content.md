@@ -4,13 +4,13 @@ weight = 1
 description = "Author documentation pages with front matter, callouts, tabs, cards, steps, GitHub-style alerts, and rich code blocks."
 +++
 
-This guide covers everything you need to write a documentation page with Acme Docs. Pages are plain Markdown files under `content/`, with a small block of front matter at the top that controls how the page appears in the sidebar and the table of contents. Beyond that, the theme ships a set of shortcodes for the elements that plain Markdown cannot express on its own: callouts, tabbed panels, card grids, and step lists.
+This guide covers everything you need to write a documentation page with Darby Docs. Pages are plain Markdown files under `content/`, with a small block of front matter at the top that controls how the page appears in the sidebar and the table of contents. Beyond that, the theme ships a set of shortcodes for the elements that plain Markdown cannot express on its own: callouts, tabbed panels, card grids, and step lists.
 
 Throughout this page you will see the **source** of each shortcode shown in a code block, followed immediately by the **rendered** result so you can compare the two.
 
 ## Page front matter
 
-Every page starts with a front matter block. Acme Docs supports TOML (delimited by `+++`), YAML (`---`), and JSON. The examples here use TOML. The fields below are the ones the theme reads; any other keys you add are available to your own templates but are ignored by the default layouts.
+Every page starts with a front matter block. Darby Docs supports TOML (delimited by `+++`), YAML (`---`), and JSON. The examples here use TOML. The fields below are the ones the theme reads; any other keys you add are available to your own templates but are ignored by the default layouts.
 
 ```toml {filename="content/guides/writing-content.md"}
 +++
@@ -185,8 +185,8 @@ The `steps` shortcode renders an ordered Markdown list as a numbered, visually c
 
 ```go-html-template
 {{</* steps */>}}
-1. **Create a project.** Run `hugo new site acme-docs && cd acme-docs`.
-2. **Add the theme.** Install Acme Docs as a Hugo module or git submodule.
+1. **Create a project.** Run `hugo new site darby-docs && cd darby-docs`.
+2. **Add the theme.** Install Darby Docs as a Hugo module or git submodule.
 3. **Write a page.** Add `content/docs/_index.md` with the front matter shown above.
 4. **Preview.** Run `hugo server` and open `http://localhost:1313`.
 {{</* /steps */>}}
@@ -195,8 +195,8 @@ The `steps` shortcode renders an ordered Markdown list as a numbered, visually c
 Rendered:
 
 {{< steps >}}
-1. **Create a project.** Run `hugo new site acme-docs && cd acme-docs`.
-2. **Add the theme.** Install Acme Docs as a Hugo module or git submodule.
+1. **Create a project.** Run `hugo new site darby-docs && cd darby-docs`.
+2. **Add the theme.** Install Darby Docs as a Hugo module or git submodule.
 3. **Write a page.** Add `content/docs/_index.md` with the front matter shown above.
 4. **Preview.** Run `hugo server` and open `http://localhost:1313`.
 {{< /steps >}}
@@ -213,8 +213,8 @@ Add a `filename` attribute after the language to print a small header above the 
 ```yaml {filename="config/_default/hugo.yaml"}
 baseURL: "https://docs.example.com/"
 languageCode: "en-us"
-title: "Acme Docs"
-theme: "acme-docs"
+title: "Darby Docs"
+theme: "darby-docs"
 params:
   accent: "#6d5efc"
   font: "Inter"
@@ -228,8 +228,8 @@ Rendered:
 ```yaml {filename="config/_default/hugo.yaml"}
 baseURL: "https://docs.example.com/"
 languageCode: "en-us"
-title: "Acme Docs"
-theme: "acme-docs"
+title: "Darby Docs"
+theme: "darby-docs"
 params:
   accent: "#6d5efc"
   font: "Inter"
@@ -244,7 +244,7 @@ To draw attention to specific lines, pass `hl_lines` with the line numbers (or r
 ````markdown
 ```bash {hl_lines=["2","5"]}
 #!/usr/bin/env bash
-export HUGO_VERSION="0.153.1"
+export HUGO_VERSION="0.163.2"
 set -euo pipefail
 
 hugo --gc --minify --baseURL "https://docs.example.com/"
@@ -256,7 +256,7 @@ Rendered:
 
 ```bash {hl_lines=["2","5"]}
 #!/usr/bin/env bash
-export HUGO_VERSION="0.153.1"
+export HUGO_VERSION="0.163.2"
 set -euo pipefail
 
 hugo --gc --minify --baseURL "https://docs.example.com/"

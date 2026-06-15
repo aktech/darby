@@ -1,10 +1,10 @@
 +++
 title = "Shortcodes"
 weight = 2
-description = "Every shortcode the Acme Docs theme ships with, each shown with a short description followed by a live, rendered demonstration."
+description = "Every shortcode the Darby Docs theme ships with, each shown with a short description followed by a live, rendered demonstration."
 +++
 
-Shortcodes let you drop rich, interactive components into plain Markdown without writing any HTML. The Acme Docs theme ships with a small, focused set: callouts, tabs, code groups, cards, and steps. This page documents each one and renders it live, so the example you read is the example you can copy.
+Shortcodes let you drop rich, interactive components into plain Markdown without writing any HTML. The Darby Docs theme ships with a small, focused set: callouts, tabs, code groups, cards, and steps. This page documents each one and renders it live, so the example you read is the example you can copy.
 
 Every demonstration below is real. The source is written in Markdown, processed by Hugo, and styled by the theme exactly as it would be on any of your own pages.
 
@@ -174,7 +174,7 @@ Rendered:
 
 {{< steps >}}
 1. **Install Hugo.** Download the extended edition and confirm it is on your `PATH` with `hugo version`.
-2. **Create a site.** Run `hugo new site acme-docs` to scaffold the directory structure.
+2. **Create a site.** Run `hugo new site darby-docs` to scaffold the directory structure.
 3. **Add the theme.** Reference the theme in your configuration and pull it with `hugo mod get`.
 4. **Write a page.** Create `content/_index.md`, add front matter, and start writing Markdown.
 5. **Preview locally.** Run `hugo server -D` and open the printed URL to see live reloads as you edit.

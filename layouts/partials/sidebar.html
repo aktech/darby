@@ -2,6 +2,7 @@
   <nav class="sidebar-nav" aria-label="Documentation">
     {{ $current := . }}
     {{ range .Site.Home.Sections.ByWeight }}
+      {{ if not .Params.sidebar_exclude }}
       {{ $open := or ($current.IsDescendant .) (eq $current .) }}
       <details class="sidebar-group"{{ if $open }} open{{ end }}>
         <summary class="sidebar-group-title">
@@ -19,6 +20,7 @@
           {{ end }}
         </ul>
       </details>
+      {{ end }}
     {{ end }}
   </nav>
 </aside>
