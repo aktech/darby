@@ -2,5 +2,5 @@
 {{- $title := .Get "title" | default (title $type) -}}
 <div class="callout callout-{{ $type }}">
   <div class="callout-head"><span class="callout-icon" data-icon="{{ $type }}"></span><span class="callout-title">{{ $title }}</span></div>
-  <div class="callout-body">{{ .Inner | .Page.RenderString }}</div>
+  <div class="callout-body">{{ .Page.RenderString (dict "display" "block") .Inner }}</div>
 </div>
