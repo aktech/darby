@@ -21,3 +21,13 @@ a:hover { text-decoration: underline; }
 .sidebar-link:hover { background: var(--bg-subtle); text-decoration: none; color: var(--fg); }
 .sidebar-link.active { background: var(--sidebar-active-bg); color: var(--accent); font-weight: 600; }
 @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } .sidebar { position: fixed; left: 0; top: var(--topbar-h); width: 80%; max-width: 20rem; background: var(--bg); transform: translateX(-100%); transition: transform .2s; z-index: 40; } .sidebar.open { transform: none; } }
+.topbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: .75rem; height: var(--topbar-h); padding: 0 1rem; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.brand { display: flex; align-items: center; gap: .5rem; color: var(--fg); font-family: var(--font-heading); font-weight: 700; }
+.brand:hover { text-decoration: none; }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: .75rem; }
+.theme-toggle, .hamburger, .topbar-link { background: none; border: none; color: var(--fg-muted); cursor: pointer; display: inline-flex; align-items: center; padding: .35rem; border-radius: var(--radius); }
+.theme-toggle:hover, .hamburger:hover, .topbar-link:hover { color: var(--fg); background: var(--bg-subtle); }
+.hamburger { display: none; }
+[data-theme="dark"] .icon-sun, [data-theme="light"] .icon-moon { display: none; }
+.dark-only { display: none; } [data-theme="dark"] .dark-only { display: inline; } [data-theme="dark"] .light-only { display: none; }
+@media (max-width: 960px) { .hamburger { display: inline-flex; } }
