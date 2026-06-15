@@ -1,0 +1,18 @@
+{{ if and (ne .Params.toc false) (gt (len .Fragments.Headings) 0) }}
+{{/* Hugo wraps page headings in a synthetic root node (empty ID); the real
+     top-level headings live one level down. Descend past any ID-less roots. */}}
+{{ $top := .Fragments.Headings }}
+{{ if and (eq (len $top) 1) (not (index $top 0).ID) }}{{ $top = (index $top 0).Headings }}{{ end }}
+{{ if gt (len $top) 0 }}
+<nav class="toc" aria-label="On this page">
+  <span class="toc-title">On this page</span>
+  <ul>
+    {{ range $top }}
+      {{ if .ID }}<li><a href="#{{ .ID }}" data-toc-link>{{ .Title }}</a>
+        {{ with .Headings }}<ul>{{ range . }}{{ if .ID }}<li><a href="#{{ .ID }}" data-toc-link>{{ .Title }}</a></li>{{ end }}{{ end }}</ul>{{ end }}
+      </li>{{ end }}
+    {{ end }}
+  </ul>
+</nav>
+{{ end }}
+{{ end }}
