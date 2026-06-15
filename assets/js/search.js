@@ -31,21 +31,29 @@
   async function ensureFuse() {
     if (ready) return;
     var res = await fetch(document.documentElement.getAttribute('data-search-index') || '/index.json');
+    if (!res.ok) throw new Error('search index not found (' + res.status + ')');
     var data = await res.json();
     fuse = new Fuse(data, { keys: ['title', 'content'], threshold: 0.35, ignoreLocation: true });
     ready = true;
   }
+  function note(msg) { results.innerHTML = '<li class="search-note">' + esc(msg) + '</li>'; }
   input.addEventListener('input', async function () {
     var q = input.value.trim();
     if (!q) { results.innerHTML = ''; return; }
-    if (backend === 'pagefind') {
-      var pf = window.__pagefind || (window.__pagefind = await import('/pagefind/pagefind.js'));
-      var search = await pf.search(q);
-      var data = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
-      render(data.map(function (d) { return { title: d.meta.title, url: d.url }; }));
-    } else {
-      await ensureFuse();
-      render(fuse.search(q));
+    try {
+      if (backend === 'pagefind') {
+        var pf = window.__pagefind || (window.__pagefind = await import('/pagefind/pagefind.js'));
+        var search = await pf.search(q);
+        var data = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
+        render(data.map(function (d) { return { title: d.meta.title, url: d.url }; }));
+      } else {
+        await ensureFuse();
+        var hits = fuse.search(q);
+        if (!hits.length) { note('No results'); return; }
+        render(hits);
+      }
+    } catch (e) {
+      note('Search is unavailable');
     }
   });
 })();

@@ -1,6 +1,10 @@
+{{ $text := "" }}{{ with .Site.Params.footer }}{{ $text = .text }}{{ end }}
+{{ $social := .Site.Params.social }}
+{{ if or $text $social }}
 <footer class="site-footer">
   <div class="footer-inner">
-    {{ with .Site.Params.footer.text }}<span>{{ . }}</span>{{ end }}
-    {{ with .Site.Params.social }}<span class="footer-social">{{ range . }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</span>{{ end }}
+    {{ with $text }}<span>{{ . }}</span>{{ end }}
+    {{ with $social }}<span class="footer-social">{{ range . }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</span>{{ end }}
   </div>
 </footer>
+{{ end }}

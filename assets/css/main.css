@@ -117,3 +117,4 @@ a:hover { text-decoration: underline; }
 .site-footer { border-top: 1px solid var(--border); padding: 2rem 1.25rem; color: var(--fg-muted); font-size: .85rem; }
 .footer-inner { max-width: 90rem; margin: 0 auto; display: flex; justify-content: space-between; gap: 1rem; }
 .footer-social a { margin-left: 1rem; color: var(--fg-muted); }
+.search-note { padding: .55rem .7rem; color: var(--fg-muted); font-size: .9rem; list-style: none; }
