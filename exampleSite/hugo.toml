@@ -24,6 +24,10 @@ title = "Acme Docs"
     name = "v1.0"
     url = "/v1/"
 
+  [params.search]
+    enable = true
+    backend = "fuse"
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 

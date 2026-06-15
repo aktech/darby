@@ -9,6 +9,7 @@
   </a>
   {{ partial "tabs.html" . }}
   <div class="topbar-right">
+    {{ if ne (.Site.Params.search.enable | default true) false }}{{ partial "search.html" . }}{{ end }}
     {{ partial "version-switcher.html" . }}
     {{ with .Site.Params.repo }}<a class="topbar-link" href="{{ . }}" aria-label="Repository">GitHub</a>{{ end }}
     {{ partial "theme-toggle.html" . }}

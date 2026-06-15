@@ -94,3 +94,11 @@ a:hover { text-decoration: underline; }
 .version-menu a { display: block; padding: .3rem .5rem; border-radius: 6px; color: var(--fg); font-size: .85rem; }
 .version-menu a:hover { background: var(--bg-subtle); text-decoration: none; }
 @media (max-width: 960px) { .nav-tabs { display: none; } }
+.search-trigger { display: inline-flex; align-items: center; gap: .5rem; background: var(--bg-subtle); border: 1px solid var(--border); color: var(--fg-muted); border-radius: var(--radius); padding: .35rem .7rem; cursor: pointer; font-size: .85rem; }
+.search-trigger kbd { font-family: var(--font-mono); font-size: .7rem; border: 1px solid var(--border); border-radius: 4px; padding: 0 .3rem; }
+.search-modal { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: grid; place-items: start center; padding-top: 12vh; z-index: 100; }
+.search-box { width: min(36rem, 92vw); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; }
+.search-input { width: 100%; padding: 1rem 1.1rem; border: 0; border-bottom: 1px solid var(--border); background: var(--bg); color: var(--fg); font-size: 1rem; outline: none; }
+.search-results { list-style: none; margin: 0; padding: .5rem; max-height: 60vh; overflow-y: auto; }
+.search-results a { display: block; padding: .55rem .7rem; border-radius: var(--radius); color: var(--fg); }
+.search-results a:hover { background: var(--bg-subtle); text-decoration: none; }
