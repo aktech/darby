@@ -7,8 +7,8 @@ title = "Darby Docs"
     path = "github.com/aktech/darby"
 
 [params]
-  accent = "#7c3aed"
-  accentDark = "#a78bfa"
+  accent = "#2563eb"
+  accentDark = "#60a5fa"
   repo = "https://github.com/aktech/darby"
   editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
   showLastUpdated = true
