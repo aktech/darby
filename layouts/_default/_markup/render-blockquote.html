@@ -1,0 +1,11 @@
+{{ if eq .Type "alert" }}
+  {{ $type := lower .AlertType }}
+  {{ $map := dict "note" "note" "tip" "tip" "important" "info" "warning" "warning" "caution" "caution" }}
+  {{ $t := index $map $type | default "note" }}
+  <div class="callout callout-{{ $t }}">
+    <div class="callout-head"><span class="callout-icon" data-icon="{{ $t }}"></span><span class="callout-title">{{ or .AlertTitle (title $type) }}</span></div>
+    <div class="callout-body">{{ .Text }}</div>
+  </div>
+{{ else }}
+  <blockquote{{ with .Attributes.class }} class="{{ . }}"{{ end }}>{{ .Text }}</blockquote>
+{{ end }}

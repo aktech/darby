@@ -55,3 +55,14 @@ a:hover { text-decoration: underline; }
 .code-copy:hover { color: var(--fg); border-color: var(--accent); }
 .code-block .chroma { border: 0; border-radius: 0; margin: 0; }
 .doc :not(pre) > code { font-family: var(--font-mono); font-size: .85em; background: var(--bg-subtle); padding: .12em .35em; border-radius: 5px; }
+
+/* Callouts */
+.callout { display: flex; flex-direction: column; gap: .35rem; margin: 1.25rem 0; padding: .85rem 1rem; border-radius: var(--radius-lg); border-left: 3px solid var(--cl-accent, var(--accent)); background: var(--cl-bg, var(--bg-subtle)); }
+.callout-head { display: flex; align-items: center; gap: .45rem; font-weight: 600; font-family: var(--font-heading); font-size: .9rem; color: var(--cl-accent, var(--accent)); }
+.callout-body > :first-child { margin-top: 0; } .callout-body > :last-child { margin-bottom: 0; }
+.callout-icon { width: 1rem; height: 1rem; border-radius: 50%; background: var(--cl-accent, var(--accent)); display: inline-block; }
+.callout-note { --cl-accent: #6366f1; --cl-bg: rgba(99,102,241,.08); }
+.callout-tip { --cl-accent: #10b981; --cl-bg: rgba(16,185,129,.08); }
+.callout-info { --cl-accent: #0ea5e9; --cl-bg: rgba(14,165,233,.08); }
+.callout-warning { --cl-accent: #f59e0b; --cl-bg: rgba(245,158,11,.08); }
+.callout-caution { --cl-accent: #ef4444; --cl-bg: rgba(239,68,68,.08); }

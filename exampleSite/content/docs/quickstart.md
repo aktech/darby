@@ -17,3 +17,12 @@ Configuration details.
 ```js {filename="app.js"}
 const x = 1;
 ```
+
+## Callouts
+
+{{< callout type="warning" >}}
+This is a warning.
+{{< /callout >}}
+
+> [!NOTE]
+> This is a note alert.
