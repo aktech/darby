@@ -1,0 +1,35 @@
+:root {
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-heading: "Space Grotesk", var(--font-body);
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --accent: #6366f1;
+  --accent-contrast: #ffffff;
+
+  --bg: #ffffff;
+  --bg-subtle: #f4f4f6;
+  --bg-code: #0f1117;
+  --fg: #18181b;
+  --fg-muted: #52525b;
+  --border: #e4e4e7;
+  --sidebar-active-bg: #eef0ff;
+
+  --radius: 8px;
+  --radius-lg: 12px;
+  --maxw-content: 48rem;
+  --sidebar-w: 17rem;
+  --toc-w: 15rem;
+  --topbar-h: 3.5rem;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.04);
+}
+
+[data-theme="dark"] {
+  --accent: var(--accent-dark, #818cf8);
+  --bg: #18181b;
+  --bg-subtle: #1f1f23;
+  --bg-code: #0e0e10;
+  --fg: #e4e4e7;
+  --fg-muted: #a1a1aa;
+  --border: #27272a;
+  --sidebar-active-bg: #27272a;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 8px rgba(0,0,0,.3);
+}

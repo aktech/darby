@@ -1,0 +1,20 @@
+{{/* Build a :root override from site params, then load tokens.css and main.css. */}}
+{{ $p := .Site.Params }}
+{{ $fonts := $p.fonts | default dict }}
+{{ $body := index $fonts "body" | default "\"Inter\", system-ui, sans-serif" }}
+{{ $head := index $fonts "heading" | default (printf "\"Space Grotesk\", %s" $body) }}
+{{ $mono := index $fonts "mono" | default "\"JetBrains Mono\", ui-monospace, monospace" }}
+<style>
+:root{
+{{- with $p.accent }}--accent:{{ . }};{{ end }}
+{{- with $p.accentDark }}--accent-dark:{{ . }};{{ end }}
+--font-body:{{ $body | safeCSS }};
+--font-heading:{{ $head | safeCSS }};
+--font-mono:{{ $mono | safeCSS }};
+}
+</style>
+{{ $tokens := resources.Get "css/tokens.css" }}
+{{ $base := resources.Get "css/main.css" }}
+{{ $css := slice $tokens $base | resources.Concat "css/main.bundle.css" }}
+{{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">

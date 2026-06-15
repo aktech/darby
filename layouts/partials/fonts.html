@@ -1,0 +1,10 @@
+{{ $fonts := .Site.Params.fonts | default dict }}
+{{ $body := index $fonts "body" | default "Inter" }}
+{{ $head := index $fonts "heading" | default "Space Grotesk" }}
+{{ $mono := index $fonts "mono" | default "JetBrains Mono" }}
+{{ $fams := slice $body $head $mono | uniq }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{ $parts := slice }}
+{{ range $fams }}{{ $parts = $parts | append (printf "family=%s:wght@400;500;600;700" (urlquery .)) }}{{ end }}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ delimit $parts "&" | safeURL }}&display=swap">

@@ -1,1 +1,7 @@
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{/* no-flash: set theme before paint */}}
+<script>
+(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+{{ partial "fonts.html" . }}
+{{ partial "css.html" . }}
