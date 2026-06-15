@@ -1,6 +1,13 @@
 {{ define "main" }}
-<section class="home">
-  <h1>{{ .Site.Title }}</h1>
-  <p>{{ .Params.description }}</p>
+<section class="hero">
+  <h1>{{ .Params.heroTitle | default .Site.Title }}</h1>
+  <p>{{ .Params.heroSubtitle | default .Params.description }}</p>
+  {{ with .Params.ctaURL }}<a class="hero-cta" href="{{ . | relURL }}">{{ $.Params.ctaText | default "Get started" }}</a>{{ end }}
 </section>
+{{ with .Params.features }}
+<section class="home-features">
+  {{ range . }}<div class="feature"><h3>{{ .title }}</h3><p>{{ .body }}</p></div>{{ end }}
+</section>
+{{ end }}
+<div class="home-content">{{ .Content }}</div>
 {{ end }}
