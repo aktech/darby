@@ -17,10 +17,15 @@
     if (e.key === 'Escape' && !modal.hidden) close();
   });
 
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
   function render(items) {
     results.innerHTML = items.slice(0, 8).map(function (r) {
       var it = r.item || r;
-      return '<li><a href="' + it.url + '">' + it.title + '</a></li>';
+      return '<li><a href="' + esc(it.url) + '">' + esc(it.title) + '</a></li>';
     }).join('');
   }
   async function ensureFuse() {
