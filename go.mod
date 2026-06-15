@@ -1,3 +1,3 @@
-module github.com/aktech/hugo-docs-theme
+module github.com/aktech/darby
 
 go 1.21

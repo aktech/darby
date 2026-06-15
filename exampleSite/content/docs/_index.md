@@ -1,5 +1,5 @@
 +++
-title = "Introduction"
+title = "Documentation"
 weight = 1
 description = "A beautiful, minimal Hugo documentation theme with dark and light modes, search, callouts, and a rich set of shortcodes."
 +++

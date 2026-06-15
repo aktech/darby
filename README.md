@@ -1,6 +1,6 @@
-# hugo-docs-theme
+# Darby
 
-A minimal, beautiful Hugo documentation theme. Dark and light modes, customizable
+Darby is a minimal, beautiful Hugo documentation theme. Dark and light modes, customizable
 fonts and accent color, code blocks with copy buttons and filename labels, callouts,
 an auto-generated sidebar, an on-page table of contents, and pluggable search.
 
@@ -18,7 +18,7 @@ needs:
 ```toml
 [module]
   [[module.imports]]
-    path = "github.com/aktech/hugo-docs-theme"
+    path = "github.com/aktech/darby"
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

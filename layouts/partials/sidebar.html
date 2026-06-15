@@ -2,8 +2,12 @@
   <nav class="sidebar-nav" aria-label="Documentation">
     {{ $current := . }}
     {{ range .Site.Home.Sections.ByWeight }}
-      <div class="sidebar-group">
-        <span class="sidebar-group-title">{{ .Title }}</span>
+      {{ $open := or ($current.IsDescendant .) (eq $current .) }}
+      <details class="sidebar-group"{{ if $open }} open{{ end }}>
+        <summary class="sidebar-group-title">
+          {{ .Title }}
+          <svg class="sidebar-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
         <ul>
           {{ range .Pages.ByWeight }}
             <li>
@@ -14,7 +18,7 @@
             </li>
           {{ end }}
         </ul>
-      </div>
+      </details>
     {{ end }}
   </nav>
 </aside>

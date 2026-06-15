@@ -4,7 +4,7 @@ title = "Acme Docs"
 
 [module]
   [[module.imports]]
-    path = "github.com/aktech/hugo-docs-theme"
+    path = "github.com/aktech/darby"
 
 [params]
   accent = "#6366f1"
@@ -17,6 +17,9 @@ title = "Acme Docs"
   [[params.tabs]]
     name = "Guides"
     url = "/guides/"
+  [[params.tabs]]
+    name = "Reference"
+    url = "/reference/"
 
   [[params.versions]]
     name = "v2.0"
