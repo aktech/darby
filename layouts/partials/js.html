@@ -1,3 +1,3 @@
-{{ $js := slice (resources.Get "js/theme.js") (resources.Get "js/sidebar.js") (resources.Get "js/copy.js") | resources.Concat "js/theme.bundle.js" }}
+{{ $js := slice (resources.Get "js/theme.js") (resources.Get "js/sidebar.js") (resources.Get "js/copy.js") (resources.Get "js/tabs.js") | resources.Concat "js/theme.bundle.js" }}
 {{ if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end }}
 <script src="{{ $js.RelPermalink }}" defer></script>

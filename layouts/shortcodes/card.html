@@ -1,0 +1,2 @@
+{{- $href := .Get "href" -}}
+<div class="card-wrap">{{ with $href }}<a class="card-link" href="{{ . | relURL }}"></a>{{ end }}<div class="card">{{ with $.Get "icon" }}<span class="card-icon">{{ . }}</span>{{ end }}<h3 class="card-title">{{ $.Get "title" }}</h3><div class="card-body">{{ $.Page.RenderString (dict "display" "block") $.Inner }}</div></div></div>

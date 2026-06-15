@@ -1,0 +1,9 @@
+{{ $content := .Inner }}
+{{ $btns := .Page.Store.Get "tabsButtons" | default slice }}
+<div class="tabs code-group" data-tabs>
+  <div class="tabs-list" role="tablist">
+    {{ range $i, $t := $btns }}<button class="tab-btn{{ if eq $i 0 }} active{{ end }}" data-tab-btn="{{ $i }}" type="button">{{ $t }}</button>{{ end }}
+  </div>
+  {{ $content }}
+</div>
+{{ .Page.Store.Set "tabsButtons" slice }}

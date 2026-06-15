@@ -1,0 +1,5 @@
+{{ $title := .Get "title" }}
+{{ $btns := .Page.Store.Get "tabsButtons" | default slice }}
+{{ .Page.Store.Set "tabsButtons" ($btns | append $title) }}
+{{ $i := len $btns }}
+<div class="tab-panel{{ if eq $i 0 }} active{{ end }}" data-tab-panel="{{ $i }}" role="tabpanel">{{ .Page.RenderString (dict "display" "block") .Inner }}</div>

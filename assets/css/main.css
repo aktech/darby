@@ -66,3 +66,21 @@ a:hover { text-decoration: underline; }
 .callout-info { --cl-accent: #0ea5e9; --cl-bg: rgba(14,165,233,.08); }
 .callout-warning { --cl-accent: #f59e0b; --cl-bg: rgba(245,158,11,.08); }
 .callout-caution { --cl-accent: #ef4444; --cl-bg: rgba(239,68,68,.08); }
+
+/* Tabs, code-group, cards, steps */
+.tabs { margin: 1.25rem 0; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.tabs-list { display: flex; gap: .25rem; background: var(--bg-subtle); padding: .35rem; border-bottom: 1px solid var(--border); }
+.tab-btn { background: none; border: none; padding: .35rem .8rem; border-radius: var(--radius); cursor: pointer; color: var(--fg-muted); font-size: .85rem; }
+.tab-btn.active { background: var(--bg); color: var(--accent); font-weight: 600; }
+.tab-panel { display: none; padding: 1rem; } .tab-panel.active { display: block; }
+.code-group .tab-panel, .code-group .code-block { margin: 0; border: 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.card-wrap { position: relative; }
+.card-link { position: absolute; inset: 0; z-index: 1; }
+.card { display: block; padding: 1.1rem 1.2rem; border: 1px solid var(--border); border-radius: var(--radius-lg); color: var(--fg); transition: border-color .15s, transform .15s; }
+.card-wrap:hover .card { border-color: var(--accent); transform: translateY(-2px); }
+.card-title { margin: .25rem 0 .35rem; font-size: 1rem; }
+.card-body { color: var(--fg-muted); font-size: .9rem; }
+.steps { counter-reset: step; padding-left: 1.75rem; border-left: 1px solid var(--border); margin-left: .5rem; }
+.steps > ol { list-style: none; padding: 0; } .steps > ol > li { position: relative; margin-bottom: 1rem; }
+.steps > ol > li::before { counter-increment: step; content: counter(step); position: absolute; left: -2.4rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--accent); color: var(--accent-contrast); display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
