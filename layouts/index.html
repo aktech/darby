@@ -5,7 +5,8 @@
   {{ with .Params.ctaURL }}<a class="hero-cta" href="{{ . | relURL }}">{{ $.Params.ctaText | default "Get started" }}</a>{{ end }}
 </section>
 {{ with .Params.features }}
-<section class="home-features">
+<section class="home-features" aria-labelledby="features-heading">
+  <h2 id="features-heading" class="visually-hidden">Features</h2>
   {{ range . }}<div class="feature"><h3>{{ .title }}</h3><p>{{ .body }}</p></div>{{ end }}
 </section>
 {{ end }}
