@@ -28,19 +28,18 @@
     });
   }
 
-  // Build a highlighted excerpt around the first matched range in `value`.
-  function excerpt(value, indices) {
-    if (!value) return '';
-    if (!indices || !indices.length) return esc(value.slice(0, 120)) + (value.length > 120 ? '…' : '');
-    // pick the longest matched range (most relevant)
-    var best = indices.reduce(function (a, b) { return (b[1] - b[0]) > (a[1] - a[0]) ? b : a; });
-    var i0 = best[0], i1 = best[1] + 1;
-    var start = Math.max(0, i0 - 60), end = Math.min(value.length, i1 + 90);
-    return (start > 0 ? '…' : '') +
-      esc(value.slice(start, i0)) +
-      '<mark>' + esc(value.slice(i0, i1)) + '</mark>' +
-      esc(value.slice(i1, end)) +
-      (end < value.length ? '…' : '');
+  // Highlight every matched range within `value` (used on the title).
+  function highlight(value, indices) {
+    if (!indices || !indices.length) return esc(value);
+    var sorted = indices.slice().sort(function (a, b) { return a[0] - b[0]; });
+    var out = '', last = 0;
+    sorted.forEach(function (r) {
+      var i0 = r[0], i1 = r[1] + 1;
+      if (i0 < last) return;
+      out += esc(value.slice(last, i0)) + '<mark>' + esc(value.slice(i0, i1)) + '</mark>';
+      last = i1;
+    });
+    return out + esc(value.slice(last));
   }
 
   function render(items) {
@@ -53,11 +52,10 @@
   function rowHTML(it, i) {
     return '<li role="option" class="search-result' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' +
       '<a href="' + esc(it.url) + '" tabindex="-1">' +
-        '<span class="sr-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>' +
+        '<span class="sr-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg></span>' +
         '<span class="sr-text">' +
+          '<span class="sr-title">' + (it.titleHTML || esc(it.title)) + '</span>' +
           (it.section ? '<span class="sr-crumb">' + esc(it.section) + '</span>' : '') +
-          '<span class="sr-title">' + esc(it.title) + '</span>' +
-          (it.snippet ? '<span class="sr-snippet">' + it.snippet + '</span>' : '') +
         '</span>' +
         '<span class="sr-enter" aria-hidden="true">&crarr;</span>' +
       '</a></li>';
@@ -66,7 +64,7 @@
   // Empty-state: show the first pages so the panel is never a blank void.
   function suggest() {
     var items = allData.slice(0, 6).map(function (d) {
-      return { title: d.title, section: d.section, url: d.url, snippet: '' };
+      return { titleHTML: esc(d.title), section: d.section, url: d.url };
     });
     current = items;
     active = items.length ? 0 : -1;
@@ -117,16 +115,14 @@
         var pf = window.__pagefind || (window.__pagefind = await import('/pagefind/pagefind.js'));
         var search = await pf.search(q);
         var data = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
-        render(data.map(function (d) { return { title: d.meta.title, section: (d.meta && d.meta.section) || '', url: d.url, snippet: d.excerpt }; }));
+        render(data.map(function (d) { return { titleHTML: esc(d.meta.title), section: (d.meta && d.meta.section) || '', url: d.url }; }));
       } else {
         await ensureFuse();
         var hits = fuse.search(q).slice(0, 8);
         if (!hits.length) { note('No results'); return; }
         render(hits.map(function (h) {
-          var cm = (h.matches || []).filter(function (m) { return m.key === 'content'; })[0];
           var tm = (h.matches || []).filter(function (m) { return m.key === 'title'; })[0];
-          var snip = cm ? excerpt(cm.value, cm.indices) : (tm ? '' : excerpt(h.item.summary || h.item.content, null));
-          return { title: h.item.title, section: h.item.section, url: h.item.url, snippet: snip };
+          return { titleHTML: highlight(h.item.title, tm ? tm.indices : null), section: h.item.section, url: h.item.url };
         }));
       }
     } catch (e) {
