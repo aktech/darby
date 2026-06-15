@@ -7,7 +7,9 @@
     {{ with .Site.Params.logoDark }}<img src="{{ . | relURL }}" alt="" class="brand-logo dark-only">{{ end }}
     <span class="brand-name">{{ .Site.Title }}</span>
   </a>
+  {{ partial "tabs.html" . }}
   <div class="topbar-right">
+    {{ partial "version-switcher.html" . }}
     {{ with .Site.Params.repo }}<a class="topbar-link" href="{{ . }}" aria-label="Repository">GitHub</a>{{ end }}
     {{ partial "theme-toggle.html" . }}
   </div>

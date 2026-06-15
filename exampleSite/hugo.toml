@@ -9,6 +9,21 @@ title = "Acme Docs"
 [params]
   accent = "#6366f1"
 
+  [[params.tabs]]
+    name = "Docs"
+    url = "/docs/"
+  [[params.tabs]]
+    name = "Guides"
+    url = "/guides/"
+
+  [[params.versions]]
+    name = "v2.0"
+    url = "/"
+    current = true
+  [[params.versions]]
+    name = "v1.0"
+    url = "/v1/"
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 

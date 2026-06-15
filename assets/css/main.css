@@ -84,3 +84,13 @@ a:hover { text-decoration: underline; }
 .steps { counter-reset: step; padding-left: 1.75rem; border-left: 1px solid var(--border); margin-left: .5rem; }
 .steps > ol { list-style: none; padding: 0; } .steps > ol > li { position: relative; margin-bottom: 1rem; }
 .steps > ol > li::before { counter-increment: step; content: counter(step); position: absolute; left: -2.4rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--accent); color: var(--accent-contrast); display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+.nav-tabs { display: flex; gap: .25rem; margin-left: 1rem; }
+.nav-tab { padding: .3rem .7rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; }
+.nav-tab:hover { background: var(--bg-subtle); color: var(--fg); text-decoration: none; }
+.nav-tab.active { color: var(--accent); font-weight: 600; }
+.version-switcher { position: relative; }
+.version-btn { background: var(--bg-subtle); border: 1px solid var(--border); color: var(--fg); border-radius: var(--radius); padding: .25rem .6rem; cursor: pointer; font-size: .82rem; }
+.version-menu { position: absolute; right: 0; top: 110%; list-style: none; margin: 0; padding: .3rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); min-width: 8rem; }
+.version-menu a { display: block; padding: .3rem .5rem; border-radius: 6px; color: var(--fg); font-size: .85rem; }
+.version-menu a:hover { background: var(--bg-subtle); text-decoration: none; }
+@media (max-width: 960px) { .nav-tabs { display: none; } }

@@ -16,3 +16,14 @@
     }
   });
 })();
+
+// Generic dropdown toggle (version switcher).
+document.querySelectorAll('[data-dropdown-toggle]').forEach(function (btn) {
+  var menu = btn.parentElement.querySelector('.version-menu');
+  btn.addEventListener('click', function () {
+    if (!menu) return;
+    var open = menu.hidden;
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});

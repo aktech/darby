@@ -1,0 +1,9 @@
+{{ with .Site.Params.versions }}
+{{ $current := "" }}{{ range . }}{{ if .current }}{{ $current = .name }}{{ end }}{{ end }}
+<div class="version-switcher" data-dropdown>
+  <button class="version-btn" type="button" data-dropdown-toggle aria-expanded="false">{{ $current | default (index . 0).name }} &#9662;</button>
+  <ul class="version-menu" hidden>
+    {{ range . }}<li><a href="{{ .url | relURL }}"{{ if .current }} aria-current="true"{{ end }}>{{ .name }}</a></li>{{ end }}
+  </ul>
+</div>
+{{ end }}
