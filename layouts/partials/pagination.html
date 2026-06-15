@@ -7,7 +7,7 @@
   {{ end }}
 {{ end }}
 {{ if or $prev $next }}
-<nav class="pager">
+<nav class="pager" aria-label="Pagination">
   <div class="pager-prev">{{ with $prev }}<a href="{{ .RelPermalink }}"><span>Previous</span><strong>{{ .LinkTitle }}</strong></a>{{ end }}</div>
   <div class="pager-next">{{ with $next }}<a href="{{ .RelPermalink }}"><span>Next</span><strong>{{ .LinkTitle }}</strong></a>{{ end }}</div>
 </nav>
