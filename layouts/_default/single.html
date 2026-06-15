@@ -4,6 +4,14 @@
   <article class="doc">
     <h1>{{ .Title }}</h1>
     {{ .Content }}
+    <div class="doc-meta">
+      {{ with .Site.Params.editURL }}
+        <a class="edit-link" href="{{ . }}{{ $.File.Path }}">{{ i18n "edit_page" }}</a>
+      {{ end }}
+      {{ if .Site.Params.showLastUpdated }}{{ with .Lastmod }}
+        <span class="last-updated">{{ i18n "last_updated" }}: {{ .Format "Jan 2, 2006" }}</span>
+      {{ end }}{{ end }}
+    </div>
     {{ partial "pagination.html" . }}
   </article>
   <div class="toc-col">{{ partial "toc.html" . }}</div>

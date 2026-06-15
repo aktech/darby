@@ -7,7 +7,7 @@ PASS=0; FAIL=0
 
 build_site() {
   if [ -z "${_BUILT:-}" ]; then
-    ( cd "$ROOT/exampleSite" && hugo --quiet --gc --cleanDestinationDir ) || { echo "BUILD FAILED"; exit 1; }
+    ( cd "$ROOT/exampleSite" && hugo --quiet --gc --cleanDestinationDir --enableGitInfo ) || { echo "BUILD FAILED"; exit 1; }
     _BUILT=1
   fi
 }

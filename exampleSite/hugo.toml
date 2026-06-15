@@ -8,6 +8,8 @@ title = "Acme Docs"
 
 [params]
   accent = "#6366f1"
+  editURL = "https://github.com/acme/docs/edit/main/exampleSite/content/"
+  showLastUpdated = true
 
   [[params.tabs]]
     name = "Docs"
@@ -27,6 +29,9 @@ title = "Acme Docs"
   [params.search]
     enable = true
     backend = "fuse"
+
+  [params.footer]
+    text = "Copyright Acme, Inc."
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

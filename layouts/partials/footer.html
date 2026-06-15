@@ -1,0 +1,6 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    {{ with .Site.Params.footer.text }}<span>{{ . }}</span>{{ end }}
+    {{ with .Site.Params.social }}<span class="footer-social">{{ range . }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</span>{{ end }}
+  </div>
+</footer>
