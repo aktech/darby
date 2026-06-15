@@ -6,7 +6,8 @@
     {{ .Content }}
     <div class="doc-meta">
       {{ with .Site.Params.editURL }}
-        <a class="edit-link" href="{{ . }}{{ $.File.Path }}">{{ i18n "edit_page" }}</a>
+        {{/* normalize OS path separators so the URL is correct on Windows too */}}
+        <a class="edit-link" href="{{ . }}{{ replace $.File.Path "\\" "/" }}">{{ i18n "edit_page" }}</a>
       {{ end }}
       {{ if .Site.Params.showLastUpdated }}{{ with .Lastmod }}
         <span class="last-updated">{{ i18n "last_updated" }}: {{ .Format "Jan 2, 2006" }}</span>

@@ -4,8 +4,8 @@
 {{ $top := .Fragments.Headings }}
 {{ if and (eq (len $top) 1) (not (index $top 0).ID) }}{{ $top = (index $top 0).Headings }}{{ end }}
 {{ if gt (len $top) 0 }}
-<nav class="toc" aria-label="On this page">
-  <span class="toc-title">On this page</span>
+<nav class="toc" aria-label="{{ i18n "on_this_page" }}">
+  <span class="toc-title">{{ i18n "on_this_page" }}</span>
   <ul>
     {{ range $top }}
       {{ if .ID }}<li><a href="#{{ .ID }}" data-toc-link>{{ .Title }}</a>
