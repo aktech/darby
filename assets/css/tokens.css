@@ -24,7 +24,7 @@
 }
 
 [data-theme="dark"] {
-  --accent: var(--accent-dark, #8b5cf6); /* lighter purple for dark mode legibility */
+  --accent: var(--accent-dark, #7c5cf0); /* lifted #331c74 so it stays legible on #181818 */
   --bg: #181818;
   --bg-subtle: #202022;
   --bg-code: #121212;
