@@ -7,7 +7,7 @@
         <ul>
           {{ range .Pages.ByWeight }}
             <li>
-              <a class="sidebar-link{{ if eq $current . }} active{{ end }}" href="{{ .RelPermalink }}">
+              <a class="sidebar-link{{ if eq $current . }} active{{ end }}"{{ if eq $current . }} aria-current="page"{{ end }} href="{{ .RelPermalink }}">
                 {{ with .Params.icon }}<span class="sidebar-icon">{{ . }}</span>{{ end }}
                 {{ .Params.sidebarLabel | default .LinkTitle }}
               </a>
