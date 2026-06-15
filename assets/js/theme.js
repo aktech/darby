@@ -1,4 +1,4 @@
-// Toggle data-theme and persist; sync the toggle's pressed state.
+// Toggle data-theme between light/dark and persist the choice.
 (function () {
   const root = document.documentElement;
   function current() { return root.getAttribute('data-theme') || 'light'; }
