@@ -7,11 +7,16 @@
   var closeBtn = document.querySelector('[data-search-close]');
   if (!trigger || !modal) return;
   var backend = document.documentElement.getAttribute('data-search') || 'fuse';
-  var fuse = null, ready = false;
+  var fuse = null, ready = false, allData = [];
   var current = [];   // current result items
   var active = -1;    // active row index for keyboard nav
 
-  function open() { modal.hidden = false; input.focus(); }
+  async function open() {
+    modal.hidden = false; input.focus();
+    if (!input.value.trim() && backend !== 'pagefind') {
+      try { await ensureFuse(); suggest(); } catch (e) { /* index unavailable: leave empty */ }
+    }
+  }
   function close() { modal.hidden = true; input.value = ''; results.innerHTML = ''; current = []; active = -1; }
   trigger.addEventListener('click', open);
   if (closeBtn) closeBtn.addEventListener('click', close);
@@ -42,17 +47,29 @@
     current = items;
     active = items.length ? 0 : -1;
     if (!items.length) { results.innerHTML = '<li class="search-note">No results</li>'; return; }
-    results.innerHTML = items.map(function (it, i) {
-      return '<li role="option" class="search-result' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' +
-        '<a href="' + esc(it.url) + '" tabindex="-1">' +
-          '<span class="sr-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>' +
-          '<span class="sr-text">' +
-            (it.section ? '<span class="sr-crumb">' + esc(it.section) + '</span>' : '') +
-            '<span class="sr-title">' + esc(it.title) + '</span>' +
-            (it.snippet ? '<span class="sr-snippet">' + it.snippet + '</span>' : '') +
-          '</span>' +
-        '</a></li>';
-    }).join('');
+    results.innerHTML = items.map(rowHTML).join('');
+  }
+
+  function rowHTML(it, i) {
+    return '<li role="option" class="search-result' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' +
+      '<a href="' + esc(it.url) + '" tabindex="-1">' +
+        '<span class="sr-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>' +
+        '<span class="sr-text">' +
+          (it.section ? '<span class="sr-crumb">' + esc(it.section) + '</span>' : '') +
+          '<span class="sr-title">' + esc(it.title) + '</span>' +
+          (it.snippet ? '<span class="sr-snippet">' + it.snippet + '</span>' : '') +
+        '</span>' +
+      '</a></li>';
+  }
+
+  // Empty-state: show the first pages so the panel is never a blank void.
+  function suggest() {
+    var items = allData.slice(0, 6).map(function (d) {
+      return { title: d.title, section: d.section, url: d.url, snippet: '' };
+    });
+    current = items;
+    active = items.length ? 0 : -1;
+    results.innerHTML = '<li class="search-section-label">Suggested pages</li>' + items.map(rowHTML).join('');
   }
 
   function setActive(i) {
@@ -81,6 +98,7 @@
     var res = await fetch(document.documentElement.getAttribute('data-search-index') || '/index.json');
     if (!res.ok) throw new Error('search index not found (' + res.status + ')');
     var data = await res.json();
+    allData = data;
     fuse = new Fuse(data, {
       keys: [{ name: 'title', weight: 3 }, { name: 'section', weight: 1 }, { name: 'content', weight: 1 }],
       threshold: 0.35, ignoreLocation: true, includeMatches: true, minMatchCharLength: 2
@@ -92,7 +110,7 @@
 
   input.addEventListener('input', async function () {
     var q = input.value.trim();
-    if (!q) { results.innerHTML = ''; current = []; active = -1; return; }
+    if (!q) { if (backend !== 'pagefind' && ready) { suggest(); } else { results.innerHTML = ''; current = []; active = -1; } return; }
     try {
       if (backend === 'pagefind') {
         var pf = window.__pagefind || (window.__pagefind = await import('/pagefind/pagefind.js'));

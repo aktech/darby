@@ -1,4 +1,7 @@
-.chroma { background: var(--bg-code); color: #e4e4e7; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: .9rem 1rem; overflow-x: auto; font-family: var(--font-mono); font-size: .85rem; line-height: 1.6; }
+/* Target pre AND code: the UA stylesheet sets `code { font-family: monospace }`,
+   which overrides inheritance from .chroma, so the code element needs it directly. */
+.chroma, .chroma pre, .chroma code { font-family: var(--font-mono); font-variant-ligatures: contextual; font-feature-settings: "liga" 1, "calt" 1; }
+.chroma { background: var(--bg-code); color: #e4e4e7; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: .9rem 1rem; overflow-x: auto; font-size: .85rem; line-height: 1.6; }
 .chroma .k, .chroma .kd, .chroma .kn { color: #c4b5fd; }
 .chroma .s, .chroma .s1, .chroma .s2 { color: #86efac; }
 .chroma .nf, .chroma .nx { color: #93c5fd; }

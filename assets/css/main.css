@@ -212,3 +212,5 @@ a, button, .tab-btn, .nav-tab, .sidebar-link, .toc a, .search-result a, .version
 .accordion[open] > summary .accordion-chevron { transform: rotate(180deg); }
 .accordion-body { padding: .9rem 1rem; }
 .accordion-body > :first-child { margin-top: 0; } .accordion-body > :last-child { margin-bottom: 0; }
+
+.search-section-label { padding: .5rem .7rem .25rem; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--fg-muted); font-weight: 700; list-style: none; }
