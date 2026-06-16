@@ -1,0 +1,6 @@
+{{- /* Byline for blog posts: date, author, reading time. Separators added in CSS. */ -}}
+<div class="post-meta">
+  {{- with .Date }}<time class="post-date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2, 2006" }}</time>{{ end -}}
+  {{- with .Params.author }}<span class="post-author">{{ . }}</span>{{ end -}}
+  <span class="post-readtime">{{ .ReadingTime }} min read</span>
+</div>

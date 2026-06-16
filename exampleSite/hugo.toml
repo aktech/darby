@@ -24,6 +24,9 @@ title = "Darby"
   [[params.tabs]]
     name = "Reference"
     url = "/reference/"
+  [[params.tabs]]
+    name = "Blog"
+    url = "/blog/"
 
   [[params.versions]]
     name = "v2.0"
