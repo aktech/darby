@@ -14,7 +14,7 @@ The diagram below renders from a plain ` ```mermaid ` code fence: you write the
 fence, the theme draws it (hand-drawn style, themed to your accent color, and it
 re-draws when you toggle dark and light).
 
-```mermaid
+```mermaid {showSource="true"}
 flowchart TB
   MD["Markdown content"] --> D
   CFG["hugo.toml params"] --> D
@@ -54,7 +54,7 @@ flowchart TB
 
 ## A sequence, end to end
 
-```mermaid
+```mermaid {showSource="true"}
 sequenceDiagram
   participant You
   participant Hugo

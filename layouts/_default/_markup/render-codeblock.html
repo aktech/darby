@@ -1,5 +1,14 @@
 {{- if eq .Type "mermaid" -}}
 {{- .Page.Store.Set "hasMermaid" true -}}
+{{- if .Attributes.showsource -}}
+<div class="code-block" data-lang="mermaid">
+  <div class="code-head">
+    <span class="code-lang">mermaid</span>
+    {{ partial "copy-button.html" . }}
+  </div>
+  {{ partial "mermaid-highlight.html" (trim .Inner "\n") }}
+</div>
+{{- end -}}
 <div class="mermaid-wrap"><pre class="mermaid">{{ .Inner }}</pre></div>
 {{- else -}}
 {{- $lang := .Type | default "text" -}}
@@ -10,10 +19,7 @@
   <div class="code-head">
     {{ with $filename }}<span class="code-filename">{{ . }}</span>{{ end }}
     <span class="code-lang">{{ $lang }}</span>
-    <button class="code-copy" data-copy type="button" aria-label="Copy code">
-      <svg class="copy-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <svg class="check-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>
-    </button>
+    {{ partial "copy-button.html" . }}
   </div>
   {{ $hl }}
 </div>

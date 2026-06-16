@@ -14,7 +14,9 @@
 .code-copy.copied .check-icon { display: inline; }
 .code-copy.copied { border-color: #a6e3a1; }
 
-.chroma { background: #1e1e2e; color: #cdd6f4; border: 0; border-radius: 0; margin: 0; padding: .9rem 1rem; overflow-x: auto; font-family: var(--font-mono); font-size: .85rem; line-height: 1.6; }
+/* The <code> inside .chroma has a UA monospace that overrides inheritance, so set the font on it directly. */
+.chroma, .chroma pre, .chroma code { font-family: var(--font-mono); font-variant-ligatures: contextual; font-feature-settings: "liga" 1, "calt" 1; }
+.chroma { background: #1e1e2e; color: #cdd6f4; border: 0; border-radius: 0; margin: 0; padding: .9rem 1rem; overflow-x: auto; font-size: .85rem; line-height: 1.6; }
 .chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr { color: #cba6f7; }      /* keywords - mauve */
 .chroma .kt { color: #f9e2af; }                                                                       /* type keyword - yellow */
 .chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .sc, .chroma .sd, .chroma .sh, .chroma .sx, .chroma .dl, .chroma .sa { color: #a6e3a1; } /* strings - green */

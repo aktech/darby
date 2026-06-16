@@ -1,0 +1,11 @@
+{{- /* Lightweight Mermaid syntax highlighter (Chroma has no mermaid lexer).
+       Input: the raw diagram source string. Output: a .chroma <pre> whose spans
+       reuse the Catppuccin token classes from chroma.css.
+       Keyword pass runs FIRST, before any class="..." spans are injected, so the
+       keyword "class" cannot match inside the markup we add. */ -}}
+{{- $h := . | htmlEscape -}}
+{{- $h = $h | replaceRE `\b(flowchart|graph|subgraph|end|direction|sequenceDiagram|participant|actor|loop|alt|opt|else|par|note|over|activate|deactivate|classDiagram|classDef|class|stateDiagram-v2|stateDiagram|state|erDiagram|gantt|pie|journey|gitGraph|TB|TD|BT|RL|LR)\b` `<span class="k">$1</span>` -}}
+{{- $h = $h | replaceRE `(?m)(%%.*$)` `<span class="c">$1</span>` -}}
+{{- $h = $h | replaceRE `(&#34;[^&]*?&#34;)` `<span class="s">$1</span>` -}}
+{{- $h = $h | replaceRE `(--?(?:&gt;){1,2}|-\.-(?:&gt;)|={2,3}(?:&gt;)|--[xo]|:::|\|)` `<span class="o">$1</span>` -}}
+<pre class="chroma"><code>{{ $h | safeHTML }}</code></pre>
