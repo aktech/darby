@@ -357,6 +357,9 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 /* Blog: standalone prose column + TOC, no docs nav-tree sidebar. */
 .post-layout { display: grid; grid-template-columns: minmax(0,1fr) var(--toc-w); gap: 0; max-width: 70rem; margin: 0 auto; }
 @media (max-width: 1200px) { .post-layout { grid-template-columns: 1fr; } }
+/* Blog index has no TOC, so use the full width and let the header span it. */
+.post-index-layout { grid-template-columns: 1fr; }
+.post-index-layout .post-index { max-width: 100%; }
 .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; color: var(--fg-muted); font-size: .9rem; margin: 0 0 1.5rem; }
 .post-meta > * + *::before { content: "·"; margin-right: .5rem; }
 .post-author { display: inline-flex; align-items: center; gap: .4rem; }
