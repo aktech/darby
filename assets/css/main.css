@@ -276,11 +276,6 @@ a, button, .tab-btn, .nav-tab, .sidebar-link, .toc a, .search-result a, .version
 pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 
 /* ---- Landing: stats strip ---- */
-.lp-stats { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 56rem; margin: .5rem auto 2.75rem; padding: 0; }
-.lp-stats div { text-align: center; padding: .35rem 1.25rem; }
-.lp-stats div + div { border-left: 1px solid var(--border); }
-.lp-stats strong { display: block; font-family: var(--font-heading); font-weight: 600; font-size: 2.1rem; line-height: 1; color: var(--fg); letter-spacing: -.03em; }
-.lp-stats span { display: block; margin-top: .5rem; font-size: .8rem; color: var(--fg-muted); }
 
 /* ---- Landing: bento showcase ---- */
 .lp-showcase { max-width: 66rem; margin: 3.5rem auto; padding: 0 1.5rem; }
@@ -335,7 +330,6 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 .mini-swatches span { width: 2.1rem; height: 2.1rem; border-radius: 50%; box-shadow: var(--shadow); }
 
 @media (max-width: 860px) {
-  .lp-stats { grid-template-columns: repeat(2, 1fr); }
   .bento { grid-template-columns: 1fr; }
   .bento-wide { grid-column: span 1; }
 }
