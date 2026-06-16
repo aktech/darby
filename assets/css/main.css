@@ -276,10 +276,11 @@ a, button, .tab-btn, .nav-tab, .sidebar-link, .toc a, .search-result a, .version
 pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 
 /* ---- Landing: stats strip ---- */
-.lp-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 60rem; margin: 1rem auto 1.5rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-subtle); }
-.lp-stats div { text-align: center; }
-.lp-stats strong { display: block; font-family: var(--font-heading); font-size: 1.9rem; line-height: 1; color: var(--accent); letter-spacing: -.02em; }
-.lp-stats span { display: block; margin-top: .4rem; font-size: .82rem; color: var(--fg-muted); }
+.lp-stats { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 56rem; margin: .5rem auto 2.75rem; padding: 0; }
+.lp-stats div { text-align: center; padding: .35rem 1.25rem; }
+.lp-stats div + div { border-left: 1px solid var(--border); }
+.lp-stats strong { display: block; font-family: var(--font-heading); font-weight: 600; font-size: 2.1rem; line-height: 1; color: var(--fg); letter-spacing: -.03em; }
+.lp-stats span { display: block; margin-top: .5rem; font-size: .8rem; color: var(--fg-muted); }
 
 /* ---- Landing: bento showcase ---- */
 .lp-showcase { max-width: 66rem; margin: 3.5rem auto; padding: 0 1.5rem; }
