@@ -7,13 +7,13 @@ description = "Get a documentation site running with the theme in about five min
 This quickstart takes you from nothing to a running documentation site in about five minutes. You will install Hugo, create a new site, add the theme, write your first page, and start the live preview server.
 
 {{< callout type="note" title="Before you start" >}}
-You need [Hugo Extended](https://gohugo.io/installation/) version 0.128 or newer and a recent version of Go (1.20+) if you plan to use Hugo Modules. The Extended edition is required because the theme uses SCSS.
+You need [Hugo](https://gohugo.io/installation/) version 0.128 or newer and a recent version of Go (1.20+) if you plan to use Hugo Modules. The theme is plain CSS with no build step, so either the standard or Extended edition works.
 {{< /callout >}}
 
 ## Steps at a glance
 
 {{< steps >}}
-1. Install Hugo Extended and verify the version.
+1. Install Hugo and verify the version.
 2. Create a new Hugo site and initialize a module.
 3. Add the theme and the required markup config.
 4. Write your first documentation page.
@@ -22,7 +22,7 @@ You need [Hugo Extended](https://gohugo.io/installation/) version 0.128 or newer
 
 ## Install
 
-First, install Hugo Extended. Pick the tab that matches your platform.
+First, install Hugo. Pick the tab that matches your platform.
 
 {{< tabs >}}
 {{< tab title="macOS" >}}
@@ -69,10 +69,6 @@ hugo mod init github.com/darby/docs
 # Add the theme as a module dependency
 hugo mod get github.com/aktech/darby
 ```
-
-{{< callout type="warning" >}}
-This is a warning: you must use Hugo **Extended**. The standard edition cannot compile the theme's SCSS and the build will fail with a "this feature is not available in your current Hugo version" error. Run `hugo version` and check that the output contains the word `extended` before going further.
-{{< /callout >}}
 
 ## Configure
 

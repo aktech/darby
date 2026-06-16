@@ -10,7 +10,7 @@ an auto-generated sidebar, an on-page table of contents, and pluggable search.
 
 ## Install (Hugo Modules)
 
-Requires Hugo extended. From your site root:
+Requires Hugo 0.128+ (standard or extended edition). From your site root:
 
 ```bash
 hugo mod init github.com/you/your-docs

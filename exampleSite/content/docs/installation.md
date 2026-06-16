@@ -10,7 +10,7 @@ There are two supported ways to install the theme: as a Hugo Module (recommended
 
 Before installing, make sure you have the following:
 
-- **Hugo Extended**, version 0.128 or newer. The Extended edition is required because the theme compiles SCSS. Run `hugo version` and confirm the output contains the word `extended`.
+- **Hugo**, version 0.128 or newer. The theme ships plain CSS with no SCSS or build step, so either the standard or Extended edition works.
 - **Go**, version 1.20 or newer, but only if you install via Hugo Modules. The module system uses Go's tooling to fetch and pin dependencies.
 - **Git**, for either installation method.
 
@@ -105,10 +105,6 @@ hugo server
 Open any docs page and check three things: the sidebar navigation appears, a callout renders as a styled box (not escaped text), and the dark/light toggle works.
 
 ## Troubleshooting
-
-### "this feature is not available in your current Hugo version"
-
-You are running the standard edition of Hugo, not Extended. Reinstall Hugo Extended and confirm with `hugo version` that the output contains `extended`.
 
 ### Shortcodes show up as escaped text
 
