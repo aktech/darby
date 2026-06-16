@@ -394,7 +394,7 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 .post-list-title a { color: var(--fg); }
 .post-list-title a:hover { color: var(--accent); }
 .post-list .post-meta { margin: 0 0 .5rem; }
-.post-summary { color: var(--fg-muted); margin: 0; }
+.post-summary { color: var(--post-summary); font-size: .88rem; line-height: 1.55; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .post-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
 .post-tag { font-size: .82rem; color: var(--fg-muted); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 999px; padding: .2rem .7rem; }
 .post-tag:hover { color: var(--accent); border-color: var(--accent); }

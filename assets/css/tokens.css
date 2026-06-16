@@ -11,6 +11,7 @@
   --bg-code: #0f172a;         /* slate-900 */
   --fg: #1e293b;              /* slate-800 */
   --fg-muted: #64748b;        /* slate-500 */
+  --post-summary: #475569;    /* slate-600: post preview text (override via params.summaryColor) */
   --border: #e2e8f0;          /* slate-200 */
   --sidebar-active-bg: #ece7f8; /* light purple tint */
 
@@ -34,6 +35,7 @@
   --bg-code: #0b0b0d;         /* code blocks, distinguished by their border */
   --fg: #ededef;
   --fg-muted: #9a9aa2;
+  --post-summary: #b6b6bf;    /* lifted for AA on the near-black bg */
   --border: #262629;
   --sidebar-active-bg: #1f1838; /* subtle purple tint to tie with the accent */
   --shadow: 0 1px 2px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.35);
