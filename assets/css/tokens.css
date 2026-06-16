@@ -24,7 +24,11 @@
 }
 
 [data-theme="dark"] {
-  --accent: var(--accent-dark, #331c74);
+  /* Dark mode needs a LIGHT accent for AA contrast on the near-black bg.
+     #331c74 itself is unreadable here, so links/active text use a lifted purple,
+     and accent-filled surfaces (buttons, badges) get dark text via --accent-contrast. */
+  --accent: var(--accent-dark, #a78bfa);
+  --accent-contrast: #1e1340;
   --bg: #181818;
   --bg-subtle: #202022;
   --bg-code: #121212;

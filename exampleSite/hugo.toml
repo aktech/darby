@@ -8,7 +8,7 @@ title = "Darby"
 
 [params]
   accent = "#331c74"
-  accentDark = "#331c74"
+  accentDark = "#a78bfa"
   repo = "https://github.com/aktech/darby"
   logo = "/darby-logo.jpg"
   editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
