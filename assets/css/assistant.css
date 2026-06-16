@@ -190,6 +190,7 @@
   color: var(--accent);
   cursor: pointer;
   font-size: .88rem;
+  font-weight: 500;
 }
 .asst-fu:hover { background: var(--bg-subtle); border-color: var(--accent); }
 
