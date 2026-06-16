@@ -93,6 +93,20 @@ The paragraph above belongs to one train of thought.
 
 The paragraph below starts a fresh one, and the rule above makes the break feel intentional rather than abrupt.
 
+## Images
+
+Insert an image with standard Markdown. Put the file in your site's `static/` folder and reference it with an absolute path, then add descriptive alt text for accessibility:
+
+```markdown
+![A Darby banner](/sample-image.png "Optional title shown on hover")
+```
+
+It renders responsively, capped to the content width with rounded corners:
+
+![A Darby banner](/sample-image.png "Darby, a beautiful Hugo docs theme")
+
+For an external image, use its full URL instead of a local path. Always include alt text describing the image.
+
 ## Callouts
 
 Callouts are the theme's shortcode-based admonitions. There are five types, each with its own icon and color. Use them to pull a single important sentence out of the flow.
