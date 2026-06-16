@@ -14,14 +14,21 @@
           GitHub</a>{{ end }}
       </div>
     </div>
-    {{ with .Params.heroCode }}
+    {{ if .Params.heroCodeHTML }}
+    <div class="lp-hero-visual" aria-hidden="true">
+      <div class="code-window">
+        <div class="cw-bar"><span class="cw-dot"></span><span class="cw-dot"></span><span class="cw-dot"></span><span class="cw-name">{{ .Params.heroCodeName | default "example" }}</span></div>
+        <pre class="cw-body">{{ .Params.heroCodeHTML | safeHTML }}</pre>
+      </div>
+    </div>
+    {{ else }}{{ with .Params.heroCode }}
     <div class="lp-hero-visual" aria-hidden="true">
       <div class="code-window">
         <div class="cw-bar"><span class="cw-dot"></span><span class="cw-dot"></span><span class="cw-dot"></span><span class="cw-name">{{ $.Params.heroCodeName | default "example" }}</span></div>
         <pre class="cw-body">{{ . }}</pre>
       </div>
     </div>
-    {{ end }}
+    {{ end }}{{ end }}
   </section>
 
   {{ with .Params.features }}
@@ -32,9 +39,10 @@
     </div>
     <div class="bento">
       {{ range . }}
-      <div class="bento-card{{ if .wide }} bento-wide{{ end }}">
-        <div class="bento-demo"><span class="bento-icon">{{ partial "feature-icon.html" (.icon | default "config") }}</span></div>
-        <div class="bento-meta"><h3>{{ .title }}</h3>{{ with .body }}<p>{{ . }}</p>{{ end }}</div>
+      {{ $f := . }}
+      <div class="bento-card{{ if $f.wide }} bento-wide{{ end }}">
+        {{ if $f.demo }}{{ partial "bento-demo.html" $f.demo }}{{ else }}<div class="bento-demo"><span class="bento-icon">{{ partial "feature-icon.html" ($f.icon | default "config") }}</span></div>{{ end }}
+        <div class="bento-meta"><h3>{{ $f.title }}</h3>{{ with $f.body }}<p>{{ . }}</p>{{ end }}</div>
       </div>
       {{ end }}
     </div>

@@ -6,46 +6,58 @@ heroTitle = "Documentation your users will love"
 heroSubtitle = "Darby is a minimal, fast, and beautiful Hugo theme for technical documentation. Dark mode, search, callouts, and gorgeous code blocks, all out of the box."
 ctaText = "Get started"
 ctaURL = "/docs/quickstart/"
-heroCodeName = "terminal"
-heroCode = """
-$ hugo new site docs && cd docs
-$ hugo mod init example.com/docs
-$ hugo mod get github.com/aktech/darby
+heroCodeName = "quickstart.md"
+heroCodeHTML = """
+<span class="cw-h"># Quickstart</span>
 
-Dark mode, search, and code blocks
-work out of the box.
-"""
-featuresTitle = "Everything a docs site needs"
-featuresSubtitle = "Batteries included. Write Markdown, drop in a shortcode when you need one, and ship."
+Install the theme and start writing.
+
+<span class="cw-f">```bash</span>
+hugo mod get github.com/aktech/darby
+<span class="cw-f">```</span>
+
+<span class="cw-note">&gt; [!NOTE]
+&gt; Dark mode, search, and code blocks
+&gt; work out of the box.</span>"""
+featuresTitle = "Built for documentation"
+featuresSubtitle = "Every feature you need to publish docs that feel premium, demonstrated below."
 
 ctaBandTitle = "Ready to build your docs?"
 ctaBandSubtitle = "Spin up a polished documentation site in minutes, not days."
 
 [[features]]
-  icon = "theme"
-  title = "Dark & light modes"
-  body = "A system-aware theme toggle with no flash of the wrong theme on load."
+  demo = "code"
   wide = true
+  title = "Gorgeous code blocks"
+  body = "Catppuccin highlighting, filename tabs, copy buttons, line highlights, and Fira Code ligatures."
 [[features]]
-  icon = "search"
+  demo = "search"
   title = "Instant search"
-  body = "Fast client-side search out of the box, with Pagefind as a drop-in upgrade."
+  body = "Client-side, keyboard-first (⌘K), zero config."
 [[features]]
-  icon = "code"
-  title = "Beautiful code"
-  body = "Filename tabs, copy buttons, language labels, line highlighting, and Fira Code."
+  demo = "themes"
+  title = "Dark & light"
+  body = "System-aware, no flash, instant toggle."
 [[features]]
-  icon = "callout"
-  title = "Callouts & shortcodes"
-  body = "Note, tip, warning and caution callouts, plus tabs, cards, steps and accordions."
+  demo = "callout"
+  title = "Callouts & alerts"
+  body = "Note, tip, warning, caution, plus tabs, cards, steps, accordions."
 [[features]]
-  icon = "nav"
-  title = "Auto navigation"
-  body = "A collapsible sidebar, on-page table of contents, and prev/next links, generated for you."
+  demo = "diagram"
+  title = "Mermaid diagrams"
+  body = "Hand-drawn, themed to your accent, from a plain code fence."
 [[features]]
-  icon = "config"
-  title = "Fully themeable"
-  body = "Swap the accent color and fonts from config. No build step, no SCSS required."
+  demo = "swatches"
+  title = "Themeable"
+  body = "Swap accent and fonts from config. No SCSS, no build step."
+[[features]]
+  demo = "nav"
+  title = "Effortless navigation"
+  body = "Collapsible sidebar, on-page table of contents, breadcrumbs, and prev / next, generated for you."
+[[features]]
+  demo = "oss"
+  title = "Open source"
+  body = "MIT licensed and free, built on Hugo's blazing-fast builds."
 +++
 
 Darby is built and documented with itself, so this entire site is a living example of
