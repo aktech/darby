@@ -333,3 +333,10 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
   .bento { grid-template-columns: 1fr; }
   .bento-wide { grid-column: span 1; }
 }
+
+/* bento: mini nav + open-source visuals */
+.mini-nav { width: 8.5rem; display: flex; flex-direction: column; gap: .5rem; }
+.mini-nav .mn-item { height: .55rem; border-radius: 4px; background: color-mix(in srgb, var(--fg-muted) 28%, transparent); }
+.mini-nav .mn-item.active { background: var(--accent); }
+.mini-nav .mn-item.short { width: 62%; }
+.mini-oss { width: 3.4rem; height: 3.4rem; color: var(--accent); }
