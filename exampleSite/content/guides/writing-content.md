@@ -159,10 +159,10 @@ Cards turn a list of links into a visual grid, which works well for section land
 
 ```go-html-template
 {{</* cards */>}}
-{{</* card title="Writing Content" href="/guides/writing-content/" icon="✍️" */>}}
+{{</* card title="Writing Content" href="/guides/writing-content/" icon="pencil" */>}}
 Front matter, shortcodes, alerts, and code blocks.
 {{</* /card */>}}
-{{</* card title="Deploying" href="/guides/deploying/" icon="🚀" */>}}
+{{</* card title="Deploying" href="/guides/deploying/" icon="rocket" */>}}
 Build the site and ship it to your host of choice.
 {{</* /card */>}}
 {{</* /cards */>}}
@@ -171,10 +171,10 @@ Build the site and ship it to your host of choice.
 Rendered:
 
 {{< cards >}}
-{{< card title="Writing Content" href="/guides/writing-content/" icon="✍️" >}}
+{{< card title="Writing Content" href="/guides/writing-content/" icon="pencil" >}}
 Front matter, shortcodes, alerts, and code blocks.
 {{< /card >}}
-{{< card title="Deploying" href="/guides/deploying/" icon="🚀" >}}
+{{< card title="Deploying" href="/guides/deploying/" icon="rocket" >}}
 Build the site and ship it to your host of choice.
 {{< /card >}}
 {{< /cards >}}

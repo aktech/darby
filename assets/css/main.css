@@ -82,6 +82,7 @@ a:hover { text-decoration: underline; }
 .card-link { position: absolute; inset: 0; z-index: 1; }
 .card { display: block; padding: 1.1rem 1.2rem; border: 1px solid var(--border); border-radius: var(--radius-lg); color: var(--fg); transition: border-color .15s, transform .15s; }
 .card-wrap:hover .card { border-color: var(--accent); transform: translateY(-2px); }
+.card-icon { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 10px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); margin-bottom: .6rem; }
 .card-title { margin: .25rem 0 .35rem; font-size: 1rem; }
 .card-body { color: var(--fg-muted); font-size: .9rem; }
 .steps { counter-reset: step; padding-left: 1.75rem; border-left: 1px solid var(--border); margin-left: .5rem; }

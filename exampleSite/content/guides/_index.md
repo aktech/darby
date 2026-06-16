@@ -15,10 +15,10 @@ If you are brand new, read **Writing Content** first so the shortcodes and front
 ## In this section
 
 {{< cards >}}
-{{< card title="Writing Content" href="/guides/writing-content/" icon="✍️" >}}
+{{< card title="Writing Content" href="/guides/writing-content/" icon="pencil" >}}
 Author pages with front matter, callouts, tabs, cards, steps, GitHub-style alerts, and code blocks with filenames and line highlighting.
 {{< /card >}}
-{{< card title="Deploying" href="/guides/deploying/" icon="🚀" >}}
+{{< card title="Deploying" href="/guides/deploying/" icon="rocket" >}}
 Build the site, choose a search backend (Fuse or Pagefind), and ship to Netlify, Vercel, or GitHub Pages with ready-to-paste config.
 {{< /card >}}
 {{< /cards >}}
