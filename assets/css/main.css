@@ -9,6 +9,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.25; }
+/* Form controls do not inherit font-family by default; make them use the theme fonts. */
+button, input, select, textarea { font-family: inherit; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .doc { width: 100%; max-width: var(--maxw-content); justify-self: start; margin: 0; padding: 2rem 2.5rem 6rem; }
