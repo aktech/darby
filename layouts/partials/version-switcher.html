@@ -3,7 +3,7 @@
 <div class="version-switcher">
   <button class="version-btn" type="button" aria-haspopup="true">{{ $current | default (index . 0).name }} <span class="version-caret" aria-hidden="true">&#9662;</span></button>
   <ul class="version-menu">
-    {{ range . }}<li><a href="{{ .url | relURL }}"{{ if .current }} aria-current="true"{{ end }}>{{ .name }}</a></li>{{ end }}
+    {{ range . }}<li><a href="{{ partial "url.html" .url }}"{{ if .current }} aria-current="true"{{ end }}>{{ .name }}</a></li>{{ end }}
   </ul>
 </div>
 {{ end }}{{ end }}

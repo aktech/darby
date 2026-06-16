@@ -1,0 +1,14 @@
+{
+  "name": "darby-assistant-tooling",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Optional CI tooling for Darby's Ask Assistant: builds the static retrieval index. Not required for the core theme.",
+  "scripts": {
+    "build-index": "node scripts/build-index.mjs",
+    "test:assistant": "node --test assets/js/assistant/"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.2.0"
+  }
+}

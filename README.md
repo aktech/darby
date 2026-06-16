@@ -87,6 +87,65 @@ Other params:
 - `logo` / `logoDark`: path to a logo image shown in the top bar (place the file in `static/`). Set only `logo` to use one image in both modes, or both for a separate dark-mode logo.
 - `favicon`: path to a favicon image (place it in `static/`); used for the browser tab icon and apple-touch-icon.
 
+## Ask Assistant (AI docs Q&A)
+
+An opt-in "Ask AI" panel that answers questions about your docs. It is fully
+client-side by default: a small embedding model and a small instruct model run
+in the visitor's browser. There is no server and no API key. Indexing runs once
+in CI; the browser only embeds the question, ranks the prebuilt chunks, and
+writes a grounded answer that cites the sources it used.
+
+Models (loaded from the Hugging Face hub, then cached in the browser so they
+download only once):
+
+- Embedding: `bge-small-en-v1.5` (q8 ONNX, 384-dim). Used in both CI and the
+  browser, so document and query vectors share one space.
+- Generation: `Llama-3.2-1B-Instruct`. WebGPU loads the dedicated q4f16 build;
+  browsers without WebGPU use the q8 build on the wasm/CPU backend. (This is the
+  model the transformers.js WebGPU chat demo ships, so it runs correctly in the
+  browser ONNX runtime; larger models such as Qwen2.5-1.5B produce degenerate
+  output there.)
+
+Enable it:
+
+```toml
+[params.assistant]
+  enable = true
+  backend = "browser"            # default; fully client-side, no server
+  indexPath = "assistant-index.json"
+  suggestions = [
+    "How do I change the accent color?",
+    "How do I deploy the site?",
+  ]
+```
+
+Build the index (a Node step, only needed when the assistant is enabled). It
+reads the rendered site, so run `hugo` first:
+
+```bash
+npm install
+hugo --source exampleSite
+npm run build-index -- --source exampleSite/public --base "https://your.site/" --out exampleSite/static/assistant-index.json
+```
+
+For the demo's ~108 chunks the index is about 925 KiB (roughly 8.8 KiB per
+chunk, most of it the 384-float vector). The GitHub Pages workflow builds it
+automatically on deploy.
+
+Optional hosted backend: instead of the in-browser model you can point at any
+OpenAI-compatible chat endpoint (OpenAI, OpenRouter, a local Ollama or
+llama.cpp server). Retrieval is identical; only the final answer call changes.
+
+```toml
+[params.assistant]
+  enable = true
+  backend = "hosted"
+  [params.assistant.hosted]
+    baseURL = "http://localhost:11434/v1"   # e.g. a local Ollama server
+    model = "llama3.1"
+    apiKey = ""   # sent from the browser, so only use keyless/local/proxied servers
+```
+
 ## Authoring
 
 Front matter per page:

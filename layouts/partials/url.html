@@ -1,0 +1,12 @@
+{{- /* Subpath-safe URL for author-supplied paths.
+   Hugo's relURL/relLangURL only prepend the baseURL subpath when the input has
+   NO leading slash ("docs/" -> "/darby/docs/"), but NOT with one ("/docs/" ->
+   "/docs/"). Theme config uses leading-slash paths, so they break on a
+   subdirectory deploy (example.com/darby/). Strip one leading slash, then
+   relLangURL. Absolute URLs pass through unchanged. Outputs the URL string. */ -}}
+{{- $u := . -}}
+{{- if or (hasPrefix $u "http://") (hasPrefix $u "https://") (hasPrefix $u "//") (hasPrefix $u "mailto:") -}}
+{{- $u -}}
+{{- else -}}
+{{- $u | strings.TrimPrefix "/" | relLangURL -}}
+{{- end -}}

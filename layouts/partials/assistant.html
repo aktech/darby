@@ -1,0 +1,71 @@
+{{/* Ask Assistant: body-level slide-in panel + runtime wiring.
+     Opt-in: only rendered when [params.assistant] enable = true.
+     Default backend is fully client-side (in-browser model, no server, no key). */}}
+{{ $a := .Site.Params.assistant }}
+{{ if and $a (eq ($a.enable | default false) true) }}
+  {{ $dir := "js/assistant" }}
+  {{/* Publish every module so native ESM relative imports (./config.mjs, ...) resolve.
+       Not fingerprinted on purpose: stable names keep the import graph intact. */}}
+  {{ $mods := slice "config" "embed" "index-io" "rank" "prompt" "answerer" "worker-client" "worker" "ui" }}
+  {{ $published := slice }}
+  {{ range $mods }}
+    {{ with resources.Get (printf "%s/%s.mjs" $dir .) }}
+      {{ $published = $published | append .RelPermalink }}
+    {{ end }}
+  {{ end }}
+  {{ $ui := resources.Get (printf "%s/ui.mjs" $dir) }}
+  {{ $worker := resources.Get (printf "%s/worker.mjs" $dir) }}
+  {{ $indexUrl := partial "url.html" ($a.indexPath | default "assistant-index.json") }}
+
+  {{ $config := dict
+      "workerUrl" $worker.RelPermalink
+      "indexUrl" $indexUrl
+      "backend" ($a.backend | default "browser")
+  }}
+  {{ if eq ($a.backend | default "browser") "hosted" }}
+    {{ $config = merge $config (dict "baseURL" ($a.hosted.baseURL | default "") "model" ($a.hosted.model | default "") "apiKey" ($a.hosted.apiKey | default "")) }}
+  {{ end }}
+
+  {{ $suggestions := $a.suggestions | default (slice) }}
+
+  <aside id="assistant-panel" class="assistant-panel" aria-label="Ask Assistant" role="dialog" aria-modal="false" hidden>
+    <header class="asst-head">
+      <span class="asst-title">
+        <svg class="asst-spark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>
+        Assistant</span>
+      <div class="asst-head-actions">
+        <button type="button" class="asst-icon-btn" data-assistant-clear aria-label="Clear conversation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+        </button>
+        <button type="button" class="asst-icon-btn" data-assistant-close aria-label="Close assistant">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="asst-thread" data-assistant-thread>
+      {{ with $suggestions }}
+        <div class="asst-empty">
+          <p class="asst-empty-hint">Ask anything about {{ $.Site.Title }}.</p>
+          <div class="asst-followups" hidden></div>
+          <div class="asst-starters">
+            {{ range . }}<button type="button" class="asst-fu" data-followup>{{ . }}</button>{{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+
+    <form class="asst-form" data-assistant-form>
+      <p class="asst-disclaimer">Responses are generated using AI and may contain mistakes.</p>
+      <div class="asst-input-row">
+        <textarea data-assistant-input class="asst-input" rows="1" placeholder="Ask a question…" aria-label="Ask a question"></textarea>
+        <button type="submit" class="asst-send" aria-label="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </button>
+      </div>
+    </form>
+  </aside>
+
+  <script id="darby-assistant-config" type="application/json">{{ $config | jsonify | safeJS }}</script>
+  <script type="module" src="{{ $ui.RelPermalink }}"></script>
+{{ end }}

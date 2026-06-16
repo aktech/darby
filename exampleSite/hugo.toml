@@ -37,6 +37,25 @@ title = "Darby"
     enable = true
     backend = "fuse"
 
+  # Ask Assistant: client-side docs Q&A. Default backend runs the model fully
+  # in the browser (no server, no API key). The index is built in CI by
+  # `npm run build-index` and shipped as a static file.
+  [params.assistant]
+    enable = true
+    backend = "browser"   # "browser" (default, no backend) or "hosted"
+    indexPath = "assistant-index.json"
+    suggestions = [
+      "How do I change the accent color?",
+      "How do I deploy the site to GitHub Pages?",
+      "How do I add a Mermaid diagram?",
+    ]
+    # For a hosted OpenAI-compatible backend instead (optional):
+    # backend = "hosted"
+    # [params.assistant.hosted]
+    #   baseURL = "https://api.openai.com/v1"
+    #   model = "gpt-4o-mini"
+    #   apiKey = ""   # exposed to the browser; use only for local/proxied servers
+
   [params.footer]
     text = "Copyright Darby, Inc."
 

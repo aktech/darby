@@ -5,15 +5,16 @@
   <a class="brand" href="{{ .Site.Home.RelPermalink }}">
     {{ $logo := .Site.Params.logo }}{{ $logoDark := .Site.Params.logoDark }}
     {{ if and $logo $logoDark }}
-      <img src="{{ $logo | relURL }}" alt="{{ .Site.Title }}" class="brand-logo light-only">
-      <img src="{{ $logoDark | relURL }}" alt="{{ .Site.Title }}" class="brand-logo dark-only">
+      <img src="{{ partial "url.html" $logo }}" alt="{{ .Site.Title }}" class="brand-logo light-only">
+      <img src="{{ partial "url.html" $logoDark }}" alt="{{ .Site.Title }}" class="brand-logo dark-only">
     {{ else if $logo }}
-      <img src="{{ $logo | relURL }}" alt="{{ .Site.Title }}" class="brand-logo">
+      <img src="{{ partial "url.html" $logo }}" alt="{{ .Site.Title }}" class="brand-logo">
     {{ end }}
     <span class="brand-name">{{ .Site.Title }}</span>
   </a>
   {{ partial "tabs.html" . }}
   <div class="topbar-right">
+    {{ partial "assistant-trigger.html" . }}
     {{ if ne (.Site.Params.search.enable | default true) false }}{{ partial "search.html" . }}{{ end }}
     {{ partial "version-switcher.html" . }}
     {{ with .Site.Params.repo }}<a class="topbar-link" href="{{ . }}" aria-label="GitHub repository">

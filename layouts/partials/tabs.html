@@ -1,8 +1,9 @@
 {{ with .Site.Params.tabs }}
 <nav class="nav-tabs" aria-label="Sections">
   {{ range . }}
-    {{ $active := hasPrefix $.RelPermalink (.url | relLangURL) }}
-    <a class="nav-tab{{ if $active }} active{{ end }}" href="{{ .url | relURL }}">{{ .name }}</a>
+    {{ $href := partial "url.html" .url }}
+    {{ $active := hasPrefix $.RelPermalink $href }}
+    <a class="nav-tab{{ if $active }} active{{ end }}" href="{{ $href }}">{{ .name }}</a>
   {{ end }}
 </nav>
 {{ end }}

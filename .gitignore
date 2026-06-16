@@ -4,3 +4,5 @@ resources/
 .hugo_build.lock
 node_modules/
 docs/superpowers/
+# Generated Ask Assistant index (built by `npm run build-index` / CI)
+exampleSite/static/assistant-index.json
