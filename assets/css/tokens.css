@@ -29,12 +29,12 @@
      and accent-filled surfaces (buttons, badges) get dark text via --accent-contrast. */
   --accent: var(--accent-dark, #a78bfa);
   --accent-contrast: #1e1340;
-  --bg: #181818;
-  --bg-subtle: #202022;
-  --bg-code: #121212;
-  --fg: #e8e8ea;
+  --bg: #000000;
+  --bg-subtle: #141416;       /* raised surfaces on black (code header, tabs, search) */
+  --bg-code: #0b0b0d;         /* code blocks, distinguished by their border */
+  --fg: #ededef;
   --fg-muted: #9a9aa2;
-  --border: #2c2c2f;
-  --sidebar-active-bg: #2a2250; /* subtle purple tint to tie with the accent */
+  --border: #262629;
+  --sidebar-active-bg: #1f1838; /* subtle purple tint to tie with the accent */
   --shadow: 0 1px 2px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.35);
 }
