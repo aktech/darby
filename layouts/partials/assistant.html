@@ -6,7 +6,7 @@
   {{ $dir := "js/assistant" }}
   {{/* Publish every module so native ESM relative imports (./config.mjs, ...) resolve.
        Not fingerprinted on purpose: stable names keep the import graph intact. */}}
-  {{ $mods := slice "config" "embed" "index-io" "rank" "prompt" "answerer" "worker-client" "worker" "ui" }}
+  {{ $mods := slice "config" "embed" "index-io" "rank" "prompt" "highlight" "markdown" "answerer" "worker-client" "worker" "ui" }}
   {{ $published := slice }}
   {{ range $mods }}
     {{ with resources.Get (printf "%s/%s.mjs" $dir .) }}

@@ -167,6 +167,14 @@
   text-decoration: none;
   font-weight: 700;
 }
+/* fenced code blocks in answers: reuse the theme's Catppuccin .chroma styling,
+   just round the corners and give it breathing room inside the panel */
+.asst-answer pre.chroma {
+  border-radius: 8px;
+  margin: .6rem 0;
+  font-size: .82rem;
+}
+.asst-answer pre.chroma code { background: none; padding: 0; }
 
 /* follow-ups */
 .asst-fu-label { font-size: .78rem; color: var(--fg-muted); margin-bottom: .4rem; text-transform: uppercase; letter-spacing: .03em; }

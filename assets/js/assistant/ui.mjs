@@ -6,6 +6,7 @@ import { RETRIEVAL } from "./config.mjs";
 import { deserializeIndex } from "./index-io.mjs";
 import { topK } from "./rank.mjs";
 import { buildAnswerMessages, buildFollowupMessages, parseFollowups, cleanAnswer, suggestFromChunks } from "./prompt.mjs";
+import { renderMarkdown, escapeHtml } from "./markdown.mjs";
 import { WorkerClient } from "./worker-client.mjs";
 import { createAnswerer } from "./answerer.mjs";
 
@@ -298,55 +299,7 @@ function renderError(target, message) {
   s.hidden = false;
 }
 
-/* ---------------- tiny markdown + citations ---------------- */
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-}
-
-function renderInline(s, hits) {
-  let t = escapeHtml(s);
-  t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
-  t = t.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-  t = t.replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  // [1] citation -> link to the matching source
-  t = t.replace(/\[(\d+)\]/g, (m, n) => {
-    const h = hits[Number(n) - 1];
-    return h ? `<a class="asst-cite" href="${h.url}">[${n}]</a>` : m;
-  });
-  return t;
-}
-
-function renderMarkdown(src, hits) {
-  const lines = src.split("\n");
-  let html = "";
-  let list = null;
-  const flush = () => {
-    if (list) {
-      html += `<${list.tag}>${list.items.join("")}</${list.tag}>`;
-      list = null;
-    }
-  };
-  for (const line of lines) {
-    const ul = line.match(/^\s*[-*]\s+(.*)/);
-    const ol = line.match(/^\s*\d+[.)]\s+(.*)/);
-    if (ul || ol) {
-      const tag = ul ? "ul" : "ol";
-      if (!list || list.tag !== tag) {
-        flush();
-        list = { tag, items: [] };
-      }
-      list.items.push(`<li>${renderInline((ul || ol)[1], hits)}</li>`);
-    } else if (line.trim() === "") {
-      flush();
-    } else {
-      flush();
-      html += `<p>${renderInline(line, hits)}</p>`;
-    }
-  }
-  flush();
-  return html;
-}
+/* ---------------- helpers ---------------- */
 
 function prettyPath(url) {
   try {
