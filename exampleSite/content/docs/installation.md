@@ -30,7 +30,7 @@ Pick one of the two methods below. They are mutually exclusive: do not mix a mod
 hugo mod init github.com/darby/docs
 
 # 2. Pull the theme as a versioned dependency
-hugo mod get github.com/darby/hugo-docs-theme@latest
+hugo mod get github.com/aktech/darby@latest
 
 # 3. Tidy the module graph
 hugo mod tidy
@@ -40,10 +40,10 @@ hugo mod tidy
 ```bash
 # From the root of your Hugo site
 # 1. Add the theme as a submodule under themes/
-git submodule add https://github.com/darby/hugo-docs-theme themes/hugo-docs-theme
+git submodule add https://github.com/aktech/darby themes/darby
 
 # 2. Pin the theme in hugo.toml instead of importing a module:
-#    theme = "hugo-docs-theme"
+#    theme = "darby"
 
 # 3. When cloning the site later, pull the submodule too
 git submodule update --init --recursive
@@ -56,13 +56,13 @@ If you used the module method, add the import to `hugo.toml`:
 ```toml {filename="hugo.toml"}
 [module]
   [[module.imports]]
-    path = "github.com/darby/hugo-docs-theme"
+    path = "github.com/aktech/darby"
 ```
 
 If you used the submodule method, set the theme by name instead:
 
 ```toml {filename="hugo.toml"}
-theme = "hugo-docs-theme"
+theme = "darby"
 ```
 
 ## Required markup config

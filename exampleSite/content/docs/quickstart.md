@@ -67,7 +67,7 @@ cd darby-docs
 hugo mod init github.com/darby/docs
 
 # Add the theme as a module dependency
-hugo mod get github.com/darby/hugo-docs-theme
+hugo mod get github.com/aktech/darby
 ```
 
 {{< callout type="warning" >}}
@@ -85,7 +85,7 @@ title = "Darby Docs"
 
 [module]
   [[module.imports]]
-    path = "github.com/darby/hugo-docs-theme"
+    path = "github.com/aktech/darby"
 
 [params]
   accent = "#6366f1"
