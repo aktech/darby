@@ -7,7 +7,12 @@ body {
   color: var(--fg);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  /* Sticky footer: fill the viewport so the footer sits at the bottom on short pages. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+body > main { flex: 1 0 auto; }
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.25; }
 /* Form controls do not inherit font-family by default; make them use the theme fonts. */
 button, input, select, textarea { font-family: inherit; }
