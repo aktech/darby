@@ -11,6 +11,7 @@ title = "Darby"
   accentDark = "#a78bfa"
   repo = "https://github.com/aktech/darby"
   logo = "/darby-logo.jpg"
+  favicon = "/favicon.png"
   editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
   showLastUpdated = true
 

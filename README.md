@@ -1,4 +1,8 @@
-# Darby
+<p align="center">
+  <img src="exampleSite/static/darby-logo.jpg" alt="Darby" width="96" height="96">
+</p>
+
+<h1 align="center">Darby</h1>
 
 Darby is a minimal, beautiful Hugo documentation theme. Dark and light modes, customizable
 fonts and accent color, code blocks with copy buttons and filename labels, callouts,
@@ -81,6 +85,7 @@ Other params:
 - `[params.footer]` with `text`: footer line.
 - `[[params.social]]`: social links.
 - `logo` / `logoDark`: path to a logo image shown in the top bar (place the file in `static/`). Set only `logo` to use one image in both modes, or both for a separate dark-mode logo.
+- `favicon`: path to a favicon image (place it in `static/`); used for the browser tab icon and apple-touch-icon.
 
 ## Authoring
 
