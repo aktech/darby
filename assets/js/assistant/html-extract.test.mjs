@@ -75,6 +75,17 @@ test("rendered code blocks become fenced markdown (lang preserved, chrome droppe
   assert.ok(text.includes("Trailing prose."));
 });
 
+test("code-block extraction works on MINIFIED html (unquoted attributes)", () => {
+  // Hugo's --minify (used in CI) drops attribute quotes: class=chroma, not class="chroma".
+  const html = `<title>T</title><article class=doc><h1>H</h1>` +
+    `<div class=code-block data-lang=bash><div class=code-head><span class=code-filename>run.sh</span><span class=code-lang>bash</span><button class=code-copy></button></div>` +
+    `<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>npm install</span></span></code></pre></div></div></article>`;
+  const text = extractPage(html).sections[0].text;
+  assert.ok(text.includes("```bash"), "fence + language from minified markup");
+  assert.ok(text.includes("npm install"));
+  assert.ok(!text.includes("run.sh"), "filename chrome dropped");
+});
+
 test("extractPage decodes HTML entities", () => {
   const page = extractPage(`<title>T</title><article class=doc><h1>H</h1><p>a &amp; b &lt; c &#34;d&#34;</p></article>`);
   assert.ok(page.sections[0].text.includes('a & b < c "d"'));
