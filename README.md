@@ -56,8 +56,11 @@ All theme options live under `[params]`:
 
 ```toml
 [params]
-  accent = "#6366f1"          # brand color (light mode)
-  accentDark = "#818cf8"      # brand color (dark mode), optional
+  accent = "#331c74"          # brand color (light mode)
+  accentDark = "#331c74"      # brand color (dark mode), optional
+  logo = "/logo.svg"          # shown in the top bar; put the file in static/
+  logoDark = "/logo-dark.svg" # optional separate logo for dark mode
+  repo = "https://github.com/you/your-docs"  # shows a GitHub icon in the top bar
   editURL = "https://github.com/you/your-docs/edit/main/content/"
   showLastUpdated = true
 
@@ -77,7 +80,7 @@ Other params:
 - `[[params.versions]]` with `name`, `url`, and optional `current = true`: version switcher.
 - `[params.footer]` with `text`: footer line.
 - `[[params.social]]`: social links.
-- `logo`: path to a logo image.
+- `logo` / `logoDark`: path to a logo image shown in the top bar (place the file in `static/`). Set only `logo` to use one image in both modes, or both for a separate dark-mode logo.
 
 ## Authoring
 
