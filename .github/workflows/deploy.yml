@@ -45,12 +45,20 @@ jobs:
       - name: Build Ask Assistant index
         # Embeds the rendered docs and writes the static retrieval index into the
         # published site. Same baseURL as the build so source links resolve.
+        # The embedding model is fetched from HuggingFace, which rate-limits
+        # anonymous downloads (HTTP 429), so retry with backoff before failing.
         run: |
           npm ci
-          node scripts/build-index.mjs \
-            --source exampleSite/public \
-            --base "${{ steps.pages.outputs.base_url }}/" \
-            --out exampleSite/public/assistant-index.json
+          ok=
+          for i in 1 2 3 4; do
+            if node scripts/build-index.mjs \
+              --source exampleSite/public \
+              --base "${{ steps.pages.outputs.base_url }}/" \
+              --out exampleSite/public/assistant-index.json; then ok=1; break; fi
+            echo "build-index attempt $i failed; retrying in $((i*20))s"
+            sleep $((i*20))
+          done
+          [ -n "$ok" ]
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
