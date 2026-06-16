@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="post-layout post-index-layout">
+<div class="post-layout post-index-layout" data-post-view="list">
   <article class="doc post post-index">
     <header class="post-header">
       <div class="blog-head">
@@ -15,12 +15,13 @@
       </div>
       {{ with .Content }}<div class="blog-intro">{{ . }}</div>{{ end }}
     </header>
-    <ul class="post-list" data-post-view="list">
+    <ul class="post-list">
       {{ range .Pages.ByDate.Reverse }}
       {{ $angle := add 110 (mod (hash.FNV32a .Title) 60) }}
+      {{ $tint := mod (hash.FNV32a (printf "%s-shade" .Title)) 42 }}
       {{ $avatar := partial "author-avatar-url.html" . }}
       <li class="post-list-item">
-        <a class="post-cover" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg;">
+        <a class="post-cover" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-tint: {{ $tint }};">
           <span class="post-cover-title">{{ .Title }}</span>
           {{ with .Params.author }}<span class="post-cover-foot">{{ with $avatar }}<img class="post-avatar" src="{{ . }}" alt="" width="24" height="24" loading="lazy">{{ end }}{{ . }}</span>{{ end }}
         </a>

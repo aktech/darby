@@ -4,7 +4,7 @@ date = 2026-06-16
 author = "aktech"
 authorGithub = "aktech"
 tags = ["announcement", "hugo", "documentation"]
-summary = "Darby is a fast, beautiful Hugo documentation theme you drop in with a config block and a folder of Markdown. No Node build, no CSS framework, accessible by default."
+summary = "Darby is a fast, beautiful Hugo documentation theme you drop in with a single config block and a folder of Markdown. It gives you dark and light modes, search, callouts, and gorgeous code blocks out of the box, with no Node build, no CSS framework, and accessibility on by default."
 +++
 
 Most Hugo documentation themes ask you to pick a side. Either you get something

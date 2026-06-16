@@ -1,7 +1,7 @@
 // Blog index view switch: list <-> cards. Persists the choice per visitor.
 (function () {
   var toggle = document.querySelector('[data-blog-view]');
-  var feed = document.querySelector('.post-list[data-post-view]');
+  var feed = document.querySelector('[data-post-view]');
   if (!toggle || !feed) return;
   var KEY = 'darby-blog-view';
 
