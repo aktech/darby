@@ -94,8 +94,14 @@ a:hover { text-decoration: underline; }
 .nav-tab.active { color: var(--accent); font-weight: 600; }
 .version-switcher { position: relative; }
 .version-btn { display: inline-flex; align-items: center; gap: .3rem; height: 2.3rem; background: var(--bg-subtle); border: 1px solid var(--border); color: var(--fg); border-radius: var(--radius); padding: 0 .7rem; cursor: pointer; font-size: .85rem; }
-.version-menu { position: absolute; right: 0; top: 110%; list-style: none; margin: 0; padding: .3rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); min-width: 8rem; }
-.version-menu a { display: block; padding: .3rem .5rem; border-radius: 6px; color: var(--fg); font-size: .85rem; }
+/* Opens on hover or keyboard focus. top:100% keeps the hover area contiguous
+   with the button (no dead zone), so the menu does not flicker shut. */
+.version-menu { position: absolute; right: 0; top: 100%; list-style: none; margin: 0; padding: .3rem; min-width: 9rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .15s ease, transform .15s ease, visibility .15s; z-index: 60; }
+.version-switcher:hover .version-menu, .version-switcher:focus-within .version-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.version-switcher:hover .version-caret, .version-switcher:focus-within .version-caret { transform: rotate(180deg); }
+.version-caret { display: inline-block; transition: transform .15s ease; }
+.version-menu li { padding: .15rem .3rem; }
+.version-menu a { display: block; padding: .35rem .55rem; border-radius: 6px; color: var(--fg); font-size: .85rem; }
 .version-menu a:hover { background: var(--bg-subtle); text-decoration: none; }
 @media (max-width: 960px) { .nav-tabs { display: none; } }
 .search-trigger { display: inline-flex; align-items: center; gap: .5rem; width: 16rem; max-width: 22vw; height: 2.3rem; background: var(--bg-subtle); border: 1px solid var(--border); color: var(--fg-muted); border-radius: var(--radius); padding: 0 .7rem; cursor: pointer; font-size: .85rem; }
