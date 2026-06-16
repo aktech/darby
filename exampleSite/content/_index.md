@@ -6,6 +6,15 @@ heroTitle = "Documentation your users will love"
 heroSubtitle = "Darby is a minimal, fast, and beautiful Hugo theme for technical documentation. Dark mode, search, callouts, and gorgeous code blocks, all out of the box."
 ctaText = "Get started"
 ctaURL = "/docs/quickstart/"
+heroCodeName = "terminal"
+heroCode = """
+$ hugo new site docs && cd docs
+$ hugo mod init example.com/docs
+$ hugo mod get github.com/aktech/darby
+
+Dark mode, search, and code blocks
+work out of the box.
+"""
 featuresTitle = "Everything a docs site needs"
 featuresSubtitle = "Batteries included. Write Markdown, drop in a shortcode when you need one, and ship."
 
@@ -16,6 +25,7 @@ ctaBandSubtitle = "Spin up a polished documentation site in minutes, not days."
   icon = "theme"
   title = "Dark & light modes"
   body = "A system-aware theme toggle with no flash of the wrong theme on load."
+  wide = true
 [[features]]
   icon = "search"
   title = "Instant search"
