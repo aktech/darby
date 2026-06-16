@@ -18,10 +18,10 @@
     <ul class="post-list">
       {{ range .Pages.ByDate.Reverse }}
       {{ $angle := add 110 (mod (hash.FNV32a .Title) 60) }}
-      {{ $tint := mod (hash.FNV32a (printf "%s-shade" .Title)) 42 }}
+      {{ $shift := sub (mod (hash.FNV32a (printf "%s-shade" .Title)) 90) 45 }}
       {{ $avatar := partial "author-avatar-url.html" . }}
       <li class="post-list-item">
-        <a class="post-cover" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-tint: {{ $tint }};">
+        <a class="post-cover" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-shift: {{ $shift }};">
           <span class="post-cover-title">{{ .Title }}</span>
           {{ with .Params.author }}<span class="post-cover-foot">{{ with $avatar }}<img class="post-avatar" src="{{ . }}" alt="" width="24" height="24" loading="lazy">{{ end }}{{ . }}</span>{{ end }}
         </a>

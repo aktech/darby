@@ -399,11 +399,12 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
   display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;
   aspect-ratio: 16 / 9; padding: 1.1rem; margin: -1.3rem -1.3rem 1rem;
   color: #fff; text-decoration: none; overflow: hidden;
+  background: var(--cover-color, var(--accent)); /* fallback if relative color unsupported */
   background:
     radial-gradient(120% 120% at 85% 15%, rgba(255,255,255,.16), transparent 60%),
     linear-gradient(var(--cover-angle, 135deg),
-      color-mix(in srgb, var(--cover-color, var(--accent)), white calc(var(--cover-tint, 0) * 1%)),
-      color-mix(in srgb, var(--cover-color, var(--accent)) 45%, #000));
+      oklch(from var(--cover-color, var(--accent)) calc(l + 0.16) c calc(h + var(--cover-shift, 0))),
+      oklch(from var(--cover-color, var(--accent)) calc(l - 0.02) c calc(h + var(--cover-shift, 0))));
 }
 .post-cover-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.4rem; line-height: 1.18; letter-spacing: -.01em; }
 .post-cover-foot { display: inline-flex; align-items: center; gap: .45rem; font-size: .85rem; font-weight: 500; }
