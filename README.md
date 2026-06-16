@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/aktech/darby/actions/workflows/ci.yml"><img src="https://github.com/aktech/darby/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://github.com/aktech/darby/actions/workflows/deploy.yml"><img src="https://github.com/aktech/darby/actions/workflows/deploy.yml/badge.svg" alt="Deploy"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/aktech/darby" alt="License: MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License: MIT"></a>
 </p>
 
 Darby is a minimal, beautiful Hugo documentation theme. Dark and light modes, customizable
