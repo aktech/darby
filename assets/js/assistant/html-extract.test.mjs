@@ -53,6 +53,28 @@ test("extractPage strips chrome (nav, svg, footer, script, anchor links) but kee
   assert.ok(!all.includes("#install"));
 });
 
+test("rendered code blocks become fenced markdown (lang preserved, chrome dropped)", () => {
+  const html = `<title>T</title><article class=doc><h1>H</h1>
+  <div class="code-block" data-lang="toml"><div class="code-head"><span class="code-filename">hugo.toml</span><span class="code-lang">toml</span><button class="code-copy"><svg></svg></button></div>
+  <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">accent</span> <span class="p">=</span> <span class="s2">&#34;#6366f1&#34;</span>
+</span></span></code></pre></div></div>
+  <p>Trailing prose.</p></article>`;
+  const { sections } = extractPage(html);
+  const text = sections[0].text;
+  // a real fence with the language
+  assert.ok(text.includes("```toml"), "opening fence with language");
+  assert.ok(/```\s*$|```\n/.test(text) || text.includes("```\n") || text.trimEnd().endsWith("```"), "closing fence");
+  // the code itself, with quotes decoded and indentation kept
+  assert.ok(text.includes('[params]'));
+  assert.ok(text.includes('  accent = "#6366f1"'), "indentation + decoded quotes preserved");
+  // chrome must NOT leak as text
+  assert.ok(!text.includes("hugo.toml"), "filename chrome dropped");
+  assert.ok(!/\btoml\b\s*\n/.test(text.replace("```toml", "")), "bare lang label dropped");
+  // surrounding prose still there
+  assert.ok(text.includes("Trailing prose."));
+});
+
 test("extractPage decodes HTML entities", () => {
   const page = extractPage(`<title>T</title><article class=doc><h1>H</h1><p>a &amp; b &lt; c &#34;d&#34;</p></article>`);
   assert.ok(page.sections[0].text.includes('a & b < c "d"'));
