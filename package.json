@@ -6,7 +6,8 @@
   "description": "Optional CI tooling for Darby's Ask Assistant: builds the static retrieval index. Not required for the core theme.",
   "scripts": {
     "build-index": "node scripts/build-index.mjs",
-    "test:assistant": "node --test assets/js/assistant/"
+    "test": "node --test assets/js/assistant/*.test.mjs",
+    "test:assistant": "node --test assets/js/assistant/*.test.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "4.2.0"

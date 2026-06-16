@@ -4,6 +4,12 @@
 
 <h1 align="center">Darby</h1>
 
+<p align="center">
+  <a href="https://github.com/aktech/darby/actions/workflows/ci.yml"><img src="https://github.com/aktech/darby/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/aktech/darby/actions/workflows/deploy.yml"><img src="https://github.com/aktech/darby/actions/workflows/deploy.yml/badge.svg" alt="Deploy"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/aktech/darby" alt="License: MIT"></a>
+</p>
+
 Darby is a minimal, beautiful Hugo documentation theme. Dark and light modes, customizable
 fonts and accent color, code blocks with copy buttons and filename labels, callouts,
 an auto-generated sidebar, an on-page table of contents, and pluggable search.
