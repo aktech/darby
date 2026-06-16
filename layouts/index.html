@@ -32,19 +32,75 @@ hugo mod get github.com/aktech/darby
     </div>
   </section>
 
-  <section class="lp-features">
+  <section class="lp-stats" aria-label="At a glance">
+    <div><strong>0</strong><span>Node build steps</span></div>
+    <div><strong>1</strong><span>config block to theme</span></div>
+    <div><strong>AA</strong><span>accessible contrast</span></div>
+    <div><strong>&infin;</strong><span>themeable</span></div>
+  </section>
+
+  <section class="lp-showcase">
     <div class="lp-section-head">
-      <h2>{{ .Params.featuresTitle | default "Everything a docs site needs" }}</h2>
-      <p>{{ .Params.featuresSubtitle | default "Batteries included, no configuration required to get started." }}</p>
+      <h2>Built for documentation</h2>
+      <p>Every feature you need to publish docs that feel premium, demonstrated below.</p>
     </div>
-    <div class="lp-grid">
-      {{ range .Params.features }}
-      <div class="lp-feature">
-        <span class="lp-feature-icon" data-icon="{{ .icon }}">{{ partial "feature-icon.html" .icon }}</span>
-        <h3>{{ .title }}</h3>
-        <p>{{ .body }}</p>
+    <div class="bento">
+
+      <div class="bento-card bento-wide">
+        <div class="bento-demo">
+          <div class="mini-code">
+            <div class="mini-code-bar"><span></span><span></span><span></span><em>app.ts</em></div>
+            <pre><span class="t-k">export</span> <span class="t-k">function</span> <span class="t-f">greet</span>(name) {
+  <span class="t-k">return</span> <span class="t-s">`Hello, ${name}`</span>;
+}</pre>
+          </div>
+        </div>
+        <div class="bento-meta"><h3>Gorgeous code blocks</h3><p>Catppuccin highlighting, filename tabs, copy buttons, line highlights, and Fira Code ligatures.</p></div>
       </div>
-      {{ end }}
+
+      <div class="bento-card">
+        <div class="bento-demo">
+          <div class="mini-search">
+            <div class="mini-search-bar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> install<span class="mini-kbd">&#8984; K</span></div>
+            <div class="mini-row active"><span class="mini-crumb">Docs</span>Installation</div>
+            <div class="mini-row"><span class="mini-crumb">Docs</span>Quickstart</div>
+          </div>
+        </div>
+        <div class="bento-meta"><h3>Instant search</h3><p>Client-side, keyboard-first (&#8984;K), zero config.</p></div>
+      </div>
+
+      <div class="bento-card">
+        <div class="bento-demo mini-themes">
+          <div class="mini-theme mini-light"><span class="mt-bar"></span><span class="mt-line"></span><span class="mt-line short"></span></div>
+          <div class="mini-theme mini-dark"><span class="mt-bar"></span><span class="mt-line"></span><span class="mt-line short"></span></div>
+        </div>
+        <div class="bento-meta"><h3>Dark &amp; light</h3><p>System-aware, no flash, instant toggle.</p></div>
+      </div>
+
+      <div class="bento-card">
+        <div class="bento-demo">
+          <div class="mini-callout">
+            <div class="mini-callout-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Note</div>
+            <div class="mini-callout-body"></div>
+          </div>
+        </div>
+        <div class="bento-meta"><h3>Callouts &amp; alerts</h3><p>Note, tip, warning, caution, plus tabs, cards, steps, accordions.</p></div>
+      </div>
+
+      <div class="bento-card">
+        <div class="bento-demo mini-diagram">
+          <span class="dg-node">A</span><span class="dg-arrow"></span><span class="dg-node">B</span><span class="dg-arrow"></span><span class="dg-node">C</span>
+        </div>
+        <div class="bento-meta"><h3>Mermaid diagrams</h3><p>Hand-drawn, themed to your accent, from a plain code fence.</p></div>
+      </div>
+
+      <div class="bento-card">
+        <div class="bento-demo mini-swatches">
+          <span style="background:#7c3aed"></span><span style="background:#2563eb"></span><span style="background:#10b981"></span><span style="background:#e11d48"></span><span style="background:#f59e0b"></span>
+        </div>
+        <div class="bento-meta"><h3>Themeable</h3><p>Swap accent and fonts from config. No SCSS, no build step.</p></div>
+      </div>
+
     </div>
   </section>
 
