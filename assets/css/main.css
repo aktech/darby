@@ -240,6 +240,10 @@ a, button, .tab-btn, .nav-tab, .sidebar-link, .toc a, .search-result a, .version
 .btn-ghost:hover { border-color: var(--accent); }
 
 .lp-hero-visual { perspective: 1200px; }
+.lp-hero-img { display: block; width: 100%; max-width: 26rem; height: auto; margin: 0 auto; }
+.lp-hero-img.dark-only { display: none; }
+[data-theme="dark"] .lp-hero-img.dark-only { display: block; }
+[data-theme="dark"] .lp-hero-img.light-only { display: none; }
 .code-window { background: var(--bg-code); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: 0 24px 60px rgba(0,0,0,.28); overflow: hidden; transform: rotateY(-6deg) rotateX(2deg); }
 .cw-bar { display: flex; align-items: center; gap: .45rem; padding: .6rem .8rem; background: color-mix(in srgb, var(--bg-code) 80%, #fff 6%); border-bottom: 1px solid rgba(255,255,255,.06); }
 .cw-dot { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; } .cw-dot:nth-child(2){ background:#febc2e; } .cw-dot:nth-child(3){ background:#28c840; }

@@ -5,7 +5,7 @@
     <div class="lp-hero-text">
       {{ with .Params.badge }}<span class="lp-badge">{{ . }}</span>{{ end }}
       <h1 class="lp-title">{{ .Params.heroTitle | default .Site.Title }}</h1>
-      <p class="lp-sub">{{ .Params.heroSubtitle | default .Params.description }}</p>
+      {{ with .Params.heroSubtitle }}<p class="lp-sub">{{ . }}</p>{{ end }}
       <div class="lp-cta">
         {{ with .Params.ctaURL }}<a class="btn btn-primary" href="{{ partial "url.html" . }}">{{ $.Params.ctaText | default "Get started" }}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>{{ end }}
@@ -14,7 +14,16 @@
           GitHub</a>{{ end }}
       </div>
     </div>
-    {{ if .Params.heroCodeHTML }}
+    {{ if .Params.heroImage }}
+    <div class="lp-hero-visual">
+      {{ if .Params.heroImageDark }}
+      <img class="lp-hero-img light-only" src="{{ partial "url.html" .Params.heroImage }}" alt="{{ .Site.Title }}">
+      <img class="lp-hero-img dark-only" src="{{ partial "url.html" .Params.heroImageDark }}" alt="{{ .Site.Title }}">
+      {{ else }}
+      <img class="lp-hero-img" src="{{ partial "url.html" .Params.heroImage }}" alt="{{ .Site.Title }}">
+      {{ end }}
+    </div>
+    {{ else if .Params.heroCodeHTML }}
     <div class="lp-hero-visual" aria-hidden="true">
       <div class="code-window">
         <div class="cw-bar"><span class="cw-dot"></span><span class="cw-dot"></span><span class="cw-dot"></span><span class="cw-name">{{ .Params.heroCodeName | default "example" }}</span></div>
@@ -51,12 +60,14 @@
 
   {{ with .Content }}<section class="lp-content">{{ . }}</section>{{ end }}
 
+  {{ with .Params.ctaBandTitle }}
   <section class="lp-cta-band">
-    <h2>{{ .Params.ctaBandTitle | default "Ready to build your docs?" }}</h2>
-    <p>{{ .Params.ctaBandSubtitle | default "Ship a beautiful documentation site in minutes." }}</p>
-    {{ with .Params.ctaURL }}<a class="btn btn-primary" href="{{ partial "url.html" . }}">{{ $.Params.ctaText | default "Get started" }}
+    <h2>{{ . }}</h2>
+    {{ with $.Params.ctaBandSubtitle }}<p>{{ . }}</p>{{ end }}
+    {{ with $.Params.ctaURL }}<a class="btn btn-primary" href="{{ partial "url.html" . }}">{{ $.Params.ctaText | default "Get started" }}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>{{ end }}
   </section>
+  {{ end }}
 
 </div>
 {{ end }}
