@@ -39,4 +39,10 @@ assert_grep "$BL" "post-avatar" "author avatar rendered in the feed"
 # RSS feed is emitted for the section.
 assert_file "$PUB/blog/index.xml" "blog RSS feed emitted"
 
+# Tag pages list the posts that carry the tag.
+TAG="$PUB/tags/announcement/index.html"
+assert_file "$TAG" "tag term page renders"
+assert_contains "$TAG" "Introducing Darby" "tagged post listed on its tag page"
+assert_grep "$TAG" "post-list" "tag page uses the post feed layout"
+
 finish

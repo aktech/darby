@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="post-layout post-index-layout">
+  <article class="doc post post-index">
+    <header class="post-header">
+      <div class="blog-head">
+        <h1>{{ .Title }}</h1>
+      </div>
+      <div class="blog-intro">{{ len .Pages }} post{{ if ne (len .Pages) 1 }}s{{ end }} tagged &ldquo;{{ .Title }}&rdquo;.</div>
+    </header>
+    <ul class="post-list" data-post-view="list">
+      {{ range .Pages.ByDate.Reverse }}
+      <li class="post-list-item">
+        <h2 class="post-list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ partial "post-meta.html" . }}
+        {{ with .Summary }}<p class="post-summary">{{ . }}</p>{{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  </article>
+</div>
+{{ end }}
