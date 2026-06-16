@@ -1,11 +1,36 @@
-/* Target pre AND code: the UA stylesheet sets `code { font-family: monospace }`,
-   which overrides inheritance from .chroma, so the code element needs it directly. */
-.chroma, .chroma pre, .chroma code { font-family: var(--font-mono); font-variant-ligatures: contextual; font-feature-settings: "liga" 1, "calt" 1; }
-.chroma { background: var(--bg-code); color: #e4e4e7; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: .9rem 1rem; overflow-x: auto; font-size: .85rem; line-height: 1.6; }
-.chroma .k, .chroma .kd, .chroma .kn { color: #c4b5fd; }
-.chroma .s, .chroma .s1, .chroma .s2 { color: #86efac; }
-.chroma .nf, .chroma .nx { color: #93c5fd; }
-.chroma .c, .chroma .c1, .chroma .cm { color: #71717a; font-style: italic; }
-.chroma .mi, .chroma .mf { color: #fca5a5; }
-.chroma .o { color: #f0abfc; }
-.chroma .hl { background: rgba(129,140,248,.15); display: block; margin: 0 -1rem; padding: 0 1rem; }
+/* ---- Code blocks: Catppuccin Mocha (dark in both site themes) ---- */
+/* Palette: base #1e1e2e, mantle #181825, surface0 #313244, surface2 #585b70,
+   text #cdd6f4, subtext #a6adc8, overlay #6c7086, mauve #cba6f7, green #a6e3a1,
+   blue #89b4fa, sky #89dceb, peach #fab387, yellow #f9e2af, red #f38ba8, pink #f5c2e7 */
+
+.code-block { margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid #313244; overflow: hidden; background: #1e1e2e; }
+.code-head { display: flex; align-items: center; gap: .5rem; padding: .4rem .75rem; background: #181825; border-bottom: 1px solid #313244; font-size: .78rem; }
+.code-filename { font-family: var(--font-mono); color: #cdd6f4; }
+.code-lang { margin-left: auto; color: #6c7086; font-family: var(--font-mono); font-size: .72rem; }
+.code-copy { display: inline-flex; align-items: center; justify-content: center; background: none; border: 1px solid #313244; color: #a6adc8; border-radius: var(--radius); padding: .25rem; cursor: pointer; }
+.code-copy:hover { color: #cdd6f4; border-color: #585b70; }
+.code-copy .check-icon { display: none; color: #a6e3a1; }
+.code-copy.copied .copy-icon { display: none; }
+.code-copy.copied .check-icon { display: inline; }
+.code-copy.copied { border-color: #a6e3a1; }
+
+.chroma { background: #1e1e2e; color: #cdd6f4; border: 0; border-radius: 0; margin: 0; padding: .9rem 1rem; overflow-x: auto; font-family: var(--font-mono); font-size: .85rem; line-height: 1.6; }
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr { color: #cba6f7; }      /* keywords - mauve */
+.chroma .kt { color: #f9e2af; }                                                                       /* type keyword - yellow */
+.chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .sc, .chroma .sd, .chroma .sh, .chroma .sx, .chroma .dl, .chroma .sa { color: #a6e3a1; } /* strings - green */
+.chroma .se, .chroma .si, .chroma .sr { color: #f5c2e7; }                                             /* escapes/interp - pink */
+.chroma .nf, .chroma .fm { color: #89b4fa; }                                                          /* functions - blue */
+.chroma .nx { color: #cdd6f4; }                                                                        /* plain names - text */
+.chroma .nb, .chroma .bp { color: #f38ba8; }                                                          /* builtins - red */
+.chroma .nc, .chroma .nn, .chroma .ne, .chroma .no { color: #f9e2af; }                                /* classes/namespaces/consts - yellow */
+.chroma .nt { color: #89b4fa; }                                                                        /* tags - blue */
+.chroma .na { color: #fab387; }                                                                        /* attributes - peach */
+.chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi { color: #cdd6f4; }                                /* variables - text */
+.chroma .c, .chroma .c1, .chroma .cm, .chroma .cp, .chroma .cs, .chroma .ch { color: #6c7086; font-style: italic; } /* comments - overlay */
+.chroma .m, .chroma .mi, .chroma .mf, .chroma .mh, .chroma .mo, .chroma .il { color: #fab387; }       /* numbers - peach */
+.chroma .o, .chroma .ow { color: #89dceb; }                                                            /* operators - sky */
+.chroma .p { color: #9399b2; }                                                                         /* punctuation - subtext */
+.chroma .gd { color: #f38ba8; } .chroma .gi { color: #a6e3a1; }                                       /* diff */
+.chroma .err { color: #f38ba8; }
+.chroma .hl { background: rgba(203,166,247,.13); display: block; margin: 0 -1rem; padding: 0 1rem; }   /* highlighted line */
+.chroma .ln, .chroma .lnt { color: #6c7086; }                                                          /* line numbers */

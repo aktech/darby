@@ -6,8 +6,8 @@
       const code = block ? block.querySelector('code, pre') : null;
       if (!code) return;
       navigator.clipboard.writeText(code.innerText).then(function () {
-        const old = btn.textContent; btn.textContent = 'Copied';
-        setTimeout(function () { btn.textContent = old; }, 1500);
+        btn.classList.add('copied');
+        setTimeout(function () { btn.classList.remove('copied'); }, 1500);
       });
     });
   });
