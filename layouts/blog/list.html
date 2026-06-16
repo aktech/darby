@@ -4,10 +4,26 @@
     <header class="post-header">
       <h1>{{ .Title }}</h1>
       {{ with .Content }}<div class="blog-intro">{{ . }}</div>{{ end }}
+      <div class="blog-toolbar">
+        <div class="view-toggle" data-blog-view role="group" aria-label="Choose layout">
+          <button type="button" class="view-btn is-active" data-view-set="list" aria-label="List view" title="List view">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+          <button type="button" class="view-btn" data-view-set="cards" aria-label="Cards view" title="Cards view">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+        </div>
+      </div>
     </header>
-    <ul class="post-list">
+    <ul class="post-list" data-post-view="list">
       {{ range .Pages.ByDate.Reverse }}
+      {{ $hue := mod (hash.FNV32a .Title) 360 }}
+      {{ $avatar := partial "author-avatar-url.html" . }}
       <li class="post-list-item">
+        <a class="post-cover" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-hue: {{ $hue }};">
+          <span class="post-cover-title">{{ .Title }}</span>
+          {{ with .Params.author }}<span class="post-cover-foot">{{ with $avatar }}<img class="post-avatar" src="{{ . }}" alt="" width="24" height="24" loading="lazy">{{ end }}{{ . }}</span>{{ end }}
+        </a>
         <h2 class="post-list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         {{ partial "post-meta.html" . }}
         {{ with .Summary }}<p class="post-summary">{{ . }}</p>{{ end }}

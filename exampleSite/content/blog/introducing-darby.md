@@ -1,7 +1,8 @@
 +++
 title = "Introducing Darby"
 date = 2026-06-16
-author = "The Darby Team"
+author = "aktech"
+authorGithub = "aktech"
 tags = ["announcement", "hugo", "documentation"]
 summary = "Darby is a fast, beautiful Hugo documentation theme you drop in with a config block and a folder of Markdown. No Node build, no CSS framework, accessible by default."
 +++

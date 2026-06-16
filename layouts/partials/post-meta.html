@@ -1,6 +1,17 @@
-{{- /* Byline for blog posts: date, author, reading time. Separators added in CSS. */ -}}
+{{- /* Byline for blog posts: date, author (avatar + linked name), reading time.
+       Name links to authorURL, else the GitHub profile when authorGithub is set.
+       Separators added in CSS. */ -}}
+{{- $avatar := partial "author-avatar-url.html" . -}}
+{{- $authorURL := "" -}}
+{{- with .Params.authorURL }}{{ $authorURL = . }}
+{{- else }}{{ with .Params.authorGithub }}{{ $authorURL = printf "https://github.com/%s" . }}{{ end }}{{ end -}}
 <div class="post-meta">
   {{- with .Date }}<time class="post-date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2, 2006" }}</time>{{ end -}}
-  {{- with .Params.author }}<span class="post-author">{{ . }}</span>{{ end -}}
+  {{- with .Params.author -}}
+  <span class="post-author">
+    {{- with $avatar }}<img class="post-avatar" src="{{ . }}" alt="" width="22" height="22" loading="lazy">{{ end -}}
+    {{- if $authorURL }}<a class="post-author-link" href="{{ $authorURL }}" rel="noopener">{{ . }}</a>{{ else }}{{ . }}{{ end -}}
+  </span>
+  {{- end -}}
   <span class="post-readtime">{{ .ReadingTime }} min read</span>
 </div>

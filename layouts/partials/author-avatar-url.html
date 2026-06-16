@@ -1,0 +1,6 @@
+{{- /* Resolve a post's author avatar URL. authorAvatar (URL or site path) wins,
+       else authorGithub resolves to GitHub's avatar. Returns "" when neither set. */ -}}
+{{- $avatar := "" -}}
+{{- with .Params.authorAvatar }}{{ $avatar = partial "url.html" . }}
+{{- else }}{{ with .Params.authorGithub }}{{ $avatar = printf "https://github.com/%s.png?size=80" . }}{{ end }}{{ end -}}
+{{- $avatar -}}
