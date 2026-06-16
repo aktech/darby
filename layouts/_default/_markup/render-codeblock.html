@@ -1,3 +1,7 @@
+{{- if eq .Type "mermaid" -}}
+{{- .Page.Store.Set "hasMermaid" true -}}
+<div class="mermaid-wrap"><pre class="mermaid">{{ .Inner }}</pre></div>
+{{- else -}}
 {{- $lang := .Type | default "text" -}}
 {{- $filename := .Attributes.filename -}}
 {{- $opts := merge .Options (dict "noClasses" false) -}}
@@ -13,3 +17,4 @@
   </div>
   {{ $hl }}
 </div>
+{{- end -}}

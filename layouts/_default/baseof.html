@@ -12,5 +12,6 @@
   {{ partial "footer.html" . }}
   {{ if ne (.Site.Params.search.enable | default true) false }}{{ partial "search-modal.html" . }}{{ end }}
   {{ partial "js.html" . }}
+  {{ if .Store.Get "hasMermaid" }}{{ partial "mermaid.html" . }}{{ end }}
 </body>
 </html>

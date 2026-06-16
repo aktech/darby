@@ -1,0 +1,10 @@
+{{/* Loaded only on pages that contain a ```mermaid fence (set via Page.Store). */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap">
+{{ $mer := resources.Get "js/vendor/mermaid.min.js" }}
+{{ if hugo.IsProduction }}{{ $mer = $mer | fingerprint }}{{ end }}
+<script src="{{ $mer.RelPermalink }}" defer></script>
+{{ $init := resources.Get "js/mermaid-init.js" }}
+{{ if hugo.IsProduction }}{{ $init = $init | minify | fingerprint }}{{ end }}
+<script src="{{ $init.RelPermalink }}" defer></script>
