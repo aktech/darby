@@ -4,6 +4,7 @@ build_site
 P="$PUB/docs/quickstart/index.html"
 assert_grep "$P" "class=\"nav-tabs\"" "top-bar tabs present"
 assert_contains "$P" "Guides" "configured tab label present"
+assert_grep "$P" "class=\"nav-tab-indicator\"" "sliding hover indicator element present"
 assert_grep "$P" "class=\"version-switcher\"" "version switcher present"
 assert_contains "$P" "v2.0" "current version shown"
 
@@ -17,6 +18,7 @@ assert_grep "$P" "class=\"nav-dropdown\"" "nested nav dropdown present"
 assert_grep "$P" "nav-dropdown-btn[^>]*>Resources" "dropdown trigger shows parent name"
 assert_grep "$P" "class=\"nav-dropdown-menu\"" "dropdown menu present"
 assert_grep "$P" "nav-dropdown-link\"[^>]*href=\"/docs/quickstart/\"" "child link rendered"
-assert_grep "$P" "nav-dropdown-icon\"><svg" "child link has an icon"
+assert_grep "$P" "nav-dropdown-icon" "child link has an icon wrapper"
+assert_grep "$P" "class=\"lucide lucide-rocket" "child icon is a real (Lucide) icon, not a hand-drawn svg"
 
 finish

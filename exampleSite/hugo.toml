@@ -51,7 +51,7 @@ title = "Darby"
     [[params.navLinks.links]]
       name = "Configuration"
       url = "/docs/configuration/"
-      icon = "config"
+      icon = "settings"
     [[params.navLinks.links]]
       name = "Shortcodes"
       url = "/reference/shortcodes/"

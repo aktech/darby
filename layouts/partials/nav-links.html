@@ -13,7 +13,7 @@
       {{ range .links }}
       {{ $ext := hasPrefix .url "http" }}
       <a class="nav-dropdown-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>
-        {{ with .icon }}<span class="nav-dropdown-icon">{{ partial "feature-icon.html" . }}</span>{{ end }}
+        {{ with .icon }}<span class="nav-dropdown-icon">{{ partial "icon.html" . }}</span>{{ end }}
         <span>{{ .name }}</span>
       </a>
       {{ end }}

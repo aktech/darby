@@ -94,9 +94,13 @@ a:hover { text-decoration: underline; }
 .steps { counter-reset: step; padding-left: 1.75rem; border-left: 1px solid var(--border); margin-left: .5rem; }
 .steps > ol { list-style: none; padding: 0; } .steps > ol > li { position: relative; margin-bottom: 1rem; }
 .steps > ol > li::before { counter-increment: step; content: counter(step); position: absolute; left: -2.4rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--accent); color: var(--accent-contrast); display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
-.nav-tabs { display: flex; gap: .25rem; margin-left: 1rem; }
-.nav-tab { padding: .3rem .7rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; font-weight: 500; }
-.nav-tab:hover { background: var(--bg-subtle); color: var(--fg); text-decoration: none; }
+.nav-tabs { display: flex; gap: .25rem; margin-left: 1rem; position: relative; }
+.nav-tab { position: relative; z-index: 1; padding: .3rem .7rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; font-weight: 500; }
+.nav-tab:hover { color: var(--fg); text-decoration: none; }
+/* Sliding hover indicator: a pill that animates to the hovered tab (JS sets its
+   position/width) and rests under the active tab. */
+.nav-tab-indicator { position: absolute; top: 0; left: 0; height: 100%; width: 0; border-radius: var(--radius); background: var(--bg-subtle); opacity: 0; transform: translateX(0); transition: transform .28s cubic-bezier(.4,0,.2,1), width .28s cubic-bezier(.4,0,.2,1), opacity .2s ease; pointer-events: none; z-index: 0; }
+.nav-tab-indicator.ready { opacity: 1; }
 .nav-links { display: flex; align-items: center; gap: .15rem; }
 .nav-link { padding: .3rem .6rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; font-weight: 500; }
 .nav-link:hover { background: var(--bg-subtle); color: var(--fg); text-decoration: none; }

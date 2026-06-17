@@ -1,0 +1,8 @@
+{{- /* Inline a vendored Lucide icon by name (assets/icons/<name>.svg).
+       Lucide (lucide.dev), ISC licensed, pinned and vendored so there is no
+       external request. Color inherits via currentColor; size it with CSS on a
+       wrapping element. Unknown names render nothing. */ -}}
+{{- $name := . -}}
+{{- with resources.Get (printf "icons/%s.svg" $name) -}}
+{{- .Content | replaceRE "(?s)<!--.*?-->" "" | safeHTML -}}
+{{- end -}}

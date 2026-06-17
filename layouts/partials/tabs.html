@@ -1,5 +1,6 @@
 {{ with .Site.Params.tabs }}
-<nav class="nav-tabs" aria-label="Sections">
+<nav class="nav-tabs" aria-label="Sections" data-nav-indicator>
+  <span class="nav-tab-indicator" aria-hidden="true"></span>
   {{ range . }}
     {{ $href := partial "url.html" .url }}
     {{ $active := hasPrefix $.RelPermalink $href }}
