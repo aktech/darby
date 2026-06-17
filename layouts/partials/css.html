@@ -20,4 +20,10 @@
 {{- with index $fonts "heading" }}{{ if findRE $safe . }}--font-heading:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "mono" }}{{ if findRE $safe . }}--font-mono:{{ . }};{{ end }}{{ end }}
 }
+{{/* --accent is the one token with a distinct dark value. Re-assert the dark
+     accent here so the :root override above (light) does not leak into dark
+     mode at equal specificity. Mirrors the rule in tokens.css. */}}
+{{- if or $p.accent $p.accentDark }}
+[data-theme="dark"]{--accent:var(--accent-dark,#a78bfa);}
+{{- end }}
 </style>

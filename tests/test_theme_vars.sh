@@ -21,4 +21,9 @@ if [ -n "$LINK_LINE" ] && [ -n "$ROOT_LINE" ] && [ "$ROOT_LINE" -gt "$LINK_LINE"
 else
   echo "FAIL: param :root override must come after the bundle link (link=$LINK_LINE root=$ROOT_LINE)"; FAIL=$((FAIL+1))
 fi
+
+# The :root override sets the light accent globally; the dark accent must be
+# re-asserted after it (equal specificity, later wins) or it leaks into dark
+# mode and accent-filled surfaces / active nav become unreadable.
+assert_contains "$P" "[data-theme=\"dark\"]{--accent:var(--accent-dark,#a78bfa);}" "dark accent re-asserted after the :root override"
 finish
