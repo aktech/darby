@@ -22,14 +22,18 @@ Choose an accent with enough contrast against white text for buttons. If your li
 
 ## Fonts
 
-You can override the body, heading, and monospace fonts independently. The monospace font defaults to **Fira Code**, which includes programming ligatures for code blocks. Each value is a CSS `font-family` stack.
+You can override the body, heading, and monospace fonts independently. The monospace font defaults to **Fira Code**, which includes programming ligatures for code blocks. Each value is a full CSS `font-family` stack.
+
+The theme fetches the **first family** in each stack from Google Fonts automatically. Generic and common system families (`serif`, `sans-serif`, `monospace`, `system-ui`, `Georgia`, `Arial`, etc.) are recognized and skipped, so they are never requested from Google. In other words, name a real Google font first and list system fallbacks after it.
 
 ```toml
 [params.fonts]
-  body = "Inter, system-ui, sans-serif"
-  heading = "Inter, system-ui, sans-serif"
-  mono = "Fira Code, ui-monospace, monospace"  # defaults to Fira Code
+  body = "Inter, system-ui, sans-serif"          # fetches "Inter"
+  heading = "Playfair Display, Georgia, serif"   # fetches "Playfair Display"
+  mono = "Fira Code, ui-monospace, monospace"    # fetches "Fira Code" (default)
 ```
+
+The same rule applies to `postTitleSize`'s companion `postTitleFont`: set it to a Google font and the blog post title page fetches it for you.
 
 ## Search
 

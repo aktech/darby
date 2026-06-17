@@ -15,4 +15,20 @@ assert_grep "$PUB/index.html" "Merriweather" "home loads the serif fonts (home-a
 
 assert_not_contains "$PUB/docs/installation/index.html" "Merriweather" "docs pages stay serif-free"
 
+# Custom font stacks: the FIRST family of each stack is fetched from Google
+# Fonts; generic / system families in the stack are NOT requested (they are not
+# Google families and would break the request).
+D="$PUB/docs/quickstart/index.html"
+assert_grep "$D" "family=Inter:wght" "first family of body stack fetched from Google"
+assert_grep "$D" "family=Space.*Grotesk:wght" "heading family fetched from Google"
+assert_grep "$D" "family=Fira.*Code:wght" "mono family fetched from Google"
+assert_not_contains "$D" "family=sans-serif" "generic family not requested from Google"
+assert_not_contains "$D" "family=system-ui" "system font not requested from Google"
+assert_not_contains "$D" "family=ui-monospace" "ui-monospace not requested from Google"
+
+# postTitleFont is fetched from Google on blog post pages (where the title
+# renders) and NOT on docs pages.
+assert_grep "$PUB/blog/introducing-darby/index.html" "family=Playfair.*Display:wght" "postTitleFont fetched from Google on blog posts"
+assert_not_contains "$D" "family=Playfair" "postTitleFont not fetched on docs pages"
+
 finish

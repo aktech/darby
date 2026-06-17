@@ -13,10 +13,17 @@ title = "Darby"
   logo = "/darby-logo.png"
   logoHeight = "2rem"
   postTitleSize = "2.6rem"
-  postTitleFont = "Lora, Georgia, serif"
+  postTitleFont = "Playfair Display, serif"
   favicon = "/favicon.png"
   editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
   showLastUpdated = true
+
+  # Fonts are given as full CSS stacks. The theme fetches the first family of
+  # each from Google Fonts and skips generic / system names (serif, system-ui).
+  [params.fonts]
+    body = "Inter, system-ui, sans-serif"
+    heading = "Space Grotesk, sans-serif"
+    mono = "Fira Code, ui-monospace, monospace"
 
   [[params.tabs]]
     name = "Docs"

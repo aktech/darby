@@ -2,13 +2,28 @@
 {{ $body := index $fonts "body" | default "Inter" }}
 {{ $head := index $fonts "heading" | default "Space Grotesk" }}
 {{ $mono := index $fonts "mono" | default "Fira Code" }}
-{{ $fams := slice $body $head $mono | uniq }}
+{{ $stacks := slice $body $head $mono }}
+{{/* postTitleFont only renders on a blog post page (.post-header h1), so fetch
+     it there too. */}}
+{{ if and (eq .Section "blog") (eq .Kind "page") }}{{ with .Site.Params.postTitleFont }}{{ $stacks = $stacks | append . }}{{ end }}{{ end }}
+{{/* Generic and common system families are NOT on Google Fonts; requesting them
+     would 400 the request, so they are skipped. The author gives a full CSS
+     stack and the theme fetches the first real family from each. */}}
+{{ $deny := slice "serif" "sans-serif" "monospace" "cursive" "fantasy" "system-ui" "ui-sans-serif" "ui-serif" "ui-monospace" "ui-rounded" "math" "emoji" "inherit" "initial" "unset" "-apple-system" "blinkmacsystemfont" "segoe ui" "georgia" "arial" "helvetica" "helvetica neue" "times" "times new roman" "courier" "courier new" "verdana" "tahoma" "trebuchet ms" "consolas" "menlo" "monaco" "cambria" "calibri" }}
+{{ $families := slice }}
+{{ range $stacks }}
+  {{ $first := trim (index (split . ",") 0) " " }}
+  {{ $first = trim $first "'\"" }}
+  {{ if and $first (not (in $deny (lower $first))) }}{{ $families = $families | append $first }}{{ end }}
+{{ end }}
+{{ $families = $families | uniq }}
+{{ if $families }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{{ $parts := slice }}
-{{ range $fams }}{{ $parts = $parts | append (printf "family=%s:wght@400;500;600;700" (urlquery .)) }}{{ end }}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ delimit $parts "&" | safeURL }}&display=swap">
-{{/* Serif pairing for the blog: load wherever post prose or summaries render -
-     the blog section, taxonomy/term feeds, and the home page (adopters often
-     make home a latest-posts feed). Docs pages stay serif-free. */}}
+{{ range $families }}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{ urlquery . }}:wght@400;500;600;700&display=swap">
+{{ end }}{{ end }}
+{{/* Blog serif pairing (Merriweather prose, Lora prose headings), loaded
+     wherever post prose or summaries render: blog section, taxonomy/term feeds,
+     and the home page (adopters often make home a latest-posts feed). Docs
+     pages stay serif-free. */}}
 {{ if or (eq .Section "blog") .IsHome (eq .Kind "term") (eq .Kind "taxonomy") }}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap">{{ end }}
