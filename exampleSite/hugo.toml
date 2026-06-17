@@ -38,27 +38,97 @@ title = "Darby"
     name = "Blog"
     url = "/blog/"
 
-  # Extra links in the top bar, alongside the action icons. A link with `url` is
-  # a plain link (external URLs open in a new tab). A link with a nested `links`
-  # list becomes an animated dropdown; each child may set an `icon` (names from
-  # the feature-icon set, e.g. rocket, config, code, pencil).
+  # Extra top-bar links. A link with `url` is a plain link (external URLs open
+  # in a new tab). A link with nested `columns` becomes a mega-menu: one shared
+  # panel that slides and resizes between triggers while the content cross-fades.
+  # Each column has a `title` and `links` (name, url, optional `icon` Lucide name
+  # and `desc`).
   [[params.navLinks]]
     name = "Resources"
-    [[params.navLinks.links]]
-      name = "Quickstart"
-      url = "/docs/quickstart/"
-      icon = "rocket"
-    [[params.navLinks.links]]
-      name = "Configuration"
-      url = "/docs/configuration/"
-      icon = "settings"
-    [[params.navLinks.links]]
-      name = "Shortcodes"
-      url = "/reference/shortcodes/"
-      icon = "code"
+    [[params.navLinks.columns]]
+      title = "Explore"
+      [[params.navLinks.columns.links]]
+        name = "Quickstart"
+        url = "/docs/quickstart/"
+        icon = "rocket"
+        desc = "Up and running in minutes"
+      [[params.navLinks.columns.links]]
+        name = "Installation"
+        url = "/docs/installation/"
+        icon = "download"
+        desc = "Add Darby to your site"
+      [[params.navLinks.columns.links]]
+        name = "Configuration"
+        url = "/docs/configuration/"
+        icon = "settings"
+        desc = "Every parameter explained"
+    [[params.navLinks.columns]]
+      title = "Use cases"
+      [[params.navLinks.columns.links]]
+        name = "Documentation"
+        url = "/docs/"
+        icon = "book-open"
+        desc = "Docs developers love"
+      [[params.navLinks.columns.links]]
+        name = "Reference"
+        url = "/reference/"
+        icon = "file-text"
+        desc = "Your team's source of truth"
+      [[params.navLinks.columns.links]]
+        name = "Blog"
+        url = "/blog/"
+        icon = "newspaper"
+        desc = "Updates and deep dives"
+  [[params.navLinks]]
+    name = "Learn"
+    [[params.navLinks.columns]]
+      title = "Guides"
+      [[params.navLinks.columns.links]]
+        name = "Guides"
+        url = "/guides/"
+        icon = "graduation-cap"
+        desc = "Step-by-step tutorials"
+      [[params.navLinks.columns.links]]
+        name = "Shortcodes"
+        url = "/reference/shortcodes/"
+        icon = "code"
+        desc = "Callouts, tabs, cards, and more"
+    [[params.navLinks.columns]]
+      title = "Build"
+      [[params.navLinks.columns.links]]
+        name = "Components"
+        url = "/reference/"
+        icon = "blocks"
+        desc = "Reusable building blocks"
+      [[params.navLinks.columns.links]]
+        name = "Theming"
+        url = "/docs/configuration/"
+        icon = "palette"
+        desc = "Colors, fonts, and layout"
   [[params.navLinks]]
     name = "Community"
-    url = "https://discourse.gohugo.io/"
+    [[params.navLinks.columns]]
+      title = "Connect"
+      [[params.navLinks.columns.links]]
+        name = "GitHub"
+        url = "https://github.com/aktech/darby"
+        icon = "github"
+        desc = "Star and contribute"
+      [[params.navLinks.columns.links]]
+        name = "Discussions"
+        url = "https://discourse.gohugo.io/"
+        icon = "message-circle"
+        desc = "Ask and share"
+    [[params.navLinks.columns]]
+      title = "Help"
+      [[params.navLinks.columns.links]]
+        name = "Support"
+        url = "https://discourse.gohugo.io/"
+        icon = "life-buoy"
+        desc = "Get unstuck fast"
+  [[params.navLinks]]
+    name = "Changelog"
+    url = "/docs/quickstart/"
 
   [[params.versions]]
     name = "v2.0"

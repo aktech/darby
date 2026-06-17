@@ -10,15 +10,17 @@ assert_contains "$P" "v2.0" "current version shown"
 
 # Customizable extra nav links in the top bar
 assert_grep "$P" "class=\"nav-links\"" "nav-links container present"
-assert_grep "$P" "nav-link\"[^>]*>Community<" "configured plain nav link rendered"
+assert_grep "$P" "nav-link\"[^>]*>Changelog<" "configured plain nav link rendered"
 assert_grep "$P" "href=\"https://discourse.gohugo.io/\"[^>]*target=\"_blank\"" "external nav link opens in new tab"
 
-# Nested dropdown nav link (parent with child links + per-child icons)
-assert_grep "$P" "class=\"nav-dropdown\"" "nested nav dropdown present"
-assert_grep "$P" "nav-dropdown-btn[^>]*>Resources" "dropdown trigger shows parent name"
-assert_grep "$P" "class=\"nav-dropdown-menu\"" "dropdown menu present"
-assert_grep "$P" "nav-dropdown-link\"[^>]*href=\"/docs/quickstart/\"" "child link rendered"
-assert_grep "$P" "nav-dropdown-icon" "child link has an icon wrapper"
-assert_grep "$P" "class=\"lucide lucide-rocket" "child icon is a real (Lucide) icon, not a hand-drawn svg"
+# Mega-menu: shared morphing panel with section columns, items + descriptions
+assert_grep "$P" "data-megamenu" "mega-menu container present"
+assert_grep "$P" "nav-dd-trigger[^>]*>Resources" "mega-menu trigger shows parent name"
+assert_grep "$P" "data-mm-panel=\"resources\"" "per-trigger panel present"
+assert_grep "$P" "class=\"mm-bg\"" "morphing background element present"
+assert_grep "$P" "mm-col-title\">Explore<" "column section title rendered"
+assert_grep "$P" "mm-item-desc\">Up and running in minutes<" "item description rendered"
+assert_grep "$P" "mm-item-title\">Quickstart<" "item title rendered"
+assert_grep "$P" "class=\"lucide lucide-rocket" "item icon is a real (Lucide) icon"
 
 finish

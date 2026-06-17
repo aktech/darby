@@ -1,28 +1,39 @@
-{{- /* Extra, author-defined links in the top bar (params.navLinks).
-       - A link with `url` is a plain link; external URLs (http...) open in a new
-         tab and resolve as-is, internal ones go through url.html.
-       - A link with a nested `links` list becomes a hover/focus dropdown (pure
-         CSS, animated). Each child may set `icon` (a feature-icon name). */ -}}
+{{- /* Extra top-bar links (params.navLinks).
+       - A link with `url` is a plain link (external opens in a new tab).
+       - A link with nested `columns` joins the mega-menu: one shared panel
+         (.mm-bg) slides and resizes between triggers while per-trigger panels
+         cross-fade. The morph is driven by megamenu.js. */ -}}
 {{ with .Site.Params.navLinks }}
-<nav class="nav-links" aria-label="Links">
+<nav class="nav-links" aria-label="Links" data-megamenu>
   {{ range . }}
-  {{ if .links }}
-  <div class="nav-dropdown">
-    <button class="nav-dropdown-btn" type="button" aria-haspopup="true">{{ .name }} <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
-    <div class="nav-dropdown-menu">
-      {{ range .links }}
-      {{ $ext := hasPrefix .url "http" }}
-      <a class="nav-dropdown-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>
-        {{ with .icon }}<span class="nav-dropdown-icon">{{ partial "icon.html" . }}</span>{{ end }}
-        <span>{{ .name }}</span>
-      </a>
+    {{ if .columns }}
+    <button class="nav-dd-trigger" type="button" data-mm="{{ .name | urlize }}" aria-haspopup="true">{{ .name }} <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
+    {{ else }}
+    {{ $ext := hasPrefix .url "http" }}
+    <a class="nav-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a>
+    {{ end }}
+  {{ end }}
+
+  <div class="mm-dropdown" data-mm-dropdown aria-hidden="true">
+    <div class="mm-bg" data-mm-bg></div>
+    {{ range . }}
+      {{ if .columns }}
+      <div class="mm-panel" data-mm-panel="{{ .name | urlize }}">
+        {{ range .columns }}
+        <div class="mm-col">
+          {{ with .title }}<div class="mm-col-title">{{ . }}</div>{{ end }}
+          {{ range .links }}
+          {{ $ext := hasPrefix .url "http" }}
+          <a class="mm-item" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>
+            {{ with .icon }}<span class="mm-item-icon">{{ partial "icon.html" . }}</span>{{ end }}
+            <span class="mm-item-text"><span class="mm-item-title">{{ .name }}</span>{{ with .desc }}<span class="mm-item-desc">{{ . }}</span>{{ end }}</span>
+          </a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
       {{ end }}
-    </div>
+    {{ end }}
   </div>
-  {{ else }}
-  {{ $ext := hasPrefix .url "http" }}
-  <a class="nav-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a>
-  {{ end }}
-  {{ end }}
 </nav>
 {{ end }}
