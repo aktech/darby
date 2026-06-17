@@ -80,32 +80,6 @@ title = "Darby"
         icon = "newspaper"
         desc = "Updates and deep dives"
   [[params.navLinks]]
-    name = "Learn"
-    [[params.navLinks.columns]]
-      title = "Guides"
-      [[params.navLinks.columns.links]]
-        name = "Guides"
-        url = "/guides/"
-        icon = "graduation-cap"
-        desc = "Step-by-step tutorials"
-      [[params.navLinks.columns.links]]
-        name = "Shortcodes"
-        url = "/reference/shortcodes/"
-        icon = "code"
-        desc = "Callouts, tabs, cards, and more"
-    [[params.navLinks.columns]]
-      title = "Build"
-      [[params.navLinks.columns.links]]
-        name = "Components"
-        url = "/reference/"
-        icon = "blocks"
-        desc = "Reusable building blocks"
-      [[params.navLinks.columns.links]]
-        name = "Theming"
-        url = "/docs/configuration/"
-        icon = "palette"
-        desc = "Colors, fonts, and layout"
-  [[params.navLinks]]
     name = "Community"
     [[params.navLinks.columns]]
       title = "Connect"
