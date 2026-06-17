@@ -8,4 +8,7 @@
 {{ $parts := slice }}
 {{ range $fams }}{{ $parts = $parts | append (printf "family=%s:wght@400;500;600;700" (urlquery .)) }}{{ end }}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ delimit $parts "&" | safeURL }}&display=swap">
-{{ if eq .Section "blog" }}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap">{{ end }}
+{{/* Serif pairing for the blog: load wherever post prose or summaries render -
+     the blog section, taxonomy/term feeds, and the home page (adopters often
+     make home a latest-posts feed). Docs pages stay serif-free. */}}
+{{ if or (eq .Section "blog") .IsHome (eq .Kind "term") (eq .Kind "taxonomy") }}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap">{{ end }}
