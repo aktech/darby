@@ -202,4 +202,4 @@ Here is a complete `[params]` block that exercises every setting at once. Copy i
 | `logo` | string | Path to a logo image shown in the header. |
 | `postTitleSize` | string | Font size of the blog post page title, e.g. `2.6rem`. Defaults to `2.1rem`. Accepts `rem`, `em`, `px`, or `%`. |
 | `postTitleFont` | string | Font stack for the blog post page title, e.g. `Lora, Georgia, serif`. Defaults to the heading font. |
-| `navLinks` | array of tables | Extra links in the top bar, each with `name` and `url`. External URLs open in a new tab. |
+| `navLinks` | array of tables | Extra top-bar links. A `name` + `url` is a plain link (external URLs open in a new tab). A `name` plus a nested `links` list becomes an animated dropdown; each child takes `name`, `url`, and an optional `icon` (a feature-icon name such as `rocket`, `config`, `code`, `pencil`). |

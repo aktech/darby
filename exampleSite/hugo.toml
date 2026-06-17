@@ -38,14 +38,27 @@ title = "Darby"
     name = "Blog"
     url = "/blog/"
 
-  # Extra links in the top bar, alongside the action icons. External URLs
-  # (http...) open in a new tab automatically.
+  # Extra links in the top bar, alongside the action icons. A link with `url` is
+  # a plain link (external URLs open in a new tab). A link with a nested `links`
+  # list becomes an animated dropdown; each child may set an `icon` (names from
+  # the feature-icon set, e.g. rocket, config, code, pencil).
+  [[params.navLinks]]
+    name = "Resources"
+    [[params.navLinks.links]]
+      name = "Quickstart"
+      url = "/docs/quickstart/"
+      icon = "rocket"
+    [[params.navLinks.links]]
+      name = "Configuration"
+      url = "/docs/configuration/"
+      icon = "config"
+    [[params.navLinks.links]]
+      name = "Shortcodes"
+      url = "/reference/shortcodes/"
+      icon = "code"
   [[params.navLinks]]
     name = "Community"
     url = "https://discourse.gohugo.io/"
-  [[params.navLinks]]
-    name = "Changelog"
-    url = "/docs/quickstart/"
 
   [[params.versions]]
     name = "v2.0"

@@ -1,11 +1,28 @@
-{{- /* Extra, author-defined links in the top bar (params.navLinks). External
-       URLs (http...) open in a new tab; internal ones resolve via url.html so
-       they respect the site baseURL. */ -}}
+{{- /* Extra, author-defined links in the top bar (params.navLinks).
+       - A link with `url` is a plain link; external URLs (http...) open in a new
+         tab and resolve as-is, internal ones go through url.html.
+       - A link with a nested `links` list becomes a hover/focus dropdown (pure
+         CSS, animated). Each child may set `icon` (a feature-icon name). */ -}}
 {{ with .Site.Params.navLinks }}
 <nav class="nav-links" aria-label="Links">
   {{ range . }}
+  {{ if .links }}
+  <div class="nav-dropdown">
+    <button class="nav-dropdown-btn" type="button" aria-haspopup="true">{{ .name }} <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
+    <div class="nav-dropdown-menu">
+      {{ range .links }}
+      {{ $ext := hasPrefix .url "http" }}
+      <a class="nav-dropdown-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>
+        {{ with .icon }}<span class="nav-dropdown-icon">{{ partial "feature-icon.html" . }}</span>{{ end }}
+        <span>{{ .name }}</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  {{ else }}
   {{ $ext := hasPrefix .url "http" }}
   <a class="nav-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a>
+  {{ end }}
   {{ end }}
 </nav>
 {{ end }}

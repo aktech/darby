@@ -101,6 +101,20 @@ a:hover { text-decoration: underline; }
 .nav-link { padding: .3rem .6rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; font-weight: 500; }
 .nav-link:hover { background: var(--bg-subtle); color: var(--fg); text-decoration: none; }
 .nav-tab.active { color: var(--accent); font-weight: 600; }
+/* Nested nav dropdown: pure-CSS hover/focus, animated open. */
+.nav-dropdown { position: relative; }
+.nav-dropdown-btn { display: inline-flex; align-items: center; gap: .3rem; background: none; border: none; cursor: pointer; padding: .3rem .6rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; font-weight: 500; font-family: inherit; }
+.nav-dropdown:hover .nav-dropdown-btn, .nav-dropdown:focus-within .nav-dropdown-btn { color: var(--fg); background: var(--bg-subtle); }
+.nav-caret { display: inline-block; font-size: .7em; transition: transform .2s ease; }
+.nav-dropdown:hover .nav-caret, .nav-dropdown:focus-within .nav-caret { transform: rotate(180deg); }
+.nav-dropdown-menu { position: absolute; left: 0; top: 100%; margin-top: .45rem; min-width: 13rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: .4rem; opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top left; transition: opacity .18s ease, transform .18s ease, visibility .18s; z-index: 60; }
+/* Invisible bridge across the gap so moving from button to menu keeps it open. */
+.nav-dropdown-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -.45rem; height: .45rem; }
+.nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.nav-dropdown-link { display: flex; align-items: center; gap: .6rem; padding: .5rem .6rem; border-radius: var(--radius); color: var(--fg); font-size: .88rem; font-weight: 500; }
+.nav-dropdown-link:hover { background: var(--bg-subtle); text-decoration: none; }
+.nav-dropdown-icon { display: inline-flex; color: var(--accent); flex-shrink: 0; }
+.nav-dropdown-icon svg { width: 18px; height: 18px; }
 .version-switcher { position: relative; }
 .version-btn { display: inline-flex; align-items: center; gap: .3rem; height: 2.3rem; background: var(--bg-subtle); border: 1px solid var(--border); color: var(--fg); border-radius: var(--radius); padding: 0 .7rem; cursor: pointer; font-size: .85rem; font-weight: 500; }
 /* Opens on hover or keyboard focus. top:100% keeps the hover area contiguous
