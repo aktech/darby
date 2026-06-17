@@ -22,8 +22,8 @@
   <div class="footer-top">
     {{ if or $logo $social }}
     <div class="footer-brand">
-      {{ if and $logo $logoDark }}<a class="footer-logo" href="{{ "/" | relLangURL }}"><img class="light-only" src="{{ $logo | relURL }}" alt="{{ $.Site.Title }}"><img class="dark-only" src="{{ $logoDark | relURL }}" alt="{{ $.Site.Title }}"></a>
-      {{ else }}{{ with $logo }}<a class="footer-logo" href="{{ "/" | relLangURL }}"><img src="{{ . | relURL }}" alt="{{ $.Site.Title }}"></a>{{ end }}{{ end }}
+      {{ if and $logo $logoDark }}<a class="footer-logo" href="{{ partial "url.html" "/" }}"><img class="light-only" src="{{ partial "url.html" $logo }}" alt="{{ $.Site.Title }}"><img class="dark-only" src="{{ partial "url.html" $logoDark }}" alt="{{ $.Site.Title }}"></a>
+      {{ else }}{{ with $logo }}<a class="footer-logo" href="{{ partial "url.html" "/" }}"><img src="{{ partial "url.html" . }}" alt="{{ $.Site.Title }}"></a>{{ end }}{{ end }}
       {{ with $social }}<span class="footer-social">{{ range . }}<a class="footer-social-link" href="{{ .url }}" aria-label="{{ .name }}">{{ partial "social-icon.html" .name }}</a>{{ end }}</span>{{ end }}
     </div>
     {{ end }}
@@ -34,7 +34,7 @@
         {{ with .title }}<h2 class="footer-col-title">{{ . }}</h2>{{ end }}
         {{ with .links }}
         <ul class="footer-col-links">
-          {{ range . }}<li><a href="{{ .url }}">{{ .name }}</a></li>{{ end }}
+          {{ range . }}<li><a href="{{ partial "url.html" .url }}">{{ .name }}</a></li>{{ end }}
         </ul>
         {{ end }}
       </div>

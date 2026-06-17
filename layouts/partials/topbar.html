@@ -4,13 +4,18 @@
   </button>
   <a class="brand" href="{{ .Site.Home.RelPermalink }}">
     {{ $logo := .Site.Params.logo }}{{ $logoDark := .Site.Params.logoDark }}
+    {{/* logoOnly: the logo is a full wordmark that stands in for the site name.
+         It renders at its natural width (no square crop) and the text title is
+         dropped. Default (false) keeps the square icon + text-title pairing. */}}
+    {{ $only := .Site.Params.logoOnly }}
+    {{ $cls := cond $only "brand-logo brand-logo-wide" "brand-logo" }}
     {{ if and $logo $logoDark }}
-      <img src="{{ partial "url.html" $logo }}" alt="{{ .Site.Title }}" class="brand-logo light-only">
-      <img src="{{ partial "url.html" $logoDark }}" alt="{{ .Site.Title }}" class="brand-logo dark-only">
+      <img src="{{ partial "url.html" $logo }}" alt="{{ .Site.Title }}" class="{{ $cls }} light-only">
+      <img src="{{ partial "url.html" $logoDark }}" alt="{{ .Site.Title }}" class="{{ $cls }} dark-only">
     {{ else if $logo }}
-      <img src="{{ partial "url.html" $logo }}" alt="{{ .Site.Title }}" class="brand-logo">
+      <img src="{{ partial "url.html" $logo }}" alt="{{ .Site.Title }}" class="{{ $cls }}">
     {{ end }}
-    <span class="brand-name">{{ .Site.Title }}</span>
+    {{ if not $only }}<span class="brand-name">{{ .Site.Title }}</span>{{ end }}
   </a>
   {{ partial "tabs.html" . }}
   <div class="topbar-right">
