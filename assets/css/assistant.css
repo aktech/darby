@@ -2,36 +2,24 @@
    it tracks the active accent and dark/light palette automatically. */
 
 /* --- trigger (topbar) --- */
-/* Mirror .search-trigger so the two top-bar bars are identical in size. */
+/* Rounded pill matching .search-trigger; width follows its content. The shared
+   pill kbd-chip styling lives alongside .search-trigger in main.css. */
 .assistant-trigger {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  width: 11rem;
-  max-width: 16vw;
-  height: 2.3rem;
-  padding: 0 .7rem;
+  width: auto;
+  height: 2.4rem;
+  padding: 0 .45rem 0 .85rem;
   background: var(--bg-subtle);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 999px;
   color: var(--fg-muted);
   cursor: pointer;
   font-size: .85rem;
 }
 .assistant-trigger:hover { border-color: var(--accent); color: var(--fg); }
 .assistant-trigger svg { color: var(--accent); }
-/* Same kbd treatment as the search ⌘K: no box, larger ⌘ glyph, pushed right. */
-.assistant-trigger kbd {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: .35em;
-  font-family: var(--font-mono);
-  font-size: .95rem;
-  color: var(--fg-muted);
-  line-height: 1;
-}
-.assistant-trigger kbd .kbd-cmd { font-size: 1.32em; line-height: 1; }
 
 /* --- panel --- */
 .assistant-panel {

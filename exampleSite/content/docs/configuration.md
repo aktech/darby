@@ -81,21 +81,49 @@ Top-level **tabs** appear in the header and group large documentation sets. The 
 
 ## Footer, social, and logo
 
-Configure the footer text, social links shown in the footer, and an optional logo for the header.
+The footer is fully config-driven. Add link `columns` (each a `title` plus a list
+of `links`) and they render as a multi-column footer above a bottom bar. The
+bottom bar shows your `copyright` text and a "Powered by" credit; both the credit
+label (`poweredBy`) and its link (`poweredByURL`) are customizable, and you can
+remove the credit entirely with `hidePoweredBy = true`. Social entries render as
+icons in the footer's brand block (and the header), keyed by `name`: `github`,
+`x`, `linkedin`, `mastodon`, `discord`, `youtube`, `bluesky`, and `rss` ship with
+built-in icons; any other name falls back to a generic link icon. With no
+`columns` set, the footer collapses to just the bottom bar.
 
 ```toml
 [params]
   logo = "/images/logo.svg"
 
-[params.footer]
-  text = "Copyright Darby, Inc."
-
 [[params.social]]
   name = "github"
-  url = "https://github.com/darby"
+  url = "https://github.com/example/darby"
 [[params.social]]
   name = "x"
-  url = "https://x.com/darby"
+  url = "https://x.com/example"
+
+[params.footer]
+  copyright = "© 2026 Darby. MIT Licensed."
+  poweredBy = "Darby"
+  poweredByURL = "https://github.com/aktech/darby"
+  # hidePoweredBy = true   # remove the "Powered by" credit
+
+  [[params.footer.columns]]
+    title = "Product"
+    [[params.footer.columns.links]]
+      name = "Quickstart"
+      url = "/docs/quickstart/"
+    [[params.footer.columns.links]]
+      name = "Installation"
+      url = "/docs/installation/"
+  [[params.footer.columns]]
+    title = "Resources"
+    [[params.footer.columns.links]]
+      name = "Guides"
+      url = "/guides/"
+    [[params.footer.columns.links]]
+      name = "Reference"
+      url = "/reference/"
 ```
 
 ## Full example
@@ -123,7 +151,9 @@ Here is a complete `[params]` block that exercises every setting at once. Copy i
     backend = "fuse"
 
   [params.footer]
-    text = "Copyright Darby, Inc."
+    copyright = "© 2026 Darby. MIT Licensed."
+    poweredBy = "Darby"
+    poweredByURL = "https://github.com/aktech/darby"
 
   [[params.tabs]]
     name = "Docs"

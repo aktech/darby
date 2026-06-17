@@ -59,8 +59,50 @@ title = "Darby"
     #   model = "gpt-4o-mini"
     #   apiKey = ""   # exposed to the browser; use only for local/proxied servers
 
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/aktech/darby"
+  [[params.social]]
+    name = "x"
+    url = "https://x.com/iaktech"
+  [[params.social]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/iaktech/"
+
   [params.footer]
-    text = "Copyright Darby, Inc."
+    copyright = "© 2026 Darby. MIT Licensed."
+    # Bottom-bar credit. Both label and URL are customizable; set
+    # hidePoweredBy = true to remove it entirely.
+    poweredBy = "Darby"
+    poweredByURL = "https://github.com/aktech/darby"
+
+    [[params.footer.columns]]
+      title = "Product"
+      [[params.footer.columns.links]]
+        name = "Quickstart"
+        url = "/docs/quickstart/"
+      [[params.footer.columns.links]]
+        name = "Installation"
+        url = "/docs/installation/"
+    [[params.footer.columns]]
+      title = "Resources"
+      [[params.footer.columns.links]]
+        name = "Guides"
+        url = "/guides/"
+      [[params.footer.columns.links]]
+        name = "Reference"
+        url = "/reference/"
+      [[params.footer.columns.links]]
+        name = "Blog"
+        url = "/blog/"
+    [[params.footer.columns]]
+      title = "Community"
+      [[params.footer.columns.links]]
+        name = "GitHub"
+        url = "https://github.com/aktech/darby"
+      [[params.footer.columns.links]]
+        name = "Hugo"
+        url = "https://gohugo.io/"
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

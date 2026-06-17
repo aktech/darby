@@ -1,18 +1,50 @@
-{{ $text := "" }}{{ with .Site.Params.footer }}{{ $text = .text }}{{ end }}
+{{- /* Footer: optional brand (logo + social) and customizable link columns on
+       top, a bottom bar with customizable copyright + powered-by credit.
+       Everything is config-driven; with no [params.footer] set it degrades to
+       just the bottom bar. */ -}}
 {{ $social := .Site.Params.social }}
+{{ $logo := .Site.Params.logo }}
+{{ $logoDark := .Site.Params.logoDark }}
+{{ $columns := slice }}
+{{ $copyright := "" }}
+{{ $pbText := "Darby" }}
+{{ $pbURL := "https://github.com/aktech/darby" }}
+{{ $hidePB := false }}
+{{ with .Site.Params.footer }}
+  {{ $copyright = or .copyright .text }}
+  {{ with .columns }}{{ $columns = . }}{{ end }}
+  {{ with .poweredBy }}{{ $pbText = . }}{{ end }}
+  {{ with .poweredByURL }}{{ $pbURL = . }}{{ end }}
+  {{ $hidePB = .hidePoweredBy }}
+{{ end }}
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-left">
-      {{ with $text }}<span>{{ . }}</span>{{ end }}
-      {{ with $social }}<span class="footer-social">{{ range . }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</span>{{ end }}
+  {{ if or $logo $social $columns }}
+  <div class="footer-top">
+    {{ if or $logo $social }}
+    <div class="footer-brand">
+      {{ if and $logo $logoDark }}<a class="footer-logo" href="{{ "/" | relLangURL }}"><img class="light-only" src="{{ $logo | relURL }}" alt="{{ $.Site.Title }}"><img class="dark-only" src="{{ $logoDark | relURL }}" alt="{{ $.Site.Title }}"></a>
+      {{ else }}{{ with $logo }}<a class="footer-logo" href="{{ "/" | relLangURL }}"><img src="{{ . | relURL }}" alt="{{ $.Site.Title }}"></a>{{ end }}{{ end }}
+      {{ with $social }}<span class="footer-social">{{ range . }}<a class="footer-social-link" href="{{ .url }}" aria-label="{{ .name }}">{{ partial "social-icon.html" .name }}</a>{{ end }}</span>{{ end }}
     </div>
-    <div class="footer-right">
-      {{ with .Site.Params.repo }}
-      <a class="footer-link" href="{{ . }}" aria-label="GitHub repository">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 8.84 21.5c.5.08.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.9-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.57.67.48A10 10 0 0 0 12 2z"/></svg>
-      </a>
+    {{ end }}
+    {{ with $columns }}
+    <div class="footer-columns">
+      {{ range . }}
+      <div class="footer-col">
+        {{ with .title }}<h2 class="footer-col-title">{{ . }}</h2>{{ end }}
+        {{ with .links }}
+        <ul class="footer-col-links">
+          {{ range . }}<li><a href="{{ .url }}">{{ .name }}</a></li>{{ end }}
+        </ul>
+        {{ end }}
+      </div>
       {{ end }}
-      <span class="footer-powered">Powered by <a href="https://github.com/aktech/darby">Darby</a></span>
     </div>
+    {{ end }}
+  </div>
+  {{ end }}
+  <div class="footer-bottom">
+    {{ with $copyright }}<span class="footer-copyright">{{ . }}</span>{{ end }}
+    {{ if not $hidePB }}<span class="footer-powered">Powered by <a href="{{ $pbURL }}">{{ $pbText }}</a></span>{{ end }}
   </div>
 </footer>
