@@ -196,3 +196,6 @@ Here is a complete `[params]` block that exercises every setting at once. Copy i
 | `footer.text` | string | Text shown in the site footer. |
 | `social` | array of tables | Social links in the footer, each with `name` and `url`. |
 | `logo` | string | Path to a logo image shown in the header. |
+| `postTitleSize` | string | Font size of the blog post page title, e.g. `2.6rem`. Defaults to `2.1rem`. Accepts `rem`, `em`, `px`, or `%`. |
+| `postTitleFont` | string | Font stack for the blog post page title, e.g. `Lora, Georgia, serif`. Defaults to the heading font. |
+| `navLinks` | array of tables | Extra links in the top bar, each with `name` and `url`. External URLs open in a new tab. |

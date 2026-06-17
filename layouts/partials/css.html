@@ -1,7 +1,12 @@
-{{/* Inline :root overrides from site params. Emitted only when set; tokens.css holds the defaults. */}}
 {{ $p := .Site.Params }}
 {{ $fonts := $p.fonts | default dict }}
 {{ $safe := `^[A-Za-z0-9 ,"'_-]+$` }}
+{{ $css := slice (resources.Get "css/tokens.css") (resources.Get "css/chroma.css") (resources.Get "css/main.css") (resources.Get "css/assistant.css") | resources.Concat "css/main.bundle.css" }}
+{{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{/* Inline :root overrides from site params, emitted AFTER the bundle so they
+     win over the matching defaults in tokens.css (same specificity, later wins).
+     Only emitted when set; tokens.css holds the defaults. */}}
 <style>
 :root{
 {{- with $p.accent }}--accent:{{ . }};{{ end }}
@@ -9,11 +14,10 @@
 {{- with $p.summaryColor }}--post-summary:{{ . }};{{ end }}
 {{- with $p.coverColor }}--cover-color:{{ . }};{{ end }}
 {{- with $p.logoHeight }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--brand-logo-height:{{ . }};{{ end }}{{ end }}
+{{- with $p.postTitleSize }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--post-title-size:{{ . }};{{ end }}{{ end }}
+{{- with $p.postTitleFont }}{{ if findRE $safe . }}--post-title-font:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "body" }}{{ if findRE $safe . }}--font-body:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "heading" }}{{ if findRE $safe . }}--font-heading:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "mono" }}{{ if findRE $safe . }}--font-mono:{{ . }};{{ end }}{{ end }}
 }
 </style>
-{{ $css := slice (resources.Get "css/tokens.css") (resources.Get "css/chroma.css") (resources.Get "css/main.css") (resources.Get "css/assistant.css") | resources.Concat "css/main.bundle.css" }}
-{{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}">

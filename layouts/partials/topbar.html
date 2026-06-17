@@ -19,6 +19,7 @@
   </a>
   {{ partial "tabs.html" . }}
   <div class="topbar-right">
+    {{ partial "nav-links.html" . }}
     {{ partial "assistant-trigger.html" . }}
     {{ if ne (.Site.Params.search.enable | default true) false }}{{ partial "search.html" . }}{{ end }}
     {{ partial "version-switcher.html" . }}

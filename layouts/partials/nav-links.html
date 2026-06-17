@@ -1,0 +1,11 @@
+{{- /* Extra, author-defined links in the top bar (params.navLinks). External
+       URLs (http...) open in a new tab; internal ones resolve via url.html so
+       they respect the site baseURL. */ -}}
+{{ with .Site.Params.navLinks }}
+<nav class="nav-links" aria-label="Links">
+  {{ range . }}
+  {{ $ext := hasPrefix .url "http" }}
+  <a class="nav-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a>
+  {{ end }}
+</nav>
+{{ end }}

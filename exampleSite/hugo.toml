@@ -12,6 +12,8 @@ title = "Darby"
   repo = "https://github.com/aktech/darby"
   logo = "/darby-logo.png"
   logoHeight = "2rem"
+  postTitleSize = "2.6rem"
+  postTitleFont = "Lora, Georgia, serif"
   favicon = "/favicon.png"
   editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
   showLastUpdated = true
@@ -28,6 +30,15 @@ title = "Darby"
   [[params.tabs]]
     name = "Blog"
     url = "/blog/"
+
+  # Extra links in the top bar, alongside the action icons. External URLs
+  # (http...) open in a new tab automatically.
+  [[params.navLinks]]
+    name = "Community"
+    url = "https://discourse.gohugo.io/"
+  [[params.navLinks]]
+    name = "Changelog"
+    url = "/docs/quickstart/"
 
   [[params.versions]]
     name = "v2.0"

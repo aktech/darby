@@ -97,6 +97,9 @@ a:hover { text-decoration: underline; }
 .nav-tabs { display: flex; gap: .25rem; margin-left: 1rem; }
 .nav-tab { padding: .3rem .7rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; font-weight: 500; }
 .nav-tab:hover { background: var(--bg-subtle); color: var(--fg); text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: .15rem; }
+.nav-link { padding: .3rem .6rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; font-weight: 500; }
+.nav-link:hover { background: var(--bg-subtle); color: var(--fg); text-decoration: none; }
 .nav-tab.active { color: var(--accent); font-weight: 600; }
 .version-switcher { position: relative; }
 .version-btn { display: inline-flex; align-items: center; gap: .3rem; height: 2.3rem; background: var(--bg-subtle); border: 1px solid var(--border); color: var(--fg); border-radius: var(--radius); padding: 0 .7rem; cursor: pointer; font-size: .85rem; font-weight: 500; }
@@ -399,6 +402,9 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 .post:not(.post-index) { font-family: "Merriweather", Georgia, serif; }
 .post:not(.post-index) h1, .post:not(.post-index) h2, .post:not(.post-index) h3, .post:not(.post-index) h4 { font-family: "Lora", Georgia, serif; }
 .post:not(.post-index) .post-meta { font-family: var(--font-body); }
+/* Post page title: customizable size + font (params.postTitleSize/postTitleFont).
+   Specificity sits above the serif heading rule so the configured font wins. */
+.post:not(.post-index) .post-header h1 { font-size: var(--post-title-size); font-family: var(--post-title-font); }
 /* Feed/card titles keep the UI heading font (Lora looked off at preview size). */
 .post-list-title, .post-cover-title { font-family: var(--font-heading); }
 /* Preview body reads in the same serif as posts, with a little more shown. */
