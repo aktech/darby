@@ -1,6 +1,7 @@
 +++
 title = "Introducing Darby"
 date = 2026-06-16
+image = "/sample-image.png"
 author = "aktech"
 authorGithub = "aktech"
 tags = ["announcement", "hugo", "documentation"]

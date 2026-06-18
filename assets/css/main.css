@@ -475,7 +475,7 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 [data-post-view="cards"] .post-list .post-cover {
   display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;
   aspect-ratio: 16 / 9; padding: 1.1rem; margin: -1.3rem -1.3rem 1rem;
-  color: #fff; text-decoration: none; overflow: hidden;
+  color: #fff; text-decoration: none; overflow: hidden; position: relative;
   background: var(--cover-color, var(--accent)); /* fallback if relative color unsupported */
   background:
     radial-gradient(120% 120% at 85% 15%, rgba(255,255,255,.16), transparent 60%),
@@ -483,6 +483,10 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
       oklch(from var(--cover-color, var(--accent)) calc(l + 0.16) c calc(h + var(--cover-shift, 0))),
       oklch(from var(--cover-color, var(--accent)) calc(l - 0.02) c calc(h + var(--cover-shift, 0))));
 }
+/* Per-post cover image fills the cover; a scrim keeps the overlaid title legible. */
+.post-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.post-cover.has-image::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.12) 55%, rgba(0,0,0,.35)); }
+.post-cover-title, .post-cover-foot { position: relative; z-index: 2; }
 .post-cover-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.4rem; line-height: 1.18; letter-spacing: -.01em; }
 .post-cover-foot { display: inline-flex; align-items: center; gap: .45rem; font-size: .85rem; font-weight: 500; }
 .post-cover-foot .post-avatar { width: 1.5rem; height: 1.5rem; border: 1px solid rgba(255,255,255,.55); background: rgba(255,255,255,.15); }
@@ -492,7 +496,9 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 [data-post-view="cards"] .post-list { max-width: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.25rem; }
 [data-post-view="cards"] .post-list .post-list-item { padding: 1.3rem; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .15s, transform .15s; }
 [data-post-view="cards"] .post-list .post-list-item:hover { border-color: var(--accent); transform: translateY(-3px); }
-[data-post-view="cards"] .post-list .post-list-title { font-size: 1.3rem; }
+/* Cards already show the title on the gradient cover; hide the duplicate text
+   title visually but keep it for screen readers (the cover is aria-hidden). */
+[data-post-view="cards"] .post-list .post-list-title { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .post-list .post-list-title { margin: 0 0 .4rem; font-size: var(--post-list-title-size); }
 .post-list-title a { color: var(--fg); }
 .post-list-title a:hover { color: var(--accent); }

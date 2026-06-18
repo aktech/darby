@@ -1,6 +1,7 @@
 +++
 title = "Theming Darby in one config block"
 date = 2026-06-10
+image = "/sample-image.png"
 author = "aktech"
 authorGithub = "aktech"
 tags = ["theming", "config"]

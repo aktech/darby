@@ -20,8 +20,17 @@
       {{ $angle := add 110 (mod (hash.FNV32a .Title) 60) }}
       {{ $shift := sub (mod (hash.FNV32a (printf "%s-shade" .Title)) 90) 45 }}
       {{ $avatar := partial "author-avatar-url.html" . }}
+      {{/* Optional per-post cover image (front matter `image` or `cover`): a page
+           resource, a static/absolute path, or a full URL. */}}
+      {{ $cover := .Params.image | default .Params.cover }}
+      {{ $coverURL := "" }}
+      {{ with $cover }}
+        {{ $res := $.Resources.GetMatch . }}
+        {{ if $res }}{{ $coverURL = $res.RelPermalink }}{{ else if hasPrefix . "http" }}{{ $coverURL = . }}{{ else }}{{ $coverURL = . | relURL }}{{ end }}
+      {{ end }}
       <li class="post-list-item">
-        <a class="post-cover" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-shift: {{ $shift }};">
+        <a class="post-cover{{ if $coverURL }} has-image{{ end }}" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-shift: {{ $shift }};">
+          {{ with $coverURL }}<img class="post-cover-img" src="{{ . }}" alt="" loading="lazy">{{ end }}
           <span class="post-cover-title">{{ .Title }}</span>
           {{ with .Params.author }}<span class="post-cover-foot">{{ with $avatar }}<img class="post-avatar" src="{{ . }}" alt="" width="24" height="24" loading="lazy">{{ end }}{{ . }}</span>{{ end }}
         </a>
