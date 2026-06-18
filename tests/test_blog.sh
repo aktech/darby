@@ -17,8 +17,9 @@ assert_grep "$BL" "data-blog-view" "view toggle control present"
 assert_grep "$BL" "data-view-set=\"list\"" "list view option present"
 assert_grep "$BL" "data-view-set=\"cards\"" "cards view option present"
 assert_grep "$BL" "data-post-view=\"cards\"" "feed uses the configured default view (blogView)"
-# Each card has an auto-generated cover (per-post gradient hue + title + author).
-assert_grep "$BL" "post-cover-title" "card cover carries the post title"
+# Each card has an auto-generated cover (per-post gradient hue) with the title below it.
+assert_grep "$BL" "post-cover" "card cover present"
+assert_grep "$BL" "post-list-title" "post title rendered below the cover"
 assert_grep "$BL" "\-\-cover-angle:" "per-post cover gradient generated"
 
 # Single post: standalone prose with byline, tags, and no docs sidebar.

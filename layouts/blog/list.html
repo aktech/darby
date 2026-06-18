@@ -30,10 +30,7 @@
         {{ if $res }}{{ $coverURL = $res.RelPermalink }}{{ else if hasPrefix . "http" }}{{ $coverURL = . }}{{ else }}{{ $coverURL = . | relURL }}{{ end }}
       {{ end }}
       <li class="post-list-item">
-        <a class="post-cover{{ if $coverURL }} has-image{{ end }}" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-shift: {{ $shift }};{{ with $coverURL }}--cover-bg: url('{{ . }}');{{ end }}">
-          <span class="post-cover-title">{{ .Title }}</span>
-          {{ with .Params.author }}<span class="post-cover-foot">{{ with $avatar }}<img class="post-avatar" src="{{ . }}" alt="" width="24" height="24" loading="lazy">{{ end }}{{ . }}</span>{{ end }}
-        </a>
+        <a class="post-cover{{ if $coverURL }} has-image{{ end }}" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-shift: {{ $shift }};{{ with $coverURL }}--cover-bg: url('{{ . }}');{{ end }}"></a>
         <h2 class="post-list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         {{ partial "post-meta.html" . }}
         {{ with .Summary }}<p class="post-summary">{{ . }}</p>{{ end }}
