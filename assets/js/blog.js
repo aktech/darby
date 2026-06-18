@@ -16,9 +16,12 @@
     }
   }
 
+  // Fall back to the site-configured default (rendered into data-post-view) when
+  // the visitor has no saved preference.
+  var def = feed.getAttribute('data-post-view') || 'list';
   var saved = null;
   try { saved = localStorage.getItem(KEY); } catch (e) {}
-  apply(saved || 'list');
+  apply(saved || def);
 
   toggle.addEventListener('click', function (e) {
     var btn = e.target.closest('[data-view-set]');

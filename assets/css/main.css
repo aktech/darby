@@ -483,8 +483,9 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
       oklch(from var(--cover-color, var(--accent)) calc(l + 0.16) c calc(h + var(--cover-shift, 0))),
       oklch(from var(--cover-color, var(--accent)) calc(l - 0.02) c calc(h + var(--cover-shift, 0))));
 }
-/* Per-post cover image fills the cover; a scrim keeps the overlaid title legible. */
-.post-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+/* Per-post cover image: background-size:cover fills and crops ANY image (any
+   size/ratio) edge-to-edge; a scrim keeps the overlaid title legible. */
+[data-post-view="cards"] .post-list .post-cover.has-image { background: var(--cover-bg) center / cover no-repeat, var(--cover-color, var(--accent)); }
 .post-cover.has-image::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.12) 55%, rgba(0,0,0,.35)); }
 .post-cover-title, .post-cover-foot { position: relative; z-index: 2; }
 .post-cover-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.4rem; line-height: 1.18; letter-spacing: -.01em; }

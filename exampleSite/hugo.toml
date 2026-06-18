@@ -14,6 +14,7 @@ title = "Darby"
   logoHeight = "2rem"
   postTitleSize = "2.6rem"
   postTitleFont = "Lora, Georgia, serif"
+  blogView = "cards"   # default blog index view: "list" or "cards"
   favicon = "/favicon.png"
   editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
   showLastUpdated = true
