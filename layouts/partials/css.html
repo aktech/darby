@@ -19,6 +19,7 @@
 {{- with $p.logoHeight }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--brand-logo-height:{{ . }};{{ end }}{{ end }}
 {{- with $p.postTitleSize }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--post-title-size:{{ . }};{{ end }}{{ end }}
 {{- with $p.postTitleFont }}{{ if findRE $safe . }}--post-title-font:{{ . }};{{ end }}{{ end }}
+{{- with $p.tocFont }}{{ if findRE $safe . }}--toc-font:{{ . }};{{ end }}{{ end }}
 {{- with $p.postListTitleFont }}{{ if findRE $safe . }}--post-list-title-font:{{ . }};{{ end }}{{ end }}
 {{- with $p.postListTitleSize }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--post-list-title-size:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "body" }}{{ if findRE $safe . }}--font-body:{{ . }};{{ end }}{{ end }}

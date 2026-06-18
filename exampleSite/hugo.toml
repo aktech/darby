@@ -13,7 +13,7 @@ title = "Darby"
   logo = "/darby-logo.png"
   logoHeight = "2rem"
   postTitleSize = "2.6rem"
-  postTitleFont = "Playfair Display, serif"
+  postTitleFont = "Lora, Georgia, serif"
   favicon = "/favicon.png"
   editURL = "https://github.com/darby/docs/edit/main/exampleSite/content/"
   showLastUpdated = true
@@ -100,9 +100,6 @@ title = "Darby"
         url = "https://discourse.gohugo.io/"
         icon = "life-buoy"
         desc = "Get unstuck fast"
-  [[params.navLinks]]
-    name = "Changelog"
-    url = "/docs/quickstart/"
 
   [[params.versions]]
     name = "v2.0"

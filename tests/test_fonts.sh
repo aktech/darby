@@ -28,7 +28,7 @@ assert_not_contains "$D" "family=ui-monospace" "ui-monospace not requested from 
 
 # postTitleFont is fetched from Google on blog post pages (where the title
 # renders) and NOT on docs pages.
-assert_grep "$PUB/blog/introducing-darby/index.html" "family=Playfair.*Display:wght" "postTitleFont fetched from Google on blog posts"
-assert_not_contains "$D" "family=Playfair" "postTitleFont not fetched on docs pages"
+assert_grep "$PUB/blog/introducing-darby/index.html" "family=Lora:wght" "postTitleFont fetched from Google on blog posts"
+assert_not_contains "$D" "family=Lora" "postTitleFont not fetched on docs pages"
 
 finish

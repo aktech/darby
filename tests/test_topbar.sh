@@ -15,7 +15,6 @@ assert_contains "$TBP" "--topbar-bg:#0b1020" "configured topbar background injec
 
 # Customizable extra nav links in the top bar
 assert_grep "$P" "class=\"nav-links\"" "nav-links container present"
-assert_grep "$P" "nav-link\"[^>]*>Changelog<" "configured plain nav link rendered"
 assert_grep "$P" "href=\"https://discourse.gohugo.io/\"[^>]*target=\"_blank\"" "external nav link opens in new tab"
 
 # Mega-menu: shared morphing panel with section columns, items + descriptions
