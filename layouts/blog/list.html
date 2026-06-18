@@ -27,7 +27,7 @@
       {{ $coverURL := "" }}
       {{ with $cover }}
         {{ $res := $.Resources.GetMatch . }}
-        {{ if $res }}{{ $coverURL = $res.RelPermalink }}{{ else if hasPrefix . "http" }}{{ $coverURL = . }}{{ else }}{{ $coverURL = . | relURL }}{{ end }}
+        {{ if $res }}{{ $coverURL = $res.RelPermalink }}{{ else if hasPrefix . "http" }}{{ $coverURL = . }}{{ else }}{{ $coverURL = partial "url.html" . }}{{ end }}
       {{ end }}
       <li class="post-list-item">
         <a class="post-cover{{ if $coverURL }} has-image{{ end }}" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1" style="--cover-angle: {{ $angle }}deg; --cover-shift: {{ $shift }};{{ with $coverURL }}--cover-bg: url('{{ . }}');{{ end }}"></a>
