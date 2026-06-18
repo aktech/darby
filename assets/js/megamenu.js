@@ -17,13 +17,18 @@
     });
 
     var firstOpen = true;
+    var lastIndex = -1;
     var closeTimer = null;
+    var SWIPE = 26; // px the content slides in the hover direction
 
     function place(id, trigger) {
       var panel = panels[id];
       if (!panel) return;
+      var idx = triggers.indexOf(trigger);
+      // Hover left->right (idx increasing) => content swipes left; right->left => swipes right.
+      var dir = (lastIndex === -1) ? 0 : (idx > lastIndex ? 1 : idx < lastIndex ? -1 : 0);
+
       triggers.forEach(function (t) { t.classList.toggle('mm-current', t === trigger); });
-      Object.keys(panels).forEach(function (k) { panels[k].classList.toggle('active', k === id); });
 
       var w = panel.offsetWidth;
       var h = panel.offsetHeight;
@@ -37,14 +42,34 @@
       bg.style.width = w + 'px';
       bg.style.height = h + 'px';
       bg.style.transform = 'translateX(' + x + 'px)';
-      panel.style.transform = 'translateX(' + x + 'px)';
-      if (firstOpen) { void bg.offsetWidth; bg.style.transition = ''; firstOpen = false; }
+      if (firstOpen) { void bg.offsetWidth; bg.style.transition = ''; }
+
+      Object.keys(panels).forEach(function (k) {
+        var pnl = panels[k];
+        if (k === id) {
+          // Incoming panel: start offset in the hover direction, then settle to x.
+          if (!firstOpen && dir !== 0) {
+            pnl.style.transition = 'none';
+            pnl.style.transform = 'translateX(' + (x + dir * SWIPE) + 'px)';
+            void pnl.offsetWidth;
+            pnl.style.transition = '';
+          }
+          pnl.classList.add('active');
+          pnl.style.transform = 'translateX(' + x + 'px)';
+        } else {
+          pnl.classList.remove('active');
+        }
+      });
+
+      firstOpen = false;
+      lastIndex = idx;
     }
 
     function open(id, trigger) { clearTimeout(closeTimer); nav.classList.add('mm-open'); place(id, trigger); }
     function close() {
       nav.classList.remove('mm-open');
       firstOpen = true;
+      lastIndex = -1;
       triggers.forEach(function (t) { t.classList.remove('mm-current'); });
       Object.keys(panels).forEach(function (k) { panels[k].classList.remove('active'); });
     }
