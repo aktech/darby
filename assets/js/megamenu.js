@@ -19,13 +19,14 @@
     var firstOpen = true;
     var lastIndex = -1;
     var closeTimer = null;
-    var SWIPE = 26; // px the content slides in the hover direction
+    var SLIDE = 80; // px the content carousels in the hover direction (clipped by .mm-bg)
 
     function place(id, trigger) {
       var panel = panels[id];
       if (!panel) return;
       var idx = triggers.indexOf(trigger);
-      // Hover left->right (idx increasing) => content swipes left; right->left => swipes right.
+      // Hover left->right (idx increasing) => new content enters from the right and
+      // slides left; right->left => enters from the left and slides right.
       var dir = (lastIndex === -1) ? 0 : (idx > lastIndex ? 1 : idx < lastIndex ? -1 : 0);
 
       triggers.forEach(function (t) { t.classList.toggle('mm-current', t === trigger); });
@@ -44,19 +45,24 @@
       bg.style.transform = 'translateX(' + x + 'px)';
       if (firstOpen) { void bg.offsetWidth; bg.style.transition = ''; }
 
+      // Panels live INSIDE .mm-bg (overflow:hidden), positioned relative to it.
+      // The active one rests at translateX(0); switching slides it in from the
+      // hover-direction side while the previous one slides out the other way.
       Object.keys(panels).forEach(function (k) {
         var pnl = panels[k];
         if (k === id) {
-          // Incoming panel: start offset in the hover direction, then settle to x.
           if (!firstOpen && dir !== 0) {
             pnl.style.transition = 'none';
-            pnl.style.transform = 'translateX(' + (x + dir * SWIPE) + 'px)';
-            void pnl.offsetWidth;
+            pnl.style.transform = 'translateX(' + (dir * SLIDE) + 'px)';
+            void pnl.offsetWidth; // commit the start position
             pnl.style.transition = '';
           }
           pnl.classList.add('active');
-          pnl.style.transform = 'translateX(' + x + 'px)';
+          pnl.style.transform = 'translateX(0)';
         } else {
+          if (dir !== 0 && pnl.classList.contains('active')) {
+            pnl.style.transform = 'translateX(' + (-dir * SLIDE) + 'px)';
+          }
           pnl.classList.remove('active');
         }
       });

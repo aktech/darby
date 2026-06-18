@@ -15,25 +15,26 @@
   {{ end }}
 
   <div class="mm-dropdown" data-mm-dropdown aria-hidden="true">
-    <div class="mm-bg" data-mm-bg></div>
-    {{ range . }}
-      {{ if .columns }}
-      <div class="mm-panel" data-mm-panel="{{ .name | urlize }}">
-        {{ range .columns }}
-        <div class="mm-col">
-          {{ with .title }}<div class="mm-col-title">{{ . }}</div>{{ end }}
-          {{ range .links }}
-          {{ $ext := hasPrefix .url "http" }}
-          <a class="mm-item" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>
-            {{ with .icon }}<span class="mm-item-icon">{{ partial "icon.html" . }}</span>{{ end }}
-            <span class="mm-item-text"><span class="mm-item-title">{{ .name }}</span>{{ with .desc }}<span class="mm-item-desc">{{ . }}</span>{{ end }}</span>
-          </a>
+    <div class="mm-bg" data-mm-bg>
+      {{ range . }}
+        {{ if .columns }}
+        <div class="mm-panel" data-mm-panel="{{ .name | urlize }}">
+          {{ range .columns }}
+          <div class="mm-col">
+            {{ with .title }}<div class="mm-col-title">{{ . }}</div>{{ end }}
+            {{ range .links }}
+            {{ $ext := hasPrefix .url "http" }}
+            <a class="mm-item" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>
+              {{ with .icon }}<span class="mm-item-icon">{{ partial "icon.html" . }}</span>{{ end }}
+              <span class="mm-item-text"><span class="mm-item-title">{{ .name }}</span>{{ with .desc }}<span class="mm-item-desc">{{ . }}</span>{{ end }}</span>
+            </a>
+            {{ end }}
+          </div>
           {{ end }}
         </div>
         {{ end }}
-      </div>
       {{ end }}
-    {{ end }}
+    </div>
   </div>
 </nav>
 {{ end }}
