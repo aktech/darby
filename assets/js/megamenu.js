@@ -19,7 +19,6 @@
     var isOpen = false;       // is the dropdown currently shown
     var lastIndex = -1;       // last hovered trigger index (kept across opens)
     var closeTimer = null;
-    var SLIDE = 90; // px the content carousels in the hover direction (clipped by .mm-bg)
 
     function place(id, trigger) {
       var panel = panels[id];
@@ -49,15 +48,17 @@
       bg.style.transform = 'translateX(' + x + 'px)';
       if (!isOpen) { void bg.offsetWidth; bg.style.transition = ''; }
 
-      // Panels live INSIDE .mm-bg (overflow:hidden), positioned relative to it.
-      // The active one rests at translateX(0); it slides in from the hover-direction
-      // side while the previous one slides out the other way.
+      // Panels live INSIDE .mm-bg (overflow:hidden). True carousel: the new panel
+      // enters fully off the hover-direction edge (a whole panel width) and slides
+      // to rest, while the previous one slides the full width out the other side.
+      // Clipping makes the two halves tile like Stripe's, not a small nudge.
       Object.keys(panels).forEach(function (k) {
         var pnl = panels[k];
+        var pw = pnl.offsetWidth || w;
         if (k === id) {
           if (dir !== 0) {
             pnl.style.transition = 'none';
-            pnl.style.transform = 'translateX(' + (dir * SLIDE) + 'px)';
+            pnl.style.transform = 'translateX(' + (dir * pw) + 'px)';
             void pnl.offsetWidth; // commit the start position
             pnl.style.transition = '';
           }
@@ -65,7 +66,7 @@
           pnl.style.transform = 'translateX(0)';
         } else {
           if (dir !== 0 && pnl.classList.contains('active')) {
-            pnl.style.transform = 'translateX(' + (-dir * SLIDE) + 'px)';
+            pnl.style.transform = 'translateX(' + (-dir * pw) + 'px)';
           }
           pnl.classList.remove('active');
         }
