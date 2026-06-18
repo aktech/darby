@@ -90,6 +90,12 @@
       t.addEventListener('mouseenter', function () { open(id, t); });
       t.addEventListener('focus', function () { open(id, t); });
     });
+    // Hovering a plain link (no dropdown) inside the nav must close the mega-menu;
+    // it lives in the same nav as the triggers, so nav's mouseleave never fires.
+    nav.querySelectorAll('.nav-link').forEach(function (lnk) {
+      lnk.addEventListener('mouseenter', close);
+      lnk.addEventListener('focus', close);
+    });
     nav.addEventListener('mouseleave', scheduleClose);
     dd.addEventListener('mouseenter', function () { clearTimeout(closeTimer); });
     nav.addEventListener('focusout', function () {
