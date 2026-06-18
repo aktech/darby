@@ -16,18 +16,20 @@
       panels[p.getAttribute('data-mm-panel')] = p;
     });
 
-    var firstOpen = true;
-    var lastIndex = -1;
+    var isOpen = false;       // is the dropdown currently shown
+    var lastIndex = -1;       // last hovered trigger index (kept across opens)
     var closeTimer = null;
-    var SLIDE = 80; // px the content carousels in the hover direction (clipped by .mm-bg)
+    var SLIDE = 90; // px the content carousels in the hover direction (clipped by .mm-bg)
 
     function place(id, trigger) {
       var panel = panels[id];
       if (!panel) return;
       var idx = triggers.indexOf(trigger);
       // Hover left->right (idx increasing) => new content enters from the right and
-      // slides left; right->left => enters from the left and slides right.
-      var dir = (lastIndex === -1) ? 0 : (idx > lastIndex ? 1 : idx < lastIndex ? -1 : 0);
+      // slides left; right->left => enters from the left and slides right. Direction
+      // is kept across separate hovers so a Resources->Community move always slides,
+      // even if the menu closed in between.
+      var dir = (lastIndex === -1 || idx === lastIndex) ? 0 : (idx > lastIndex ? 1 : -1);
 
       triggers.forEach(function (t) { t.classList.toggle('mm-current', t === trigger); });
 
@@ -39,19 +41,21 @@
       var maxX = window.innerWidth - 12 - w - navLeft;
       if (x > maxX) x = Math.max(0, maxX);
 
-      if (firstOpen) bg.style.transition = 'none';
+      // Snap the background into place when opening from closed; morph when moving
+      // between triggers while already open.
+      if (!isOpen) bg.style.transition = 'none';
       bg.style.width = w + 'px';
       bg.style.height = h + 'px';
       bg.style.transform = 'translateX(' + x + 'px)';
-      if (firstOpen) { void bg.offsetWidth; bg.style.transition = ''; }
+      if (!isOpen) { void bg.offsetWidth; bg.style.transition = ''; }
 
       // Panels live INSIDE .mm-bg (overflow:hidden), positioned relative to it.
-      // The active one rests at translateX(0); switching slides it in from the
-      // hover-direction side while the previous one slides out the other way.
+      // The active one rests at translateX(0); it slides in from the hover-direction
+      // side while the previous one slides out the other way.
       Object.keys(panels).forEach(function (k) {
         var pnl = panels[k];
         if (k === id) {
-          if (!firstOpen && dir !== 0) {
+          if (dir !== 0) {
             pnl.style.transition = 'none';
             pnl.style.transform = 'translateX(' + (dir * SLIDE) + 'px)';
             void pnl.offsetWidth; // commit the start position
@@ -67,15 +71,14 @@
         }
       });
 
-      firstOpen = false;
+      isOpen = true;
       lastIndex = idx;
     }
 
     function open(id, trigger) { clearTimeout(closeTimer); nav.classList.add('mm-open'); place(id, trigger); }
     function close() {
       nav.classList.remove('mm-open');
-      firstOpen = true;
-      lastIndex = -1;
+      isOpen = false; // keep lastIndex so the next hover still slides directionally
       triggers.forEach(function (t) { t.classList.remove('mm-current'); });
       Object.keys(panels).forEach(function (k) { panels[k].classList.remove('active'); });
     }
