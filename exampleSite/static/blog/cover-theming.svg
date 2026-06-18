@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none" role="img" aria-label="Theming Darby">
+  <defs>
+    <linearGradient id="bgt" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#13112b"/><stop offset="1" stop-color="#2a2350"/>
+    </linearGradient>
+    <radialGradient id="glowt" cx="0.5" cy="0.5" r="0.6">
+      <stop stop-color="#ffffff" stop-opacity="0.10"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bgt)"/>
+  <rect width="1200" height="675" fill="url(#glowt)"/>
+  <g transform="translate(600 338)">
+    <rect x="-258" y="-160" width="300" height="320" rx="34" fill="#6d28d9" transform="rotate(-14)"/>
+    <rect x="-150" y="-160" width="300" height="320" rx="34" fill="#0ea5e9" transform="rotate(-4)"/>
+    <rect x="-42" y="-160" width="300" height="320" rx="34" fill="#10b981" transform="rotate(6)"/>
+    <rect x="66" y="-160" width="300" height="320" rx="34" fill="#f59e0b" transform="rotate(16)"/>
+  </g>
+  <g fill="#ffffff" fill-opacity="0.9">
+    <circle cx="980" cy="150" r="10"/><circle cx="1020" cy="180" r="6"/>
+    <circle cx="210" cy="520" r="8"/>
+  </g>
+</svg>

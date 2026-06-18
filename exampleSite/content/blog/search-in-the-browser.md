@@ -1,6 +1,7 @@
 +++
 title = "Search that runs in your browser"
 date = 2026-06-04
+image = "/blog/cover-search.svg"
 author = "aktech"
 authorGithub = "aktech"
 tags = ["search", "javascript"]

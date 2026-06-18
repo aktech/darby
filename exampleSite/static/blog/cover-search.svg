@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none" role="img" aria-label="Search that runs in your browser">
+  <defs>
+    <linearGradient id="bgs" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#152a6b"/><stop offset="1" stop-color="#3b6fd4"/>
+    </linearGradient>
+    <radialGradient id="glows" cx="0.25" cy="0.2" r="0.8">
+      <stop stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bgs)"/>
+  <rect width="1200" height="675" fill="url(#glows)"/>
+  <!-- command-palette window -->
+  <rect x="318" y="190" width="564" height="300" rx="22" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.28" stroke-width="2"/>
+  <rect x="348" y="220" width="504" height="52" rx="13" fill="#ffffff" fill-opacity="0.16"/>
+  <circle cx="380" cy="246" r="13" stroke="#ffffff" stroke-width="4"/>
+  <line x1="390" y1="256" x2="404" y2="270" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <rect x="420" y="238" width="230" height="16" rx="8" fill="#ffffff" fill-opacity="0.45"/>
+  <rect x="348" y="300" width="420" height="16" rx="8" fill="#ffffff" fill-opacity="0.55"/>
+  <rect x="348" y="338" width="320" height="14" rx="7" fill="#ffffff" fill-opacity="0.3"/>
+  <rect x="348" y="372" width="380" height="14" rx="7" fill="#ffffff" fill-opacity="0.3"/>
+  <rect x="348" y="406" width="260" height="14" rx="7" fill="#ffffff" fill-opacity="0.3"/>
+  <rect x="788" y="296" width="64" height="24" rx="6" fill="#ffffff" fill-opacity="0.22"/>
+</svg>

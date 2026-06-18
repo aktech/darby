@@ -1,6 +1,7 @@
 +++
 title = "Writing docs that read well"
 date = 2026-05-28
+image = "/blog/cover-writing.svg"
 author = "aktech"
 authorGithub = "aktech"
 tags = ["writing", "documentation"]

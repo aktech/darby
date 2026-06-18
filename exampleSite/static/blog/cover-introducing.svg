@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none" role="img" aria-label="Introducing Darby">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#241056"/><stop offset="0.55" stop-color="#4524a8"/><stop offset="1" stop-color="#8b6cf0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.18" r="0.85">
+      <stop stop-color="#ffffff" stop-opacity="0.30"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+  <g stroke="#ffffff" stroke-opacity="0.13" fill="none">
+    <circle cx="600" cy="338" r="130"/><circle cx="600" cy="338" r="215"/><circle cx="600" cy="338" r="305"/>
+  </g>
+  <path d="M600 168 L636 300 L768 338 L636 376 L600 508 L564 376 L432 338 L564 300 Z" fill="#ffffff"/>
+  <path d="M884 168 l14 46 46 14 -46 14 -14 46 -14 -46 -46 -14 46 -14 z" fill="#ffffff" fill-opacity="0.65"/>
+  <path d="M306 486 l10 34 34 10 -34 10 -10 34 -10 -34 -34 -10 34 -10 z" fill="#ffffff" fill-opacity="0.55"/>
+  <circle cx="232" cy="196" r="7" fill="#ffffff" fill-opacity="0.55"/>
+  <circle cx="980" cy="486" r="9" fill="#ffffff" fill-opacity="0.5"/>
+  <circle cx="1010" cy="150" r="5" fill="#ffffff" fill-opacity="0.5"/>
+</svg>
