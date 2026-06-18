@@ -7,6 +7,9 @@ title = "Darby"
     path = "github.com/aktech/darby"
 
 [params]
+  description = "A minimal, fast, and beautiful Hugo documentation theme with dark mode, client-side search, and gorgeous code blocks."
+  ogImage = "/sample-image.png"   # default social-share image (raster; SVG is ignored by scrapers)
+  twitter = "iaktech"             # handle for Twitter card attribution (no @)
   accent = "#331c74"
   accentDark = "#a78bfa"
   repo = "https://github.com/aktech/darby"

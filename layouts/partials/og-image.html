@@ -1,0 +1,30 @@
+{{- /* Generate a per-post OG image at build time: the post title (word-wrapped)
+       plus author/read-time, drawn over the branded base. Returns an absolute
+       URL ("" if assets are missing). Hugo caches the generated image. */ -}}
+{{- $url := "" -}}
+{{- /* The base canvas and fonts are overridable via params (drop your own files
+       in assets/ and point params.ogBase / params.ogTitleFont at them). */ -}}
+{{- $base := resources.Get (.Site.Params.ogBase | default "og/og-base.png") -}}
+{{- $titleFont := resources.Get (.Site.Params.ogTitleFont | default "og/SpaceGrotesk-700.ttf") -}}
+{{- $metaFont := resources.Get (.Site.Params.ogMetaFont | default "og/Inter-400.ttf") -}}
+{{- if and $base $titleFont -}}
+  {{- /* Word-wrap the title to ~20 chars/line. */ -}}
+  {{- $lines := slice -}}
+  {{- $cur := "" -}}
+  {{- range (split .Title " ") -}}
+    {{- $try := cond (eq $cur "") . (printf "%s %s" $cur .) -}}
+    {{- if and (gt (len $try) 20) (ne $cur "") -}}
+      {{- $lines = $lines | append $cur -}}{{- $cur = . -}}
+    {{- else -}}
+      {{- $cur = $try -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if ne $cur "" }}{{ $lines = $lines | append $cur }}{{ end -}}
+  {{- $text := delimit $lines "\n" -}}
+  {{- $img := $base.Filter (images.Text $text (dict "color" "#ffffff" "size" 76 "x" 72 "y" 196 "linespacing" 16 "font" $titleFont)) -}}
+  {{- $sub := .Params.author | default "" -}}
+  {{- if .ReadingTime }}{{ $sub = cond (eq $sub "") (printf "%d min read" .ReadingTime) (printf "%s · %d min read" $sub .ReadingTime) }}{{ end -}}
+  {{- if and (ne $sub "") $metaFont }}{{ $img = $img.Filter (images.Text $sub (dict "color" "#d9ccff" "size" 30 "x" 74 "y" 540 "font" $metaFont)) }}{{ end -}}
+  {{- $url = $img.Permalink -}}
+{{- end -}}
+{{- return $url -}}

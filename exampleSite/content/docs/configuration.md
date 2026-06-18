@@ -35,6 +35,28 @@ The theme fetches the **first family** in each stack from Google Fonts automatic
 
 The same rule applies to `postTitleSize`'s companion `postTitleFont`: set it to a Google font and the blog post title page fetches it for you.
 
+## SEO and social sharing
+
+Every page emits a meta description, a canonical URL, Open Graph and Twitter Card
+tags, and JSON-LD structured data, so links unfurl nicely on social platforms and
+search engines. Set a site `description` and a default `ogImage` (a raster PNG/JPG;
+social scrapers ignore SVG), and a `twitter` handle for card attribution.
+
+```toml
+[params]
+  description = "A fast, beautiful Hugo documentation theme."
+  ogImage = "/og-default.png"   # 1200x630 PNG/JPG
+  twitter = "yourhandle"         # no @
+```
+
+Blog posts get an **auto-generated** social image at build time: the post title
+(word-wrapped) plus author and read time, drawn over a branded background. It is
+on by default and fully overridable:
+
+- Set a post's front-matter `image` to a raster file to use that instead.
+- `autoOgImage = false` turns generation off (falls back to `ogImage`).
+- `ogBase`, `ogTitleFont`, `ogMetaFont` point at your own canvas / fonts in `assets/`.
+
 ## Search
 
 Search is client-side and needs no external service. The default backend, `fuse`, builds a fuzzy index from your content at build time and loads it in the browser.

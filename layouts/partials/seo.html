@@ -1,0 +1,55 @@
+{{- /* SEO + social sharing: meta description, canonical, Open Graph, Twitter
+       cards, and JSON-LD structured data. og:image must be a raster (PNG/JPG):
+       social scrapers ignore SVG, so SVG covers fall back to params.ogImage. */ -}}
+{{- $title := cond .IsHome .Site.Title (printf "%s · %s" .Title .Site.Title) -}}
+{{- $desc := "" -}}
+{{- with .Description }}{{ $desc = . }}{{ else }}{{ with .Summary }}{{ $desc = . }}{{ else }}{{ $desc = .Site.Params.description }}{{ end }}{{ end -}}
+{{- $desc = $desc | plainify | htmlUnescape | truncate 200 -}}
+{{- $isArticle := and .IsPage (eq .Section "blog") -}}
+{{- $img := "" -}}
+{{- $pageImg := .Params.image | default .Params.cover -}}
+{{- if and $pageImg (not (strings.HasSuffix (lower $pageImg) ".svg")) -}}
+  {{- $res := .Resources.GetMatch $pageImg -}}
+  {{- if $res }}{{ $img = $res.Permalink }}{{ else if hasPrefix $pageImg "http" }}{{ $img = $pageImg }}{{ else }}{{ $img = $pageImg | absURL }}{{ end -}}
+{{- end -}}
+{{- /* No explicit raster image on a blog post: auto-generate a branded OG image. */ -}}
+{{- if and (not $img) $isArticle (ne .Site.Params.autoOgImage false) }}{{ $img = partial "og-image.html" . }}{{ end -}}
+{{- if not $img }}{{ with .Site.Params.ogImage }}{{ $img = . | absURL }}{{ else with .Site.Params.logo }}{{ $img = . | absURL }}{{ end }}{{ end -}}
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="description" content="{{ $desc }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:type" content="{{ cond $isArticle "article" "website" }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="{{ replace (.Site.LanguageCode | default "en") "-" "_" }}">
+{{- with $img }}
+<meta property="og:image" content="{{ . }}">{{ end }}
+{{- if $isArticle }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{- with .Lastmod }}
+<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{- with .Params.author }}
+<meta property="article:author" content="{{ . }}">{{ end }}
+{{- range .Params.tags }}
+<meta property="article:tag" content="{{ . }}">{{ end }}
+{{- end }}
+<meta name="twitter:card" content="{{ cond (ne $img "") "summary_large_image" "summary" }}">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+{{- with $img }}
+<meta name="twitter:image" content="{{ . }}">{{ end }}
+{{- with .Site.Params.twitter }}
+<meta name="twitter:site" content="@{{ . }}">{{ end }}
+{{- $ld := dict "@context" "https://schema.org" -}}
+{{- if $isArticle -}}
+  {{- $ld = merge $ld (dict "@type" "BlogPosting" "headline" .Title "url" .Permalink "mainEntityOfPage" .Permalink "datePublished" (.Date.Format "2006-01-02") "dateModified" (.Lastmod.Format "2006-01-02") "description" $desc) -}}
+  {{- with .Params.author }}{{ $ld = merge $ld (dict "author" (dict "@type" "Person" "name" .)) }}{{ end -}}
+  {{- with $img }}{{ $ld = merge $ld (dict "image" .) }}{{ end -}}
+{{- else if .IsHome -}}
+  {{- $ld = merge $ld (dict "@type" "WebSite" "name" .Site.Title "url" .Site.Home.Permalink) -}}
+  {{- with .Site.Params.description }}{{ $ld = merge $ld (dict "description" .) }}{{ end -}}
+{{- else -}}
+  {{- $ld = merge $ld (dict "@type" "WebPage" "name" .Title "url" .Permalink) -}}
+{{- end }}
+<script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>

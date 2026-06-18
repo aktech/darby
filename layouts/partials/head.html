@@ -1,4 +1,4 @@
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{ partial "seo.html" . }}
 {{ with .Site.Params.favicon }}<link rel="icon" href="{{ partial "url.html" . }}">
 <link rel="apple-touch-icon" href="{{ partial "url.html" . }}">{{ end }}
 {{/* no-flash: set theme before paint */}}
