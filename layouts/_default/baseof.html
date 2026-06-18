@@ -8,6 +8,8 @@
 </head>
 <body>
   {{ partial "topbar.html" . }}
+  {{ partial "mobile-sidebar.html" . }}
+  {{ partial "mobile-nav.html" . }}
   <main>{{ block "main" . }}{{ end }}</main>
   {{ partial "footer.html" . }}
   {{ if ne (.Site.Params.search.enable | default true) false }}{{ partial "search-modal.html" . }}{{ end }}

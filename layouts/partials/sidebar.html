@@ -1,26 +1,3 @@
 <aside class="sidebar" id="sidebar">
-  <nav class="sidebar-nav" aria-label="Documentation">
-    {{ $current := . }}
-    {{ range .Site.Home.Sections.ByWeight }}
-      {{ if not .Params.sidebar_exclude }}
-      {{ $open := or ($current.IsDescendant .) (eq $current .) }}
-      <details class="sidebar-group"{{ if $open }} open{{ end }}>
-        <summary class="sidebar-group-title">
-          {{ .Title }}
-          <svg class="sidebar-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <ul>
-          {{ range .Pages.ByWeight }}
-            <li>
-              <a class="sidebar-link{{ if eq $current . }} active{{ end }}"{{ if eq $current . }} aria-current="page"{{ end }} href="{{ .RelPermalink }}">
-                {{ with .Params.icon }}<span class="sidebar-icon">{{ . }}</span>{{ end }}
-                {{ .Params.sidebarLabel | default .LinkTitle }}
-              </a>
-            </li>
-          {{ end }}
-        </ul>
-      </details>
-      {{ end }}
-    {{ end }}
-  </nav>
+  {{ partial "sidebar-nav.html" . }}
 </aside>

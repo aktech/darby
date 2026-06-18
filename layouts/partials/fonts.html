@@ -6,6 +6,9 @@
 {{/* postTitleFont only renders on a blog post page (.post-header h1), so fetch
      it there too. */}}
 {{ if and (eq .Section "blog") (eq .Kind "page") }}{{ with .Site.Params.postTitleFont }}{{ $stacks = $stacks | append . }}{{ end }}{{ end }}
+{{/* postListTitleFont renders in the post feed (home, blog section list,
+     taxonomy/term), so fetch it on those pages. */}}
+{{ if or .IsHome (eq .Kind "term") (eq .Kind "taxonomy") (and (eq .Section "blog") (eq .Kind "section")) }}{{ with .Site.Params.postListTitleFont }}{{ $stacks = $stacks | append . }}{{ end }}{{ end }}
 {{/* Generic and common system families are NOT on Google Fonts; requesting them
      would 400 the request, so they are skipped. The author gives a full CSS
      stack and the theme fetches the first real family from each. */}}

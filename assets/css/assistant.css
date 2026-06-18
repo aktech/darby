@@ -248,9 +248,12 @@
 }
 @keyframes asst-spin { to { transform: rotate(360deg); } }
 
-@media (max-width: 680px) {
+/* On mobile the trigger is a plain icon (no pill): drop the label, kbd, fill and
+   border so it matches the search / menu icons. */
+@media (max-width: 960px) {
   .assistant-trigger span, .assistant-trigger kbd { display: none; }
-  .assistant-trigger { width: auto; padding: .4rem; }
+  .assistant-trigger { width: auto; height: auto; padding: .4rem; background: none; border: none; }
+  .assistant-trigger:hover { background: var(--bg-subtle); border: none; }
 }
 @media (max-width: 520px) {
   .assistant-panel { width: 100vw; border-left: none; }

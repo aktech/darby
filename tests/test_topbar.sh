@@ -8,6 +8,11 @@ assert_grep "$P" "class=\"nav-tab-indicator\"" "sliding hover indicator element 
 assert_grep "$P" "class=\"version-switcher\"" "version switcher present"
 assert_contains "$P" "v2.0" "current version shown"
 
+# Custom top-bar background (params.topbarBg): the bar becomes a dark surface.
+TBP="$(build_site_with topbarbg=#0b1020)/docs/quickstart/index.html"
+assert_grep "$TBP" "class=\"topbar\" data-solid" "topbar marked as a solid surface"
+assert_contains "$TBP" "--topbar-bg:#0b1020" "configured topbar background injected into :root"
+
 # Customizable extra nav links in the top bar
 assert_grep "$P" "class=\"nav-links\"" "nav-links container present"
 assert_grep "$P" "nav-link\"[^>]*>Changelog<" "configured plain nav link rendered"

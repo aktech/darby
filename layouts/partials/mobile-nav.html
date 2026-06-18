@@ -1,0 +1,27 @@
+{{- /* Right-hand mobile drawer opened by the three-dots button: the top-bar
+       navigation that is hidden on small screens (section tabs + extra nav
+       links), plus the theme toggle. The left burger opens the docs sidebar
+       (section tree) separately. */ -}}
+<aside class="mobile-nav" id="mobilenav" aria-label="Menu">
+  <div class="mobile-nav-top">{{ partial "theme-toggle.html" . }}</div>
+  <nav class="sidebar-nav" aria-label="Navigation">
+    {{ range .Site.Params.navLinks }}
+      {{ if .columns }}
+      <details class="sidebar-group" open>
+        <summary class="sidebar-group-title">{{ .name }}
+          <svg class="sidebar-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <ul>
+          {{ range .columns }}{{ range .links }}
+          {{ $ext := hasPrefix .url "http" }}
+          <li><a class="sidebar-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a></li>
+          {{ end }}{{ end }}
+        </ul>
+      </details>
+      {{ else }}
+      {{ $ext := hasPrefix .url "http" }}
+      <a class="sidebar-link" href="{{ if $ext }}{{ .url }}{{ else }}{{ partial "url.html" .url }}{{ end }}"{{ if $ext }} target="_blank" rel="noopener"{{ end }}>{{ .name }}</a>
+      {{ end }}
+    {{ end }}
+  </nav>
+</aside>

@@ -31,20 +31,41 @@ a:hover { text-decoration: underline; }
 .sidebar-link { display: block; padding: .3rem .6rem; border-radius: var(--radius); color: var(--fg-muted); font-size: .9rem; }
 .sidebar-link:hover { background: var(--bg-subtle); text-decoration: none; color: var(--fg); }
 .sidebar-link.active { background: var(--sidebar-active-bg); color: var(--accent); font-weight: 600; }
-@media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); } .sidebar { position: fixed; left: 0; top: var(--topbar-h); width: 80%; max-width: 20rem; background: var(--bg); transform: translateX(-100%); transition: transform .2s; z-index: 40; } .sidebar.open { transform: none; } }
-.topbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: .75rem; height: var(--topbar-h); padding: 0 1rem; background: var(--bg); border-bottom: 1px solid var(--border); }
+/* Mobile nav drawer: rendered on every page, off-canvas, slides in on .open.
+   Hidden on desktop (the docs sidebar column is used there instead). */
+.mobile-nav, .mobile-sidebar { display: none; }
+/* Theme toggle lives at the top of the mobile drawer (it is hidden in the bar). */
+.mobile-nav-top { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+.mobile-nav-top .theme-toggle { border: 1px solid var(--border); border-radius: 999px; padding: .35rem .6rem; }
+@media (max-width: 960px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { display: none; }
+  /* Left drawer: docs section tree (burger). */
+  .mobile-sidebar { display: block; position: fixed; left: 0; top: var(--topbar-h); width: 82%; max-width: 20rem; height: calc(100vh - var(--topbar-h)); overflow-y: auto; background: var(--bg); border-right: 1px solid var(--border); padding: 1.5rem 1rem; transform: translateX(-100%); transition: transform .2s ease; z-index: 45; }
+  .mobile-sidebar.open { transform: none; }
+  /* Right drawer: top-bar nav items + theme toggle (three-dots). */
+  .mobile-nav { display: block; position: fixed; right: 0; top: var(--topbar-h); width: 82%; max-width: 20rem; height: calc(100vh - var(--topbar-h)); overflow-y: auto; background: var(--bg); border-left: 1px solid var(--border); padding: 1.5rem 1rem; transform: translateX(100%); transition: transform .2s ease; z-index: 45; }
+  .mobile-nav.open { transform: none; }
+}
+.topbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: .75rem; height: var(--topbar-h); padding: 0 1rem; background: var(--topbar-bg, var(--bg)); border-bottom: 1px solid var(--border); }
+/* Solid top bar (params.topbarBg): treat the bar (and its mega-menu) as a dark
+   surface so links, icons and the logo stay legible regardless of page theme. */
+.topbar[data-solid] { --bg: var(--topbar-bg); --fg: var(--topbar-fg, #f5f7fa); --fg-muted: color-mix(in srgb, var(--topbar-fg, #f5f7fa) 66%, transparent); --bg-subtle: rgba(255,255,255,.10); --border: rgba(255,255,255,.16); color: var(--fg); }
+.topbar[data-solid] .light-only { display: none; } .topbar[data-solid] .dark-only { display: inline; }
 .brand { display: flex; align-items: center; gap: .5rem; color: var(--fg); font-family: var(--font-heading); font-weight: 700; }
 .brand-logo { height: 1.6rem; width: 1.6rem; border-radius: 24%; object-fit: cover; display: block; }
 /* Wordmark logo (params.logoOnly): natural width, no crop, no rounding. */
 .brand-logo-wide { width: auto; height: var(--brand-logo-height); border-radius: 0; object-fit: contain; }
 .brand:hover { text-decoration: none; }
 .topbar-right { margin-left: auto; display: flex; align-items: center; gap: .75rem; }
-.theme-toggle, .hamburger, .topbar-link { background: none; border: none; color: var(--fg-muted); cursor: pointer; display: inline-flex; align-items: center; padding: .35rem; border-radius: var(--radius); }
-.theme-toggle:hover, .hamburger:hover, .topbar-link:hover { color: var(--fg); background: var(--bg-subtle); }
-.hamburger { display: none; }
+.theme-toggle, .menu-toggle, .hamburger, .topbar-link { background: none; border: none; color: var(--fg-muted); cursor: pointer; display: inline-flex; align-items: center; padding: .35rem; border-radius: var(--radius); }
+.theme-toggle:hover, .menu-toggle:hover, .hamburger:hover, .topbar-link:hover { color: var(--fg); background: var(--bg-subtle); }
+/* Burger (left, docs sidebar) and three-dots (right, nav menu) only appear on mobile. */
+.menu-toggle, .hamburger { display: none; }
+.hamburger { margin-right: -.15rem; }
 [data-theme="dark"] .icon-sun, [data-theme="light"] .icon-moon { display: none; }
 .dark-only { display: none; } [data-theme="dark"] .dark-only { display: inline; } [data-theme="dark"] .light-only { display: none; }
-@media (max-width: 960px) { .hamburger { display: inline-flex; } }
+@media (max-width: 960px) { .menu-toggle, .hamburger { display: inline-flex; } }
 .toc-col { position: sticky; top: var(--topbar-h); align-self: start; height: calc(100vh - var(--topbar-h)); overflow-y: auto; padding: 2rem 1rem; }
 .toc-title { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--fg-muted); font-weight: 700; }
 .toc ul { list-style: none; margin: .5rem 0 0; padding: 0; }
@@ -200,15 +221,18 @@ a:hover { text-decoration: underline; }
 /* Mobile top-bar polish: keep brand on one line, collapse search to an icon. */
 .brand-name { white-space: nowrap; }
 @media (max-width: 960px) {
+  /* Search + assistant collapse to plain icons (no pill); version, repo link and
+     the theme toggle move into the menu drawer, leaving only the icons + dots. */
   .search-trigger span, .search-trigger kbd { display: none; }
-  .search-trigger { padding: .4rem; width: auto; min-width: 0; }
+  .search-trigger { padding: .4rem; width: auto; min-width: 0; background: none; border: none; }
+  .search-trigger:hover { border: none; }
+  .topbar-link, .version-switcher, .topbar-right > .theme-toggle { display: none; }
   .topbar { gap: .5rem; }
-  .topbar-right { gap: .4rem; }
+  .topbar-right { gap: .25rem; }
 }
 @media (max-width: 560px) {
   .topbar { padding: 0 .6rem; gap: .4rem; }
-  .topbar-right { gap: .25rem; }
-  .topbar-link, .version-switcher { display: none; }
+  .topbar-right { gap: .15rem; }
 }
 
 /* ---- Interaction polish ---- */
@@ -407,9 +431,12 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 /* Blog: standalone prose column + TOC, no docs nav-tree sidebar. */
 .post-layout { display: grid; grid-template-columns: minmax(0,1fr) var(--toc-w); gap: 0; max-width: 70rem; margin: 0 auto; }
 @media (max-width: 1200px) { .post-layout { grid-template-columns: minmax(0, 1fr); } }
-/* Blog index has no TOC: one centered column; header (and toggle) span its width. */
-.post-index-layout { grid-template-columns: minmax(0, 1fr); max-width: 54rem; }
+/* Blog index: the container width stays constant across both views so the
+   header (and its view toggle) never moves. The reading content (header, intro,
+   list) is centered at a narrow width; only the cards grid uses the full width. */
+.post-index-layout { grid-template-columns: minmax(0, 1fr); max-width: 72rem; }
 .post-index-layout .post-index { max-width: 100%; }
+.post-index .blog-head, .post-index .blog-intro, .post-index .post-list { max-width: 54rem; margin-left: auto; margin-right: auto; }
 .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; color: var(--fg-muted); font-size: .9rem; margin: 0 0 1.5rem; }
 .post-meta > * + *::before { content: "·"; margin-right: .5rem; }
 .post-author { display: inline-flex; align-items: center; gap: .4rem; }
@@ -433,7 +460,8 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
    Specificity sits above the serif heading rule so the configured font wins. */
 .post:not(.post-index) .post-header h1 { font-size: var(--post-title-size); font-family: var(--post-title-font); }
 /* Feed/card titles keep the UI heading font (Lora looked off at preview size). */
-.post-list-title, .post-cover-title { font-family: var(--font-heading); }
+.post-list-title { font-family: var(--post-list-title-font); }
+.post-cover-title { font-family: var(--font-heading); }
 /* Preview body reads in the same serif as posts, with a little more shown. */
 .post-summary { font-family: "Merriweather", Georgia, serif; }
 
@@ -454,14 +482,13 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 .post-cover-foot { display: inline-flex; align-items: center; gap: .45rem; font-size: .85rem; font-weight: 500; }
 .post-cover-foot .post-avatar { width: 1.5rem; height: 1.5rem; border: 1px solid rgba(255,255,255,.55); background: rgba(255,255,255,.15); }
 
-/* Cards view: each post becomes a bordered card in a responsive grid. */
-/* Cards view uses more of the page width so more covers fit per row. */
-.post-index-layout[data-post-view="cards"] { max-width: 72rem; }
-[data-post-view="cards"] .post-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.25rem; }
+/* Cards view: each post becomes a bordered card in a responsive grid that uses
+   the full container width (the header above it stays at the narrow width). */
+[data-post-view="cards"] .post-list { max-width: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.25rem; }
 [data-post-view="cards"] .post-list .post-list-item { padding: 1.3rem; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .15s, transform .15s; }
 [data-post-view="cards"] .post-list .post-list-item:hover { border-color: var(--accent); transform: translateY(-3px); }
 [data-post-view="cards"] .post-list .post-list-title { font-size: 1.15rem; }
-.post-list-title { margin: 0 0 .4rem; font-size: 1.4rem; }
+.post-list-title { margin: 0 0 .4rem; font-size: var(--post-list-title-size); }
 .post-list-title a { color: var(--fg); }
 .post-list-title a:hover { color: var(--accent); }
 .post-list .post-meta { margin: 0 0 .5rem; }

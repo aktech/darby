@@ -1,0 +1,6 @@
+{{- /* Left-hand mobile drawer opened by the burger: the docs section tree.
+       Rendered on every page (the desktop sidebar column only exists on docs
+       pages) so the burger always opens navigation on small screens. */ -}}
+<aside class="mobile-sidebar" id="mobile-sidebar" aria-label="Section navigation">
+  {{ partial "sidebar-nav.html" . }}
+</aside>

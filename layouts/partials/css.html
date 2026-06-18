@@ -13,9 +13,14 @@
 {{- with $p.accentDark }}--accent-dark:{{ . }};{{ end }}
 {{- with $p.summaryColor }}--post-summary:{{ . }};{{ end }}
 {{- with $p.coverColor }}--cover-color:{{ . }};{{ end }}
+{{- $color := `^(#[0-9A-Fa-f]{3,8}|rgba?\([0-9, .%]+\)|hsla?\([0-9, .%]+\))$` }}
+{{- with $p.topbarBg }}{{ if findRE $color . }}--topbar-bg:{{ . }};{{ end }}{{ end }}
+{{- with $p.topbarFg }}{{ if findRE $color . }}--topbar-fg:{{ . }};{{ end }}{{ end }}
 {{- with $p.logoHeight }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--brand-logo-height:{{ . }};{{ end }}{{ end }}
 {{- with $p.postTitleSize }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--post-title-size:{{ . }};{{ end }}{{ end }}
 {{- with $p.postTitleFont }}{{ if findRE $safe . }}--post-title-font:{{ . }};{{ end }}{{ end }}
+{{- with $p.postListTitleFont }}{{ if findRE $safe . }}--post-list-title-font:{{ . }};{{ end }}{{ end }}
+{{- with $p.postListTitleSize }}{{ if findRE `^[0-9.]+(rem|em|px|%)$` . }}--post-list-title-size:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "body" }}{{ if findRE $safe . }}--font-body:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "heading" }}{{ if findRE $safe . }}--font-heading:{{ . }};{{ end }}{{ end }}
 {{- with index $fonts "mono" }}{{ if findRE $safe . }}--font-mono:{{ . }};{{ end }}{{ end }}
@@ -23,7 +28,10 @@
 {{/* --accent is the one token with a distinct dark value. Re-assert the dark
      accent here so the :root override above (light) does not leak into dark
      mode at equal specificity. Mirrors the rule in tokens.css. */}}
-{{- if or $p.accent $p.accentDark }}
-[data-theme="dark"]{--accent:var(--accent-dark,#a78bfa);}
+{{- if or $p.accent $p.accentDark $p.bgDark }}
+{{- $dark := "" }}
+{{- if or $p.accent $p.accentDark }}{{ $dark = "--accent:var(--accent-dark,#a78bfa);" }}{{ end }}
+{{- with $p.bgDark }}{{ if findRE $color . }}{{ $dark = printf "%s--bg:%s;--bg-subtle:color-mix(in srgb,%s,#fff 7%%);--border:color-mix(in srgb,%s,#fff 14%%);--bg-code:color-mix(in srgb,%s,#000 35%%);" $dark . . . . }}{{ end }}{{ end }}
+[data-theme="dark"]{ {{- $dark | safeCSS -}} }
 {{- end }}
 </style>

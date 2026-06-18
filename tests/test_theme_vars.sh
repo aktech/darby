@@ -3,6 +3,9 @@ source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 build_site
 P="$PUB/docs/quickstart/index.html"
 assert_contains "$P" "--accent:#331c74" "configured accent injected into :root"
+assert_contains "$P" "[data-theme=\"dark\"]" "dark-theme override block emitted"
+BGP="$(build_site_with bgdark=#0a0e27)/docs/quickstart/index.html"
+assert_grep "$BGP" "data-theme=.dark.\]\{[^}]*--bg:#0a0e27" "configured dark background injected into dark theme"
 assert_contains "$P" "--brand-logo-height:2rem" "configured logo height injected into :root"
 assert_contains "$P" "--post-title-size:2.6rem" "configured blog post title size injected into :root"
 assert_contains "$P" "--post-title-font:Playfair Display, serif" "configured blog post title font injected into :root"
@@ -25,5 +28,5 @@ fi
 # The :root override sets the light accent globally; the dark accent must be
 # re-asserted after it (equal specificity, later wins) or it leaks into dark
 # mode and accent-filled surfaces / active nav become unreadable.
-assert_contains "$P" "[data-theme=\"dark\"]{--accent:var(--accent-dark,#a78bfa);}" "dark accent re-asserted after the :root override"
+assert_grep "$P" "data-theme=.dark.\]\{--accent:var\(--accent-dark,#a78bfa\);" "dark accent re-asserted after the :root override"
 finish

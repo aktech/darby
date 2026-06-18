@@ -5,6 +5,16 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PUB="$ROOT/exampleSite/public"
 PASS=0; FAIL=0
 
+# Build the example site with extra theme params injected via HUGO_PARAMS_*
+# env vars, into a throwaway dir. Lets feature-injection be asserted without
+# baking demo values into the shared exampleSite config. Echoes the dir.
+build_site_with() { # KEY=value ...  (KEY is the lowercased param name)
+  local out; out="$(mktemp -d)"
+  local env_args=(); for kv in "$@"; do env_args+=("HUGO_PARAMS_${kv%%=*}=${kv#*=}"); done
+  ( cd "$ROOT/exampleSite" && env "${env_args[@]}" hugo --quiet --gc -d "$out" ) || { echo "VARIANT BUILD FAILED"; exit 1; }
+  echo "$out"
+}
+
 build_site() {
   if [ -z "${_BUILT:-}" ]; then
     ( cd "$ROOT/exampleSite" && hugo --quiet --gc --cleanDestinationDir --enableGitInfo ) || { echo "BUILD FAILED"; exit 1; }
