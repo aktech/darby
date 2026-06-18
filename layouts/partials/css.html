@@ -2,7 +2,7 @@
 {{ $fonts := $p.fonts | default dict }}
 {{ $safe := `^[A-Za-z0-9 ,"'_-]+$` }}
 {{ $css := slice (resources.Get "css/tokens.css") (resources.Get "css/chroma.css") (resources.Get "css/main.css") (resources.Get "css/assistant.css") | resources.Concat "css/main.bundle.css" }}
-{{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ end }}
+{{ if hugo.IsProduction }}{{ $css = $css | minify | fingerprint }}{{ else }}{{ $css = $css | fingerprint }}{{ end }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{/* Inline :root overrides from site params, emitted AFTER the bundle so they
      win over the matching defaults in tokens.css (same specificity, later wins).

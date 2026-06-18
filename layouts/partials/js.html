@@ -3,5 +3,5 @@
 {{ if ne $backend "pagefind" }}{{ $scripts = $scripts | append (resources.Get "js/vendor/fuse.min.js") }}{{ end }}
 {{ $scripts = $scripts | append (resources.Get "js/search.js") }}
 {{ $js := $scripts | resources.Concat "js/theme.bundle.js" }}
-{{ if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end }}
+{{ if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ else }}{{ $js = $js | fingerprint }}{{ end }}
 <script src="{{ $js.RelPermalink }}" defer></script>
