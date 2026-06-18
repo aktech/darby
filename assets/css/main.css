@@ -440,8 +440,8 @@ pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 2rem; }
 .post-index-layout .post-index { max-width: 100%; }
 /* Blog index: everything left-aligned in a constant-width container so the
    heading never moves between list/cards; the cards just fill out to the right. */
-.post-index .blog-head, .post-index .blog-intro { max-width: 48rem; }
-.post-index .post-list { max-width: none; }
+.post-index .blog-intro { max-width: 48rem; }
+.post-index .post-list { max-width: none; margin-top: 4.5rem; }
 .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; color: var(--fg-muted); font-size: .9rem; margin: 0 0 1.5rem; }
 .post-meta > * + *::before { content: "·"; margin-right: .5rem; }
 .post-author { display: inline-flex; align-items: center; gap: .4rem; }
