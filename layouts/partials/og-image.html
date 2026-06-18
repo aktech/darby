@@ -8,23 +8,33 @@
 {{- $titleFont := resources.Get (.Site.Params.ogTitleFont | default "og/SpaceGrotesk-700.ttf") -}}
 {{- $metaFont := resources.Get (.Site.Params.ogMetaFont | default "og/Inter-400.ttf") -}}
 {{- if and $base $titleFont -}}
-  {{- /* Word-wrap the title to ~20 chars/line. */ -}}
+  {{- /* Word-wrap the title to ~22 chars/line. */ -}}
   {{- $lines := slice -}}
   {{- $cur := "" -}}
   {{- range (split .Title " ") -}}
     {{- $try := cond (eq $cur "") . (printf "%s %s" $cur .) -}}
-    {{- if and (gt (len $try) 20) (ne $cur "") -}}
+    {{- if and (gt (len $try) 22) (ne $cur "") -}}
       {{- $lines = $lines | append $cur -}}{{- $cur = . -}}
     {{- else -}}
       {{- $cur = $try -}}
     {{- end -}}
   {{- end -}}
   {{- if ne $cur "" }}{{ $lines = $lines | append $cur }}{{ end -}}
+  {{- $n := len $lines -}}
+  {{- /* Shrink the title as it wraps to more lines so it never runs into the
+         meta line, then vertically center the block in the area above it. */ -}}
+  {{- $size := cond (ge $n 4) 54 (cond (eq $n 3) 66 76) -}}
+  {{- $lh := add $size 18 -}}
+  {{- $metaY := 548 -}}
+  {{- $areaTop := 150 -}}
+  {{- $blockH := mul $n $lh -}}
+  {{- $startY := add $areaTop (int (math.Max 0 (div (sub (sub $metaY $areaTop) $blockH) 2))) -}}
   {{- $text := delimit $lines "\n" -}}
-  {{- $img := $base.Filter (images.Text $text (dict "color" "#ffffff" "size" 76 "x" 72 "y" 196 "linespacing" 16 "font" $titleFont)) -}}
+  {{- $img := $base.Filter (images.Text $text (dict "color" "#ffffff" "size" $size "x" 72 "y" $startY "linespacing" 18 "font" $titleFont)) -}}
   {{- $sub := .Params.author | default "" -}}
   {{- if .ReadingTime }}{{ $sub = cond (eq $sub "") (printf "%d min read" .ReadingTime) (printf "%s · %d min read" $sub .ReadingTime) }}{{ end -}}
-  {{- if and (ne $sub "") $metaFont }}{{ $img = $img.Filter (images.Text $sub (dict "color" "#d9ccff" "size" 30 "x" 74 "y" 540 "font" $metaFont)) }}{{ end -}}
+  {{- $metaColor := .Site.Params.ogMetaColor | default "#d9ccff" -}}
+  {{- if and (ne $sub "") $metaFont }}{{ $img = $img.Filter (images.Text $sub (dict "color" $metaColor "size" 30 "x" 74 "y" $metaY "font" $metaFont)) }}{{ end -}}
   {{- $url = $img.Permalink -}}
 {{- end -}}
 {{- return $url -}}
