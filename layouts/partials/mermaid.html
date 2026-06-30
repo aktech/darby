@@ -2,7 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap">
-{{ $mer := resources.Get "js/vendor/mermaid.min.js" }}
+{{ $mer := resources.Get "js/lib/mermaid.min.js" }}
 {{ if hugo.IsProduction }}{{ $mer = $mer | fingerprint }}{{ end }}
 <script src="{{ $mer.RelPermalink }}" defer></script>
 {{ $init := resources.Get "js/mermaid-init.js" }}

@@ -1,0 +1,12 @@
+{{- /* Subpath-safe URL for Markdown render hooks. Rewrites only ROOT-ABSOLUTE
+   internal paths ("/docs/" -> "/sub/docs/" on a subdirectory deploy) by
+   stripping the leading slash and running relLangURL. Everything else passes
+   through untouched: external URLs (http://, https://, //, mailto:, tel:),
+   in-page anchors (#x), and page-relative links (../x, x/) already resolve
+   correctly relative to the current page. Outputs the URL string. */ -}}
+{{- $u := . -}}
+{{- if and (hasPrefix $u "/") (not (hasPrefix $u "//")) -}}
+{{- $u | strings.TrimPrefix "/" | relLangURL -}}
+{{- else -}}
+{{- $u -}}
+{{- end -}}

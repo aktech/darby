@@ -1,6 +1,6 @@
 {{ $backend := .Site.Params.search.backend | default "fuse" }}
 {{ $scripts := slice (resources.Get "js/theme.js") (resources.Get "js/sidebar.js") (resources.Get "js/copy.js") (resources.Get "js/tabs.js") (resources.Get "js/blog.js") (resources.Get "js/nav.js") (resources.Get "js/megamenu.js") }}
-{{ if ne $backend "pagefind" }}{{ $scripts = $scripts | append (resources.Get "js/vendor/fuse.min.js") }}{{ end }}
+{{ if ne $backend "pagefind" }}{{ $scripts = $scripts | append (resources.Get "js/lib/fuse.min.js") }}{{ end }}
 {{ $scripts = $scripts | append (resources.Get "js/search.js") }}
 {{ $js := $scripts | resources.Concat "js/theme.bundle.js" }}
 {{ if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ else }}{{ $js = $js | fingerprint }}{{ end }}

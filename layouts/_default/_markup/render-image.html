@@ -1,0 +1,5 @@
+{{- /* Subpath-safe images: rewrite root-absolute Markdown image sources
+   ("/img.png" -> "/sub/img.png" on a subdirectory deploy). External and
+   page-relative sources pass through unchanged. */ -}}
+{{- $src := partial "internal-url.html" .Destination -}}
+<img src="{{ $src | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
