@@ -99,7 +99,8 @@ var mermaidDoodle = (() => {
 
   // src/sources.ts
   var DEFAULT_SELECTOR = 'pre.mermaid, div.mermaid, [data-language="mermaid"], code.language-mermaid';
-  var STASH = "doodleSrc";
+  var STASH_ATTR = "data-doodle-src";
+  var CLAIMED_SELECTOR = `[${STASH_ATTR}]`;
   function extractSource(el) {
     const lines = el.querySelectorAll(".ec-line, .line");
     if (lines.length > 1) {
@@ -123,9 +124,9 @@ var mermaidDoodle = (() => {
       const container = containerFor(match);
       if (!container || seen.has(container)) continue;
       seen.add(container);
-      const stashed = container.dataset[STASH];
+      const stashed = container.getAttribute(STASH_ATTR);
       const source = stashed ?? extractSource(container);
-      if (stashed === void 0) container.dataset[STASH] = source;
+      if (stashed === null) container.setAttribute(STASH_ATTR, source);
       found.push({ container, source });
     }
     return found;
@@ -224,7 +225,10 @@ var mermaidDoodle = (() => {
     const candidate = mod?.default ?? mod;
     return candidate && typeof candidate.run === "function" ? candidate : null;
   }
-  var dynamicImport = new Function("specifier", "return import(specifier)");
+  function importAtRuntime(specifier) {
+    const dynamicImport = new Function("specifier", "return import(specifier)");
+    return dynamicImport(specifier);
+  }
   async function resolveMermaid(provided, cdnUrl = DEFAULT_CDN_URL) {
     if (provided) return provided;
     const global = unwrap(globalThis.mermaid);
@@ -237,11 +241,47 @@ var mermaidDoodle = (() => {
     }
     if (cdnUrl) {
       try {
-        return unwrap(await dynamicImport(cdnUrl));
+        return unwrap(await importAtRuntime(cdnUrl));
       } catch {
       }
     }
     return null;
+  }
+
+  // src/colour.ts
+  var COLOUR_FIELDS = Object.keys(VAR_NAMES).filter(
+    (key) => key !== "font"
+  );
+  function normalisePaletteColours(palette, convert) {
+    const result = { ...palette };
+    for (const key of COLOUR_FIELDS) {
+      const value = palette[key];
+      if (value.trim().toLowerCase() === "transparent") continue;
+      try {
+        result[key] = convert(value);
+      } catch {
+      }
+    }
+    return result;
+  }
+
+  // src/colour-canvas.ts
+  var INVALID_SENTINEL = "#010203";
+  function createCanvasColourConverter() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1;
+    canvas.height = 1;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return (value) => value;
+    return (value) => {
+      ctx.fillStyle = INVALID_SENTINEL;
+      ctx.fillStyle = value;
+      if (ctx.fillStyle === INVALID_SENTINEL) return value;
+      ctx.clearRect(0, 0, 1, 1);
+      ctx.fillRect(0, 0, 1, 1);
+      const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
+      return a === 255 ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${+(a / 255).toFixed(3)})`;
+    };
   }
 
   // src/renderer.ts
@@ -281,9 +321,13 @@ var mermaidDoodle = (() => {
       showSource = false,
       mermaidConfig = {}
     } = options;
+    const collectSelector = `${selector}, ${CLAIMED_SELECTOR}`;
     let instance = null;
+    let inFlight = null;
+    let rerunRequested = false;
     let stopWatching = null;
     let fontsReady = false;
+    let colourConverter = null;
     async function ensureFontsReady(fontStack) {
       if (fontsReady) return;
       fontsReady = true;
@@ -309,14 +353,14 @@ var mermaidDoodle = (() => {
       wrapper.append(container);
       return wrapper;
     }
-    async function render() {
+    async function renderOnce() {
+      const found = collectSources(root, collectSelector);
+      if (found.length === 0) return;
       instance ??= await resolveMermaid(provided, cdnUrl);
       if (!instance) {
         console.warn("[mermaid-doodle] no mermaid instance available, diagrams left as text");
         return;
       }
-      const found = collectSources(root, selector);
-      if (found.length === 0) return;
       const nodes = [];
       for (const { container, source } of found) {
         container.classList.add(DIAGRAM_CLASS);
@@ -329,10 +373,11 @@ var mermaidDoodle = (() => {
         container.removeAttribute("data-processed");
         nodes.push(container);
       }
-      const palette = paletteFromVars(
-        (name) => getComputedStyle(document.documentElement).getPropertyValue(name)
-      );
+      const rootStyle = getComputedStyle(document.documentElement);
+      const palette = paletteFromVars((name) => rootStyle.getPropertyValue(name));
       await ensureFontsReady(palette.font);
+      colourConverter ??= createCanvasColourConverter();
+      const colours = normalisePaletteColours(palette, colourConverter);
       instance.initialize({
         startOnLoad: false,
         securityLevel,
@@ -340,11 +385,32 @@ var mermaidDoodle = (() => {
         handDrawnSeed,
         theme: "base",
         fontFamily: palette.font,
-        themeVariables: toThemeVariables(palette),
+        themeVariables: toThemeVariables(colours),
         flowchart: { curve: "basis", padding: 16, htmlLabels: true },
         ...mermaidConfig
       });
       await instance.run({ nodes, suppressErrors: true });
+    }
+    function render() {
+      if (inFlight) {
+        rerunRequested = true;
+        return inFlight;
+      }
+      inFlight = (async () => {
+        try {
+          do {
+            rerunRequested = false;
+            try {
+              await renderOnce();
+            } catch (error) {
+              console.warn("[mermaid-doodle] render failed", error);
+            }
+          } while (rerunRequested);
+        } finally {
+          inFlight = null;
+        }
+      })();
+      return inFlight;
     }
     return {
       render,
