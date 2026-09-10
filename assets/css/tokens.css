@@ -28,6 +28,24 @@
   --toc-font: var(--font-body);
   --post-list-title-size: 1.65rem;
   --shadow: 0 1px 2px rgba(15,23,42,.05), 0 2px 8px rgba(15,23,42,.05);
+
+  /* Mermaid diagram palette, read by mermaid-doodle. Deliberately not
+     --accent: diagrams need a mid purple to stay legible at diagram scale,
+     while --accent (#331c74) is tuned for text and chrome. */
+  --doodle-bg: transparent;
+  --doodle-accent: #5b3cc4;
+  --doodle-node-bg: #ece7f8;
+  --doodle-node-text: #241b3d;
+  --doodle-alt-bg: #f3eefc;
+  --doodle-alt-border: #8b6fd8;
+  --doodle-cluster-bg: #faf8ff;
+  --doodle-cluster-border: #cdbfeb;
+  --doodle-tertiary-bg: #faf8ff;
+  --doodle-tertiary-text: #1e293b;
+  --doodle-note-bg: #f3eefc;
+  --doodle-text: #33324a;
+  --doodle-edge-label-bg: #ffffff;
+  --doodle-font: "Shantell Sans", "Segoe Print", "Comic Sans MS", cursive;
 }
 
 [data-theme="dark"] {
@@ -45,4 +63,18 @@
   --border: #262629;
   --sidebar-active-bg: #1f1838; /* subtle purple tint to tie with the accent */
   --shadow: 0 1px 2px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.35);
+
+  --doodle-bg: transparent;
+  --doodle-accent: #8b5cf6;
+  --doodle-node-bg: #1c1633;
+  --doodle-node-text: #ededef;
+  --doodle-alt-bg: #241c3d;
+  --doodle-alt-border: #6d5bbf;
+  --doodle-cluster-bg: #100c1c;
+  --doodle-cluster-border: #3a2f63;
+  --doodle-tertiary-bg: #14101f;
+  --doodle-tertiary-text: #cdd2e0;
+  --doodle-note-bg: #241c3d;
+  --doodle-text: #dcdce2;
+  --doodle-edge-label-bg: #000000;
 }

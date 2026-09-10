@@ -36,3 +36,22 @@
 .chroma .err { color: #f38ba8; }
 .chroma .hl { background: rgba(203,166,247,.13); display: block; margin: 0 -1rem; padding: 0 1rem; }   /* highlighted line */
 .chroma .ln, .chroma .lnt { color: #6c7086; }                                                          /* line numbers */
+
+/* Source panel for mermaid diagrams, built by mermaid-doodle. Mirrors the
+   .code-block chrome above so a diagram's source looks like any other fence. */
+.doodle-source { text-align: left; margin: 1.25rem 0; border-radius: var(--radius-lg); border: 1px solid #313244; overflow: hidden; background: #1e1e2e; }
+.doodle-source__head { display: flex; align-items: center; gap: .5rem; padding: .4rem .75rem; background: #181825; border-bottom: 1px solid #313244; font-size: .78rem; }
+.doodle-source__lang { margin-left: auto; color: #6c7086; font-family: var(--font-mono); font-size: .72rem; }
+/* The <code> inside .doodle-source__pre has a UA monospace that overrides inheritance, so set the font on it directly (same fix as .chroma above). */
+.doodle-source__pre, .doodle-source__pre code { font-family: var(--font-mono); font-variant-ligatures: contextual; font-feature-settings: "liga" 1, "calt" 1; }
+.doodle-source__pre { background: #1e1e2e; color: #cdd6f4; margin: 0; padding: .9rem 1rem; overflow-x: auto; font-size: .85rem; line-height: 1.6; }
+.doodle-hl-k { color: #cba6f7; }
+.doodle-hl-s { color: #a6e3a1; }
+.doodle-hl-c { color: #6c7086; font-style: italic; }
+.doodle-hl-o { color: #89dceb; }
+.doodle-copy { display: inline-flex; align-items: center; justify-content: center; background: none; border: 1px solid #313244; color: #a6adc8; border-radius: var(--radius); padding: .25rem; cursor: pointer; }
+.doodle-copy:hover { color: #cdd6f4; border-color: #585b70; }
+.doodle-copy .doodle-copy__check { display: none; color: #a6e3a1; }
+.doodle-copy.is-copied .doodle-copy__copy { display: none; }
+.doodle-copy.is-copied .doodle-copy__check { display: inline; }
+.doodle-copy.is-copied { border-color: #a6e3a1; }
