@@ -10,6 +10,14 @@ assert_grep "$P" "mermaid-doodle[.a-z0-9]*\.js" "plugin bundle loaded"
 assert_grep "$P" "mermaid[.a-z0-9]*\.min[.a-z0-9]*\.js" "vendored mermaid loaded"
 assert_not_contains "$P" "mermaid-init" "old init script no longer referenced"
 
+# A fence with no showSource attribute must not opt into the source panel.
+# code-blocks/ carries the only plain (no showSource) fence in the example
+# site, so a page-wide assert_not_contains is unambiguous here: there is no
+# other diagram on the page whose data-doodle-source could cause a false pass.
+N="$PUB/reference/code-blocks/index.html"
+assert_grep "$N" "class=\"doodle-wrap\"" "plain fence still gets a wrapper"
+assert_not_contains "$N" "data-doodle-source" "plain fence omits the source-panel attribute"
+
 # The mermaid payload is 3.3MB, so it must stay off pages with no diagrams.
 Q="$PUB/docs/quickstart/index.html"
 assert_not_contains "$Q" "mermaid-doodle" "plugin not loaded on pages without diagrams"

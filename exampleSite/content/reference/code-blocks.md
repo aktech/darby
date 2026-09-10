@@ -321,6 +321,15 @@ println!("{count}");
 {{< /tab >}}
 {{< /code-group >}}
 
+## Diagrams
+
+A mermaid fence is a code block too, except the theme renders it as a diagram instead of highlighting the source. By default only the diagram shows; add `{showSource="true"}` to the fence, as the [Architecture](/reference/architecture/) page does, to show the diagram's source alongside it.
+
+```mermaid
+flowchart LR
+  FENCE["mermaid fence"] --> DIAGRAM["rendered diagram"]
+```
+
 ## Inline code
 
 Not everything needs a block. For a single command or identifier, inline code keeps the prose flowing: run `hugo server` to start the dev server, set `enableSearch = true` to turn on search, or call `Page.RenderString` from a shortcode to process Markdown. Mixing inline and block code is the natural way to write technical documentation, and the theme styles both consistently.
