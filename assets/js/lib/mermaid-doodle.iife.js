@@ -248,6 +248,27 @@ var mermaidDoodle = (() => {
   var WRAP_CLASS = "doodle-wrap";
   var SOURCE_ATTR = "data-doodle-source";
   var DIAGRAM_CLASS = "doodle-diagram";
+  var GENERIC_FONT_FAMILIES = /* @__PURE__ */ new Set([
+    "serif",
+    "sans-serif",
+    "cursive",
+    "fantasy",
+    "monospace",
+    "system-ui",
+    "ui-serif",
+    "ui-sans-serif",
+    "ui-monospace",
+    "ui-rounded",
+    "emoji",
+    "math",
+    "fangsong"
+  ]);
+  function firstFontFamily(fontStack) {
+    const first = (fontStack.split(",")[0] ?? "").trim();
+    const unquoted = first.replace(/^["']|["']$/g, "").trim();
+    if (!unquoted || GENERIC_FONT_FAMILIES.has(unquoted.toLowerCase())) return null;
+    return unquoted;
+  }
   function createRenderer(options = {}) {
     const {
       root = document,
@@ -263,10 +284,17 @@ var mermaidDoodle = (() => {
     let instance = null;
     let stopWatching = null;
     let fontsReady = false;
-    async function ensureFontsReady() {
+    async function ensureFontsReady(fontStack) {
       if (fontsReady) return;
       fontsReady = true;
       if (typeof document === "undefined" || !document.fonts) return;
+      const family = firstFontFamily(fontStack);
+      if (family) {
+        try {
+          await document.fonts.load(`1em "${family}"`);
+        } catch {
+        }
+      }
       try {
         await document.fonts.ready;
       } catch {
@@ -287,7 +315,6 @@ var mermaidDoodle = (() => {
         console.warn("[mermaid-doodle] no mermaid instance available, diagrams left as text");
         return;
       }
-      await ensureFontsReady();
       const found = collectSources(root, selector);
       if (found.length === 0) return;
       const nodes = [];
@@ -305,6 +332,7 @@ var mermaidDoodle = (() => {
       const palette = paletteFromVars(
         (name) => getComputedStyle(document.documentElement).getPropertyValue(name)
       );
+      await ensureFontsReady(palette.font);
       instance.initialize({
         startOnLoad: false,
         securityLevel,
