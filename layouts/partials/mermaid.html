@@ -1,9 +1,12 @@
 {{/* Loaded only on pages that contain a ```mermaid fence (set via Page.Store).
-     Both scripts are deferred, which preserves order, so mermaid is on
-     window by the time the plugin mounts and it never reaches for a CDN. */}}
+     cdnUrl is forced to null below, so the plugin can never fall back to a
+     third-party CDN if the vendored mermaid script fails to load. Both
+     scripts are deferred, which preserves order, so mermaid is on window
+     by the time the plugin mounts. */}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap">
+<script>window.mermaidDoodleConfig = { cdnUrl: null };</script>
 {{ $mer := resources.Get "js/lib/mermaid.min.js" }}
 {{ if hugo.IsProduction }}{{ $mer = $mer | fingerprint }}{{ end }}
 <script src="{{ $mer.RelPermalink }}" defer></script>
