@@ -1,10 +1,12 @@
-{{/* Loaded only on pages that contain a ```mermaid fence (set via Page.Store). */}}
+{{/* Loaded only on pages that contain a ```mermaid fence (set via Page.Store).
+     Both scripts are deferred, which preserves order, so mermaid is on
+     window by the time the plugin mounts and it never reaches for a CDN. */}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600&display=swap">
 {{ $mer := resources.Get "js/lib/mermaid.min.js" }}
 {{ if hugo.IsProduction }}{{ $mer = $mer | fingerprint }}{{ end }}
 <script src="{{ $mer.RelPermalink }}" defer></script>
-{{ $init := resources.Get "js/mermaid-init.js" }}
-{{ if hugo.IsProduction }}{{ $init = $init | minify | fingerprint }}{{ end }}
-<script src="{{ $init.RelPermalink }}" defer></script>
+{{ $doodle := resources.Get "js/lib/mermaid-doodle.iife.js" }}
+{{ if hugo.IsProduction }}{{ $doodle = $doodle | fingerprint }}{{ end }}
+<script src="{{ $doodle.RelPermalink }}" defer></script>

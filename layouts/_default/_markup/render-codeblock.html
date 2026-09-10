@@ -1,15 +1,6 @@
 {{- if eq .Type "mermaid" -}}
 {{- .Page.Store.Set "hasMermaid" true -}}
-{{- if .Attributes.showsource -}}
-<div class="code-block" data-lang="mermaid">
-  <div class="code-head">
-    <span class="code-lang">mermaid</span>
-    {{ partial "copy-button.html" . }}
-  </div>
-  {{ partial "mermaid-highlight.html" (trim .Inner "\n") }}
-</div>
-{{- end -}}
-<div class="mermaid-wrap"><pre class="mermaid">{{ .Inner }}</pre></div>
+<div class="doodle-wrap"{{ if .Attributes.showsource }} data-doodle-source{{ end }}><pre class="mermaid">{{ .Inner }}</pre></div>
 {{- else -}}
 {{- $lang := .Type | default "text" -}}
 {{- $filename := .Attributes.filename -}}
