@@ -45,3 +45,16 @@ jobs:
         run: npm test
       - name: Render tests
         run: bash tests/run.sh
+
+  vendored-bundle:
+    name: Vendored diagram bundle matches published version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "22"
+      - name: Compare committed bundle to the pinned npm package
+        run: bash scripts/check-vendored-mermaid-doodle.sh

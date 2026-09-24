@@ -26,9 +26,11 @@ assert_not_contains "$Q" "mermaid.min" "mermaid not loaded on pages without diag
 # Integrity check for the vendored diagram bundle: does the committed file
 # still match the sha256 recorded alongside it, so a corrupted, truncated,
 # or hand-edited bundle fails here instead of being discovered months later.
-# This proves nothing about whether the bundle matches the latest upstream
-# build; that needs the source package installable, which it is not yet
-# (unpublished, private repo). Re-vendor with scripts/vendor-mermaid-doodle.sh.
+# This proves nothing about whether the bundle matches the latest published
+# package; that is checked separately in CI (see the "vendored-bundle" job
+# and scripts/check-vendored-mermaid-doodle.sh), since it needs network
+# access this offline render-test run does not have. Re-vendor with
+# scripts/vendor-mermaid-doodle.sh.
 BUNDLE="$ROOT/assets/js/lib/mermaid-doodle.iife.js"
 RECORD="$BUNDLE.provenance"
 assert_file "$RECORD" "vendored diagram bundle has a provenance record"
