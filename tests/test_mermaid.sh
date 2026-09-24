@@ -23,4 +23,20 @@ Q="$PUB/docs/quickstart/index.html"
 assert_not_contains "$Q" "mermaid-doodle" "plugin not loaded on pages without diagrams"
 assert_not_contains "$Q" "mermaid.min" "mermaid not loaded on pages without diagrams"
 
+# Integrity check for the vendored diagram bundle: does the committed file
+# still match the sha256 recorded alongside it, so a corrupted, truncated,
+# or hand-edited bundle fails here instead of being discovered months later.
+# This proves nothing about whether the bundle matches the latest upstream
+# build; that needs the source package installable, which it is not yet
+# (unpublished, private repo). Re-vendor with scripts/vendor-mermaid-doodle.sh.
+BUNDLE="$ROOT/assets/js/lib/mermaid-doodle.iife.js"
+RECORD="$BUNDLE.provenance"
+assert_file "$RECORD" "vendored diagram bundle has a provenance record"
+if command -v sha256sum >/dev/null 2>&1; then
+  BUNDLE_SHA="$(sha256sum "$BUNDLE" | cut -d' ' -f1)"
+else
+  BUNDLE_SHA="$(shasum -a 256 "$BUNDLE" | cut -d' ' -f1)"
+fi
+assert_contains "$RECORD" "SHA256=$BUNDLE_SHA" "vendored diagram bundle matches its recorded sha256"
+
 finish

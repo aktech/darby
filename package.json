@@ -7,7 +7,8 @@
   "scripts": {
     "build-index": "node scripts/build-index.mjs",
     "test": "node --test assets/js/assistant/*.test.mjs",
-    "test:assistant": "node --test assets/js/assistant/*.test.mjs"
+    "test:assistant": "node --test assets/js/assistant/*.test.mjs",
+    "vendor:mermaid-doodle": "bash scripts/vendor-mermaid-doodle.sh"
   },
   "dependencies": {
     "@huggingface/transformers": "4.2.0"
