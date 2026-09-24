@@ -361,21 +361,8 @@ var mermaidDoodle = (() => {
         console.warn("[mermaid-doodle] no mermaid instance available, diagrams left as text");
         return;
       }
-      const nodes = [];
-      for (const { container, source } of found) {
-        container.classList.add(DIAGRAM_CLASS);
-        const wrapper = wrap(container);
-        const wants = showSource || wrapper.hasAttribute(SOURCE_ATTR) || container.hasAttribute(SOURCE_ATTR);
-        if (wants && !wrapper.querySelector(":scope > .doodle-source")) {
-          wrapper.insertBefore(buildSourceView(source), container);
-        }
-        container.textContent = source;
-        container.removeAttribute("data-processed");
-        nodes.push(container);
-      }
       const rootStyle = getComputedStyle(document.documentElement);
       const palette = paletteFromVars((name) => rootStyle.getPropertyValue(name));
-      await ensureFontsReady(palette.font);
       colourConverter ??= createCanvasColourConverter();
       const colours = normalisePaletteColours(palette, colourConverter);
       instance.initialize({
@@ -389,6 +376,19 @@ var mermaidDoodle = (() => {
         flowchart: { curve: "basis", padding: 16, htmlLabels: true },
         ...mermaidConfig
       });
+      const nodes = [];
+      for (const { container, source } of found) {
+        container.classList.add(DIAGRAM_CLASS);
+        const wrapper = wrap(container);
+        const wants = showSource || wrapper.hasAttribute(SOURCE_ATTR) || container.hasAttribute(SOURCE_ATTR);
+        if (wants && !wrapper.querySelector(":scope > .doodle-source")) {
+          wrapper.insertBefore(buildSourceView(source), container);
+        }
+        container.textContent = source;
+        container.removeAttribute("data-processed");
+        nodes.push(container);
+      }
+      await ensureFontsReady(palette.font);
       await instance.run({ nodes, suppressErrors: true });
     }
     function render() {
