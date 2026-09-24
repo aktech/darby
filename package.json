@@ -12,5 +12,8 @@
   },
   "dependencies": {
     "@huggingface/transformers": "4.2.0"
+  },
+  "devDependencies": {
+    "mermaid-doodle": "0.1.1"
   }
 }
